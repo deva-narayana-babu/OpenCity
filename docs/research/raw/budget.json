@@ -1,0 +1,231 @@
+{
+ "dimension": "budget",
+ "sources": [
+  {
+   "metric": "Annual budget books (General Board, approved)",
+   "city": "Surat",
+   "source_name": "SMC Accounts Dept - Budget page",
+   "url": "https://www.suratmunicipal.gov.in/Departments/Accounts/Budget",
+   "format": "PDF; the 2026-27 book is 778 pages. Numbers extract fine, but the Gujarati text uses a legacy non-Unicode font and comes out garbled",
+   "ease_score": 3,
+   "verified_live": true,
+   "latest_period": "2026-27",
+   "granularity": "City-wide by fund and head; Outcome Based Budget only for 2022-23 and 2023-24",
+   "access_notes": "Books cover 2021-22 to 2026-27. Direct PDF: /Content/Documents/Departments/Accounts/2026-27/BudgetBookGeneralBoard_2026_27.pdf. You need to map headings by hand, but the numeric columns can be parsed."
+  },
+  {
+   "metric": "Revenue/capital budget vs actuals, by zone, weekly",
+   "city": "Surat",
+   "source_name": "SMC Revenue-Capital Budget Summary (Rs '000)",
+   "url": "https://www.suratmunicipal.gov.in/Departments/Accounts/CapitalRevenueBudgetSummary",
+   "format": "HTML table, filled in by JavaScript",
+   "ease_score": 4,
+   "verified_live": true,
+   "latest_period": "Weekly update, last on 27/09/2026 (Actuals 24-25, Original/Revised 25-26, Tentative actuals 25-26 and 26-27)",
+   "granularity": "HQ + 10 zones",
+   "access_notes": "The raw HTML has only the headers, so the rows come from a background (XHR) request. Find that endpoint and you get near-live budget execution by zone, which no other source here offers."
+  },
+  {
+   "metric": "Audited balance sheet",
+   "city": "Surat",
+   "source_name": "SMC Balance Sheet page",
+   "url": "https://www.suratmunicipal.gov.in/Departments/Accounts/BalanceSheet_25_26.pdf",
+   "format": "Text PDF in English, 4 pages, accrual format",
+   "ease_score": 4,
+   "verified_live": true,
+   "latest_period": "As on 31-03-2026 (FY 2025-26), with 2024-25 alongside",
+   "granularity": "City (SMC), schedule level",
+   "access_notes": "The index at /Departments/Accounts/BalanceSheet lists years back to 2015-16 and earlier. Text extracts cleanly with pdftotext -layout. Loans: Rs 200 cr secured (bond) plus about Rs 1,059 cr unsecured in FY26."
+  },
+  {
+   "metric": "Standardised audited accounts (income, expenditure, own revenue)",
+   "city": "Surat",
+   "source_name": "MoHUA/Janaagraha CityFinance - Surat",
+   "url": "https://www.cityfinance.in/municipal-data/city/surat",
+   "format": "Dashboard with XLSX export",
+   "ease_score": 5,
+   "verified_live": true,
+   "latest_period": "Audited 2023-24",
+   "granularity": "ULB (SMC), standard line items",
+   "access_notes": "Audited years listed: 2015-16, 2016-17, 2017-18, 2019-20, 2020-21, 2021-22, 2022-23, 2023-24. FY24: total revenue Rs 4,407 cr, expenditure Rs 4,349 cr, own revenue Rs 3,404 cr. Comparable across cities."
+  },
+  {
+   "metric": "Credit rating rationale (clean finance tables)",
+   "city": "Surat",
+   "source_name": "CRISIL Ratings - Surat Municipal Corporation rationale, 17 Mar 2025",
+   "url": "https://www.crisil.com/mnt/winshare/Ratings/RatingList/RatingDocs/SuratMunicipalCorporation_March%2017_%202025_RR_364831.html",
+   "format": "HTML",
+   "ease_score": 4,
+   "verified_live": false,
+   "latest_period": "2025",
+   "granularity": "City (SMC)",
+   "access_notes": "Found via search, not fetched. Rated CRISIL AA+/Stable. India Ratings IND AA+ (Jan 2025) also exists."
+  },
+  {
+   "metric": "Municipal (green) bond offer document",
+   "city": "Surat",
+   "source_name": "SMC Green Bond Offer Document dated 18 Sep 2025",
+   "url": "https://www.suratmunicipal.gov.in/Content/Documents/Departments/Accounts/SMCBond/GreenBond/Surat_Municipal_Corporation_Offer_Document_dated_September_18_2025.pdf",
+   "format": "PDF (SEBI-format offer document)",
+   "ease_score": 4,
+   "verified_live": false,
+   "latest_period": "Sep 2025",
+   "granularity": "City: multi-year revenue, expenditure, tax collection and debt tables",
+   "access_notes": "Found via search, not fetched. A public NCD issue (Oct 2025). The bond index is at /Departments/Accounts/SMCBondInformation. Offer documents usually carry 3-5 years of clean financials."
+  },
+  {
+   "metric": "Annual budget books",
+   "city": "Ahmedabad",
+   "source_name": "AMC - Budget page",
+   "url": "https://ahmedabadcity.gov.in/SP/Budget",
+   "format": "PDF. The 2026-27 'Budget A' is 334 pages of Unicode Gujarati with Gujarati numerals. Some years also have an English copy",
+   "ease_score": 3,
+   "verified_live": true,
+   "latest_period": "2026-27 (draft plus Standing Committee resolution dated 10-02-2026)",
+   "granularity": "City-wide; revenue/capital income and expenditure abstracts",
+   "access_notes": "Books run 2005-06 to 2026-27, the longest series. English copies exist for 2018-19, 2019-20 and 2021-22 to 2023-24. The 2026-27 PDF is at /ViewFile/ViewFile?TYPE=FileRepository,2583. Needs the legacy-TLS curl. Numerals need conversion from Gujarati to Arabic digits, and letter shaping breaks in extraction."
+  },
+  {
+   "metric": "Balance sheet and audit report",
+   "city": "Ahmedabad",
+   "source_name": "AMC - Balance Sheet page",
+   "url": "https://ahmedabadcity.gov.in/SP/BalanceSheet",
+   "format": "PDF. The FY2025-26 file is a scanned image, 49 pages, with almost no text layer",
+   "ease_score": 2,
+   "verified_live": true,
+   "latest_period": "As on 31-03-2026 (FY 2025-26)",
+   "granularity": "City (AMC), fund-wise; audit reports for 2018-19 to 2023-24",
+   "access_notes": "A long series from 2006 to 2026. The FY26 file is /ViewFile/ViewFile?TYPE=FileRepository,2689 and pdftotext returned about 120 characters. Needs OCR. Some older years may have a text layer."
+  },
+  {
+   "metric": "Standardised audited accounts",
+   "city": "Ahmedabad",
+   "source_name": "CityFinance - Ahmedabad",
+   "url": "https://www.cityfinance.in/municipal-data/city/ahmedabad",
+   "format": "Dashboard",
+   "ease_score": 2,
+   "verified_live": false,
+   "latest_period": "Unknown",
+   "granularity": "ULB",
+   "access_notes": "This URL loaded but said 'Financial data is unavailable for selected entity'. The page slug may be wrong (for example 'amdavad'), so AMC coverage there is still unconfirmed."
+  },
+  {
+   "metric": "Credit rating rationale / bond placement memo",
+   "city": "Ahmedabad",
+   "source_name": "CRISIL rationale 29 Feb 2024; India Ratings press release; BSE placement memorandum Feb 2024",
+   "url": "https://www.crisil.com/mnt/winshare/Ratings/RatingList/RatingDocs/AhmedabadMunicipalCorporation_February%2029,%202024_RR_337695.html",
+   "format": "HTML / PDF",
+   "ease_score": 4,
+   "verified_live": false,
+   "latest_period": "2024 (CRISIL); India Ratings item reportedly 2026",
+   "granularity": "City (AMC)",
+   "access_notes": "Found via search, not fetched. Rs 200 cr green bond rated CRISIL AA+/Stable. Placement memo: https://bond.bseindia.com/PPMFiles/2024/FEB/PPM/816/7646.pdf"
+  },
+  {
+   "metric": "Budget headline figures (news)",
+   "city": "Ahmedabad",
+   "source_name": "DeshGujarat - AMC Rs 18,518 cr budget 2026-27",
+   "url": "https://deshgujarat.com/2026/02/10/amc-presents-18518-crore-budget-for-2026-27/",
+   "format": "News HTML",
+   "ease_score": 1,
+   "verified_live": false,
+   "latest_period": "Feb 2026",
+   "granularity": "City headline",
+   "access_notes": "Found via search. Draft Rs 17,018 cr; Standing Committee raised it to Rs 18,518 cr. Useful for cross-checking only."
+  }
+ ],
+ "city_comparison": [
+  {
+   "metric": "Budget book years online",
+   "surat": "2021-22 to 2026-27 (6 years), plus Outcome Budgets for 2022-24",
+   "ahmedabad": "2005-06 to 2026-27 (22 years)",
+   "edge": "Ahmedabad"
+  },
+  {
+   "metric": "Budget book machine-readability",
+   "surat": "778-page PDF. Numbers extract, but the Gujarati text is a legacy font and comes out garbled",
+   "ahmedabad": "334-page Unicode Gujarati PDF with Gujarati numerals. Needs digit conversion; English copies exist for some years up to 2023-24",
+   "edge": "Tie"
+  },
+  {
+   "metric": "In-year budget execution (BE/RE/actuals)",
+   "surat": "Weekly HTML summary by zone (updated 27/09/2026): Actuals 24-25, BE/RE 25-26, tentative actuals 25-26 and 26-27",
+   "ahmedabad": "Nothing similar found; only annual books",
+   "edge": "Surat"
+  },
+  {
+   "metric": "Latest balance sheet format",
+   "surat": "FY2025-26 English text PDF, 4 pages, parses cleanly",
+   "ahmedabad": "FY2025-26 scanned 49-page PDF, needs OCR",
+   "edge": "Surat"
+  },
+  {
+   "metric": "CityFinance audited accounts",
+   "surat": "8 audited years up to 2023-24, XLSX export",
+   "ahmedabad": "Page shows no data (slug unconfirmed)",
+   "edge": "Surat"
+  },
+  {
+   "metric": "Credit rating / bonds",
+   "surat": "CRISIL and India Ratings AA+ (2025); public green-bond offer document Sep 2025 hosted on SMC site",
+   "ahmedabad": "CRISIL AA+ Rs 200 cr green bond (Feb 2024); BSE placement memo",
+   "edge": "Surat"
+  },
+  {
+   "metric": "Site access",
+   "surat": "Fetches cleanly over standard TLS",
+   "ahmedabad": "Needs legacy TLS renegotiation; files served via opaque ViewFile IDs",
+   "edge": "Surat"
+  },
+  {
+   "metric": "Debt visibility",
+   "surat": "Balance sheet shows Rs 200 cr secured and about Rs 1,059 cr unsecured loans (31-03-2026)",
+   "ahmedabad": "Only in the scanned balance sheet or rating documents",
+   "edge": "Surat"
+  }
+ ],
+ "scores": {
+  "surat": 7.5,
+  "ahmedabad": 5,
+  "rationale": "Surat is easier to build for. It has current English text balance sheets, a weekly budget-vs-actuals feed by zone, CityFinance XLSX files through 2023-24, and a 2025 bond offer document, all on a site that fetches cleanly. Ahmedabad has the longer budget archive (from 2005), but its latest balance sheet is scanned, its budgets are in Gujarati numerals, its CityFinance coverage is unconfirmed, and its site needs the TLS workaround."
+ },
+ "gaps": [
+  {
+   "metric": "Property tax demand, collection and arrears by zone and ward",
+   "city": "Surat",
+   "rti_public_authority": "Surat Municipal Corporation - PIO, Assessment & Recovery (Property Tax) Dept, Head Office",
+   "rti_question": "Provide, zone-wise and ward-wise for FY 2023-24, 2024-25 and 2025-26: number of assessed properties, property-tax demand raised, amount collected, and arrears outstanding as on 31 March, in Excel/CSV if held electronically."
+  },
+  {
+   "metric": "Property tax demand, collection and arrears by zone and ward",
+   "city": "Ahmedabad",
+   "rti_public_authority": "Amdavad Municipal Corporation - PIO, Property Tax Dept (Revenue), Central Office",
+   "rti_question": "Provide, zone-wise and ward-wise for FY 2023-24 to 2025-26: property-tax demand, collection, arrears as on 31 March, and number of tenements assessed, in electronic spreadsheet form."
+  },
+  {
+   "metric": "Budget execution (actual spend vs budget) by capital project",
+   "city": "Ahmedabad",
+   "rti_public_authority": "Amdavad Municipal Corporation - PIO, Finance Department (Chief Accountant)",
+   "rti_question": "For FY 2025-26, provide for each capital-budget work/project: budget estimate, revised estimate and actual expenditure as on 31-03-2026, plus zone and department, as a spreadsheet."
+  },
+  {
+   "metric": "Smart Cities Mission funds received and utilised",
+   "city": "Both",
+   "rti_public_authority": "Surat Smart City Development Ltd / Ahmedabad Smart City Development Ltd - PIO (SPV); appeal to SMC/AMC",
+   "rti_question": "Provide year-wise from FY 2016-17 to 2025-26: central and state funds received, own/convergence funds, amount utilised, and project-wise sanctioned cost, expenditure and completion status under Smart Cities Mission."
+  },
+  {
+   "metric": "Machine-readable balance sheet and schedules",
+   "city": "Ahmedabad",
+   "rti_public_authority": "Amdavad Municipal Corporation - PIO, Finance Department",
+   "rti_question": "Provide the audited balance sheet, income and expenditure account and all schedules for FY 2024-25 and 2025-26 in the electronic form held (Excel or text PDF), since the published copy is a scanned image."
+  }
+ ],
+ "challenges": [
+  "Both budget books are Gujarati-first: SMC's text is a legacy non-Unicode font that comes out garbled, and AMC uses Gujarati numerals. You need digit conversion and hand-built mappings of budget heads to extract anything.",
+  "SMC's weekly budget summary fills its table by JavaScript. The underlying request (XHR) endpoint has to be reverse-engineered before it can be scraped, and it may change.",
+  "AMC's site needs legacy TLS renegotiation, and its files sit behind opaque ViewFile?TYPE=FileRepository,N IDs, so automated fetching breaks easily.",
+  "AMC's latest balance sheet (FY26) is scanned and needs OCR. CityFinance showed no AMC data at the tried URL, so cross-city comparison of standardised accounts is unconfirmed.",
+  "Scope mismatch: SMC/AMC finance covers the municipal area only, while the upstream model is district-level. Smart City SPVs and urban development authorities (SUDA/AUDA) keep separate books."
+ ]
+}
