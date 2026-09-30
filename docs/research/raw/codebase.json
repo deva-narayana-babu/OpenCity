@@ -1,0 +1,402 @@
+{
+ "how_to_add_district": "Source: clone at /tmp/claude-1000/-home-deva-src-OpenCity/473ae9f8-f0a2-4667-963a-27ce0f03f491/scratchpad/ftp (HEAD 38df958, 11 Jun 2026). This recipe merges docs/SCALING-CHECKLIST.md with docs/DISTRICT-EXPANSION-SKILL.md (Pune #10 \"6-prompt\" pattern), then corrects both against the code. CONTRIBUTING.md \"Adding a New District\" is out of date: the schema doesn't need editing, and the directory is public/geo/, not public/geojson/.\n\n0. SETUP\n- Node 20+ and Postgres (Neon or local).\n- Create .env.local with DATABASE_URL and ADMIN_SESSION_SECRET. src/lib/admin-auth.ts throws at module load if ADMIN_SESSION_SECRET is missing.\n- Run: npm install, npx prisma generate, npm run db:push. The build no longer runs db push. `next build` statically renders DB-backed pages, so it needs a reachable DB.\n- Do NOT run `npm run db:seed`. prisma/seed.ts starts with 52 global deleteMany({}) calls (the Mandya pilot reset).\n\n1. HIERARCHY (DB)\n- In prisma/seed-hierarchy.ts, upsert:\n  - State {slug:'gujarat', nameLocal:'ગુજરાત', capital:'Gandhinagar'}.\n  - District {slug:'surat', nameLocal, tagline, population, area, talukCount, literacy, sexRatio, density, avgRainfall, active:false}.\n  - Taluk rows. For a city dashboard, follow Mumbai/Kolkata/Chennai: they put city zones in the taluk slot (mumbai-taluks.json = 5 zones). So SMC/AMC zones can be Taluk rows. There is no Ward or ULB model; DemographicLevel has a WARD enum value only.\n- Run: npx tsx prisma/seed-hierarchy.ts. Gujarat is not in seed-hierarchy.ts today.\n\n2. STATIC CONSTANTS\n- In src/lib/constants/districts.ts (~line 1151), replace lockedDistrict('surat','Surat') with a full District object. Copy the Pune stub at lines 1111-1144: active:true, nameLocal, badges, stats, taluks[]. Set the Gujarat state to active:true.\n- This file drives routing: [district]/layout.tsx calls getDistrict() and returns notFound() if it's missing. It also drives the sitemap, the locked preview and the compare selectors.\n\n3. STATE CONFIG\n- In src/lib/constants/state-config.ts, add `const GUJARAT: StateConfig` and register it in STATE_CONFIGS (~line 404). Without it, getStateConfig('gujarat') returns null and every page falls back to generic text.\n- Fields: discom, water portal, GSRTC, GSEB SSC, Gujarat Information Commission + rtiPortalUrl, districtHeadTitle 'Collector', subDistrictUnit 'Taluka', policeSystemType 'commissionerate', showVillages / gramPanchayatApplicable / jjmApplicable false, municipalBody, stateHealthScheme, lastElection*, dataSources[], and tenderPortals only if Tenders will be used.\n- Limitation: municipalBody and discom are per state, so SMC and AMC can't both be named without a per-district override.\n\n4. SCRAPER / API NAME FIXES\n- src/scraper/jobs/weather.ts: add an OWM_CITY_OVERRIDE entry.\n- src/scraper/jobs/crops.ts: add an AGMARKNET_DISTRICT_OVERRIDE entry. Check the exact Agmarknet spelling first.\n- src/scraper/jobs/news.ts: buildQueries() hardcodes \"<district> Karnataka\", and buildStaticSources() uses The Hindu and Deccan Herald Karnataka feeds. Make both use ctx.stateName and Gujarat feeds.\n- src/scraper/jobs/schemes.ts: add gujarat:'GJ' to STATE_CODES. Without it the lookup falls back to 'KA'.\n- Guard rti.ts, courts.ts and jjm.ts to Karnataka only. They hardcode the KIC URL, NJDG state_code \"17\" and JJM StateCode \"29\", with no state check.\n\n5. FONTS / I18N\n- In src/app/layout.tsx and globals.css, load Noto Sans Gujarati. --font-regional is hard-wired to Kannada (globals.css:51).\n- Optionally add 'gu' to src/i18n/routing.ts (currently [\"en\",\"kn\"]) and create src/dictionaries/gu.json (196 keys).\n- Fix the hardcoded \"ಕನ್ನಡದಲ್ಲಿ\" label at file-rti/page.tsx:79.\n\n6. GEO\n- The district polygon already exists in public/geo/gujarat-districts.json, with slug 'surat'.\n- Ahmedabad is slugged 'ahmadabad' there. GenericStateMap pushes /en/gujarat/ahmadabad, which 404s. Rename it or add an alias.\n- Add public/geo/surat-taluks.json (zones or talukas, with _attribution). An empty stub with features:[] is acceptable, as Pune did.\n- Add a DISTRICT_PROJECTION entry, plus TALUK_COLORS, in src/components/map/TalukMap.tsx:14. The default projection centres on Mandya.\n\n7. DATA SEEDS\n- Write prisma/seed-surat-*.ts files following Pune's pattern: 17 files, ~3.5k LOC, idempotent findFirst guards, and a source on every row.\n- Models to seed: Leader (5 tiers; T1/T2 via scripts/fix-all-districts-leadership.ts), BudgetEntry + BudgetAllocation (amounts in Rupees), School (aggregate-first), Scheme, RtiTemplate, GovOffice, ServiceGuide, LocalIndustry, BusRoute/TrainSchedule, HousingScheme, PopulationHistory, DemographicProfile, FamousPersonality, ElectionResult.\n- DemographicProfile: Census 2011 plus NITI MPI 2023 rows extracted with scripts/extract-mpi-barchart-full.ts.\n- InfraProject and GovernmentExam fill from the news+AI pipeline (needs OPENROUTER_API_KEY). Exams can also be cloned with onboardDistrictExams(districtId).\n\n8. PAGE CONTENT\n- src/lib/constants/responsibility-content.ts: add per-district TS content.\n- health/page.tsx STATE_HEALTH_SCHEMES: add a gujarat entry.\n- industries/page.tsx: choose a mode (sugar/tech/heritage/general).\n\n9. ACTIVATE\n- Set District.active=true and goLiveDate using Prisma Studio, SQL, or a script modelled on scripts/activate-telangana-districts.ts. Leave tendersActive=false.\n\n10. JOBS\n- Vercel crons in vercel.json: scrape-news, scrape-crops, generate-insights, news-intelligence, scrape-budget, generate-citizen-tips, update-exams. They need CRON_SECRET.\n- The Railway node-cron worker (npm run scraper, src/scraper/scheduler.ts) runs everything else. Most of those jobs skip Gujarat or are Karnataka-bound.\n\n11. VERIFY\n- Smoke-test every /en/gujarat/surat/<slug> route (36 sidebar slugs).\n- Run npx tsc --noEmit and npm run build.\n- Confirm NoDataCard shows on empty modules.\n- Update docs/DATA-SOURCES.md.",
+ "modules": [
+  {
+   "module": "overview",
+   "current_source": "District row, Leader rows and entity counts from manual seeds (seed-hierarchy + districts.ts), plus the latest OWM weather reading",
+   "gujarat_reuse": "as-is",
+   "gujarat_source_suggestion": "Works once the hierarchy is seeded. Headline stats (population, area, literacy) come from the Census 2011 District Census Handbook for Surat / Ahmadabad.",
+   "effort": "S"
+  },
+  {
+   "module": "leadership (leaders)",
+   "current_source": "Manual seeds (Leader model, 5 tiers). T1/T2 auto via scripts/fix-all-districts-leadership.ts; T3-T5 by hand. The news pipeline updates later.",
+   "gujarat_reuse": "needs-gujarat-source",
+   "gujarat_source_suggestion": "ECI / Gujarat Legislative Assembly lists of MPs and MLAs. Collector from the district NIC portal. Municipal Commissioner and Mayor from SMC/AMC sites. Police Commissioner from the city police site. Use 'Verify at <portal>' when unsure.",
+   "effort": "S"
+  },
+  {
+   "module": "finance (budget)",
+   "current_source": "Manual seeds: BudgetEntry, BudgetAllocation, RevenueEntry, RevenueCollection. budget.ts has a null resource for every state (no-op). finance.ts queries an unverified data.gov.in resource labelled 'Karnataka Finance Dept'.",
+   "gujarat_reuse": "needs-gujarat-source",
+   "gujarat_source_suggestion": "SMC/AMC annual budget books (PDF, often Gujarati plus English), Gujarat Finance Department budget publications, PFMS. Entered manually or extracted from PDFs.",
+   "effort": "M"
+  },
+  {
+   "module": "infrastructure",
+   "current_source": "News-driven: Google News RSS, then OpenRouter free-model extraction and verification, then InfraProject/InfraUpdate. NATIONAL/STATE projects fan out automatically (e.g. Mumbai-Ahmedabad bullet train). PMGSY data.gov.in scraper is secondary.",
+   "gujarat_reuse": "as-is",
+   "gujarat_source_suggestion": "Works with OPENROUTER_API_KEY. Optionally seed SMC/AMC Smart City and Gujarat Metro Rail project lists from official sources.",
+   "effort": "S"
+  },
+  {
+   "module": "crops (food / mandi prices)",
+   "current_source": "Agmarknet daily mandi prices through the data.gov.in API (resource 9ef84268..., national), filtered by state and district name",
+   "gujarat_reuse": "as-is",
+   "gujarat_source_suggestion": "Set DATA_GOV_API_KEY and check the Agmarknet district spelling for Surat and Ahmedabad. For consumer food prices, consider adding the Dept of Consumer Affairs price-monitoring retail series (check whether these cities are reporting centres).",
+   "effort": "S"
+  },
+  {
+   "module": "weather",
+   "current_source": "OpenWeatherMap current-weather API (OPENWEATHER_API_KEY), city = district name or override. RainfallHistory from manual seed.",
+   "gujarat_reuse": "as-is",
+   "gujarat_source_suggestion": "Add OWM overrides, or switch to Open-Meteo (no key). IMD district rainfall for history.",
+   "effort": "S"
+  },
+  {
+   "module": "water (dams)",
+   "current_source": "Karnataka WRD POST API (water.karnataka.gov.in) only; other states skip gracefully",
+   "gujarat_reuse": "drop-or-defer",
+   "gujarat_source_suggestion": "If kept: CWC weekly reservoir bulletin (PDF, national) for reservoirs feeding the cities, and SMC/AMC water-supply data. City water supply is more relevant than dams.",
+   "effort": "M"
+  },
+  {
+   "module": "news",
+   "current_source": "Google News RSS plus static feeds. buildQueries() hardcodes 'Karnataka'; static feeds are The Hindu / Deccan Herald Karnataka.",
+   "gujarat_reuse": "needs-gujarat-source",
+   "gujarat_source_suggestion": "Build Google News RSS queries from '<city> Gujarat'. Swap in Gujarat or city-edition RSS feeds (English and Gujarati outlets; check each feed URL).",
+   "effort": "S"
+  },
+  {
+   "module": "alerts",
+   "current_source": "Google News RSS keyword search (district slug + topic) with regex severity classification",
+   "gujarat_reuse": "as-is",
+   "gujarat_source_suggestion": "Works unchanged; could add SMC/AMC and IMD Ahmedabad advisories.",
+   "effort": "S"
+  },
+  {
+   "module": "schemes",
+   "current_source": "MyScheme.gov.in search API plus manual seeds. STATE_CODES has no gujarat, so it falls back to 'KA' (Karnataka schemes).",
+   "gujarat_reuse": "as-is",
+   "gujarat_source_suggestion": "Add gujarat:'GJ' to STATE_CODES in schemes.ts. Seed Gujarat state and SMC/AMC schemes by hand.",
+   "effort": "S"
+  },
+  {
+   "module": "health",
+   "current_source": "No data model. Static national helplines, STATE_HEALTH_SCHEMES (no gujarat entry), DepartmentStaffing widget and module news. docs note the Hospital model is missing entirely.",
+   "gujarat_reuse": "needs-gujarat-source",
+   "gujarat_source_suggestion": "New model and UI. HMIS district indicators; NFHS-5 district factsheets for Surat / Ahmadabad (Harvard Dataverse CSV mirror); Gujarat Health and Family Welfare Department; SMC/AMC municipal hospital data (often RTI-only).",
+   "effort": "L"
+  },
+  {
+   "module": "police",
+   "current_source": "Manual seeds (PoliceStation, CrimeStat, TrafficCollection) plus data.gov.in resources: NCRB-by-district and 'Traffic challans Karnataka' (IDs and lowercase-slug filters unverified)",
+   "gujarat_reuse": "needs-gujarat-source",
+   "gujarat_source_suggestion": "NCRB Crime in India metropolitan-city and district tables (annual). Surat / Ahmedabad Police Commissionerate sites for the station list.",
+   "effort": "M"
+  },
+  {
+   "module": "elections",
+   "current_source": "Manual ElectionResult seeds plus a data.gov.in ECI resource (Karnataka-labelled, unverified)",
+   "gujarat_reuse": "needs-gujarat-source",
+   "gujarat_source_suggestion": "ECI results for the Gujarat assembly and Lok Sabha elections. Gujarat State Election Commission for SMC/AMC municipal polls.",
+   "effort": "M"
+  },
+  {
+   "module": "transport",
+   "current_source": "Manual BusRoute/TrainSchedule seeds. data.gov.in bus resource exists only for Karnataka (KSRTC); other states skip. Train resource unverified.",
+   "gujarat_reuse": "drop-or-defer",
+   "gujarat_source_suggestion": "Later: GSRTC, SMC city bus/BRTS, AMC AMTS/BRTS, Gujarat Metro Rail. Check for published GTFS; otherwise seed by hand.",
+   "effort": "M"
+  },
+  {
+   "module": "power",
+   "current_source": "BESCOM planned-outage HTML parser only (Karnataka); other states skip",
+   "gujarat_reuse": "drop-or-defer",
+   "gujarat_source_suggestion": "Later: the private licensee in the city areas and the state DISCOMs (DGVCL/UGVCL) outage notices. Confirm which licensee serves each area.",
+   "effort": "M"
+  },
+  {
+   "module": "schools (education)",
+   "current_source": "Manual School/SchoolResult seeds (aggregate-first) plus a data.gov.in UDISE resource (Karnataka-labelled, lowercase-slug filter, unverified)",
+   "gujarat_reuse": "needs-gujarat-source",
+   "gujarat_source_suggestion": "UDISE+ district report cards, GSEB SSC/HSC district results, SMC and AMC municipal school boards (enrolment, teachers, infrastructure).",
+   "effort": "M"
+  },
+  {
+   "module": "gram-panchayat",
+   "current_source": "MGNREGA data.gov.in resource ('Karnataka GPs') plus GramPanchayat seeds",
+   "gujarat_reuse": "drop-or-defer",
+   "gujarat_source_suggestion": "Not applicable to a city dashboard (set gramPanchayatApplicable:false, as Maharashtra does)",
+   "effort": "S"
+  },
+  {
+   "module": "rti (RTI Tracker)",
+   "current_source": "RtiStat from src/scraper/jobs/rti.ts, which parses the Karnataka Information Commission HTML table for every active district with no state guard",
+   "gujarat_reuse": "needs-gujarat-source",
+   "gujarat_source_suggestion": "Disable the KIC job for Gujarat. Seed from Gujarat Information Commission annual reports (state and department level), SMC/AMC RTI registers or Section 4 disclosures, and crowd-sourced outcomes from the students' helper.",
+   "effort": "M"
+  },
+  {
+   "module": "courts",
+   "current_source": "CourtStat seeds plus an NJDG API call hardcoded to state_code '17' with the slug as district code (no state guard; likely never worked)",
+   "gujarat_reuse": "needs-gujarat-source",
+   "gujarat_source_suggestion": "Periodic manual snapshot of the NJDG district dashboard (Surat district court; Ahmedabad city civil and sessions court and rural courts)",
+   "effort": "M"
+  },
+  {
+   "module": "industries (local industries)",
+   "current_source": "Manual LocalIndustry seeds; the page picks sugar/tech/heritage/general mode",
+   "gujarat_reuse": "needs-gujarat-source",
+   "gujarat_source_suggestion": "District Industries Centre profiles, MSME Udyam district data, GIDC estates, iNDEXTb (e.g. Surat textiles and diamonds)",
+   "effort": "M"
+  },
+  {
+   "module": "sugar-factory",
+   "current_source": "SugarFactory / SugarFactorySeason manual seed (Mandya only)",
+   "gujarat_reuse": "drop-or-defer",
+   "gujarat_source_suggestion": "Not relevant",
+   "effort": "S"
+  },
+  {
+   "module": "soil / farm advisory",
+   "current_source": "SoilHealth data.gov.in resource plus AgriAdvisory seeds",
+   "gujarat_reuse": "drop-or-defer",
+   "gujarat_source_suggestion": "Not relevant to a city MVP (Soil Health Card portal if ever needed)",
+   "effort": "S"
+  },
+  {
+   "module": "housing",
+   "current_source": "HousingScheme; data.gov.in PMAY-G (rural) resource plus seeds",
+   "gujarat_reuse": "drop-or-defer",
+   "gujarat_source_suggestion": "Later: PMAY-Urban MIS/dashboard, SMC/AMC EWS housing project lists",
+   "effort": "M"
+  },
+  {
+   "module": "jjm (Jal Jeevan Mission)",
+   "current_source": "eJalShakti API hardcoded to StateCode '29' (Karnataka); rural household tap connections",
+   "gujarat_reuse": "drop-or-defer",
+   "gujarat_source_suggestion": "Rural-only; set jjmApplicable:false for city dashboards",
+   "effort": "S"
+  },
+  {
+   "module": "offices",
+   "current_source": "Manual GovOffice seeds",
+   "gujarat_reuse": "needs-gujarat-source",
+   "gujarat_source_suggestion": "District NIC portal, SMC/AMC zone and ward office directories, Digital Gujarat. Reusable as the PIO directory base.",
+   "effort": "S"
+  },
+  {
+   "module": "population",
+   "current_source": "DemographicProfile (Census 2011 + NITI MPI 2023 via extraction scripts) plus PopulationHistory seeds",
+   "gujarat_reuse": "needs-gujarat-source",
+   "gujarat_source_suggestion": "Same national sources, but Gujarat rows must be extracted: Census 2011 District Census Handbook for Surat / Ahmadabad (and SMC/AMC town tables for city figures), NITI MPI 2023 PDF district rows, NFHS-5 district factsheets. Watch the 'Ahmadabad' spelling.",
+   "effort": "M"
+  },
+  {
+   "module": "famous-personalities",
+   "current_source": "Manual Wikipedia-sourced seeds (CC-BY-SA)",
+   "gujarat_reuse": "drop-or-defer",
+   "gujarat_source_suggestion": "Optional; Wikipedia if kept",
+   "effort": "S"
+  },
+  {
+   "module": "citizen-corner",
+   "current_source": "CitizenTip rows generated by the generate-citizen-tips cron (OpenRouter), plus seeds",
+   "gujarat_reuse": "drop-or-defer",
+   "gujarat_source_suggestion": "Optional; could become the RTI-walkthrough entry point instead",
+   "effort": "S"
+  },
+  {
+   "module": "data-sources",
+   "current_source": "StateConfig.dataSources plus UNIVERSAL_DATA_SOURCES (static)",
+   "gujarat_reuse": "as-is",
+   "gujarat_source_suggestion": "Works once a GUJARAT StateConfig is added",
+   "effort": "S"
+  },
+  {
+   "module": "file-rti (extra; beyond the 29)",
+   "current_source": "Manual RtiTemplate seeds; copy-to-clipboard; link to rtionline.gov.in (central authorities only)",
+   "gujarat_reuse": "needs-gujarat-source",
+   "gujarat_source_suggestion": "This is the students' core contribution. PIO/FAA lists from SMC/AMC, Collectorate and state-department Section 4(1)(b) disclosures; Gujarat Information Commission; Gujarat RTI Rules fee and payment modes (verify).",
+   "effort": "L"
+  },
+  {
+   "module": "tenders (extra)",
+   "current_source": "6 procurement portals (KPPP Karnataka, CPPP/GePNIC, IREPS, defproc, BEL, HAL) through custom engines; gated by District.tendersActive",
+   "gujarat_reuse": "drop-or-defer",
+   "gujarat_source_suggestion": "Later: Gujarat's state e-procurement portal would need a new engine; the CPPP (nicgep) engine is reusable for central tenders",
+   "effort": "L"
+  },
+  {
+   "module": "exams (extra)",
+   "current_source": "National exams (UPSC/SSC/IBPS/RRB) plus Karnataka KPSC/KEA scrapers and a news pipeline; onboardDistrictExams clones national rows",
+   "gujarat_reuse": "as-is",
+   "gujarat_source_suggestion": "National rows work through onboardDistrictExams; GPSC/GSSSB can come later",
+   "effort": "S"
+  },
+  {
+   "module": "services (extra)",
+   "current_source": "Manual ServiceGuide seeds",
+   "gujarat_reuse": "needs-gujarat-source",
+   "gujarat_source_suggestion": "Digital Gujarat portal, SMC/AMC online civic services (certificates, property tax)",
+   "effort": "S"
+  },
+  {
+   "module": "responsibility (extra)",
+   "current_source": "Hardcoded per-district TS content (responsibility-content.ts) plus ResponsibilityItem",
+   "gujarat_reuse": "drop-or-defer",
+   "gujarat_source_suggestion": "Optional hand-written content",
+   "effort": "S"
+  },
+  {
+   "module": "map (extra)",
+   "current_source": "public/geo/*-districts.json and *-taluks.json via react-simple-maps; TalukMap has a per-district projection table",
+   "gujarat_reuse": "needs-gujarat-source",
+   "gujarat_source_suggestion": "District polygon already exists. Need zone/ward polygons: SMC/AMC GIS, or check DataMeet Municipal_Spatial_Data (CC-BY). Fix the 'ahmadabad' slug.",
+   "effort": "M"
+  },
+  {
+   "module": "contributors / update-log (extra)",
+   "current_source": "Supporter model with Razorpay payments; UpdateLog of admin/scraper changes",
+   "gujarat_reuse": "drop-or-defer",
+   "gujarat_source_suggestion": "Drop contributors (Razorpay needs business KYC). update-log is generic and can stay.",
+   "effort": "S"
+  }
+ ],
+ "existing_gujarat_assets": [
+  "src/lib/constants/districts.ts:1151-1161 has a Gujarat state entry (slug 'gujarat', nameLocal 'ગુજરાત', capital Gandhinagar, active:false) with 5 lockedDistrict() stubs: ahmedabad, surat, vadodara, rajkot, gandhinagar. Each stub is just slug + English name (nameLocal = English name), taluks:[], no stats. These stubs are what render the '29 data dashboards are waiting to be unlocked' placeholder (LockedDistrictPreview.tsx:133).",
+  "public/geo/gujarat-districts.json (313 KB GeoJSON FeatureCollection) has 26 district features with {name, slug, stateSlug}, including 'surat' and 'ahmadabad'. Census-2011 vintage: 26 districts, with no post-2013 districts (Botad, Morbi, Aravalli, Mahisagar, Chhota Udaipur, Devbhumi Dwarka, Gir Somnath), so the Ahmedabad polygon is probably pre-Botad (verify). No inline source attribution. The slug 'ahmadabad' does not match the constant 'ahmedabad', so clicking Ahmedabad on the state map routes to a 404.",
+  "public/geo/india-states.json includes the Gujarat state polygon. src/components/map/DrillDownMap.tsx:29 and scripts/setup-state-maps.ts:38 map 'Gujarat' to 'gujarat'.",
+  "src/lib/data/district-meta.ts:123 has the state code GJ: 'Gujarat'. src/lib/constants/infra-locations.ts:86 has a 'surat: null' placeholder.",
+  "src/lib/infra-sync.ts:238 NAMED_CITY_RX already includes ahmedabad|surat|vadodara, so infra news naming those cities is detected for scope classification. NATIONAL projects such as the Mumbai-Ahmedabad bullet train (prisma/seed-maharashtra-state-infra.ts, seed-mumbai-data.ts) fan out to every active district automatically.",
+  "Gujarat state-level values appear only on the national /india pages: src/lib/india/mock-state-data.ts (explicitly MOCK, not citable) and prisma/seed-india-natural-resources-energy.ts (CEA Gujarat renewable capacity metric).",
+  "Gujarati script support exists only in src/lib/india/design-tokens.ts (language rotator) and src/lib/validators/contributor-name.ts (allows Gujarati characters).",
+  "Community: README lists '@tiwarikaran — Ahmedabad district (in progress)'. docs/LIVE-STATE.md records issue #13 (Ahmedabad) triaged 'ENCOURAGE', pointing to Pune as the template. The repo references #13, not #11. No Ahmedabad code has been merged.",
+  "NOT present: no GUJARAT entry in src/lib/constants/state-config.ts; no Gujarat rows in prisma/seed-hierarchy.ts (so none in the DB); no seed-surat-* or seed-ahmedabad-* files; no Gujarat taluk or zone GeoJSON; no Gujarat OWM or Agmarknet overrides; no 'gu' locale (only en/kn) and no Noto Sans Gujarati font; no Gujarat RTI templates, StateConfig RTI portal or scraper sources."
+ ],
+ "stack_services": [
+  {
+   "service": "PostgreSQL (Neon recommended) + Prisma 7.5 with @prisma/adapter-pg",
+   "purpose": "All app data: 108 models, 22k LOC of seeds. `next build` also needs a reachable DB because it statically renders DB-backed pages. Env: DATABASE_URL (src/lib/db.ts throws if unset).",
+   "required_for_mvp": true,
+   "free_tier_ok": true,
+   "alternative": "Local Postgres (docker postgres:16-alpine), Supabase free tier; SQLite or flat JSON/CSV in a build-fresh app"
+  },
+  {
+   "service": "Vercel hosting (region bom1)",
+   "purpose": "Next.js 16 hosting. vercel.json also sets the X-Creator/X-License headers.",
+   "required_for_mvp": true,
+   "free_tier_ok": true,
+   "alternative": "Netlify or Render free tiers; `next start` on any VM; static export for a lighter rewrite"
+  },
+  {
+   "service": "Vercel Cron (7 schedules in vercel.json)",
+   "purpose": "scrape-news (daily), scrape-crops (daily), generate-insights (twice daily), news-intelligence (every 4h), scrape-budget (weekly), generate-citizen-tips (weekly), update-exams (daily). Protected by CRON_SECRET.",
+   "required_for_mvp": false,
+   "free_tier_ok": false,
+   "alternative": "Upstream README assumes Vercel Pro; Hobby-tier cron frequency limits may not cover the sub-daily jobs (check current limits). GitHub Actions scheduled workflows running `npx tsx` jobs are free."
+  },
+  {
+   "service": "Railway worker (Dockerfile.scraper, `npm run scraper` = node-cron in src/scraper/scheduler.ts)",
+   "purpose": "24/7 scheduler for weather (5 min), crops, power, dams, news, alerts, police, infra, exams, RTI, courts, MGNREGA, JJM, housing, schools, finance, transport, schemes, soil, elections. Most of these jobs are Karnataka-bound.",
+   "required_for_mvp": false,
+   "free_tier_ok": false,
+   "alternative": "Upstream pricing doc lists about $5/mo. Use GitHub Actions cron or Vercel cron routes for the few jobs that matter (weather, crops, news)."
+  },
+  {
+   "service": "Upstash Redis (REST)",
+   "purpose": "API response cache, rate limiting (fails open), admin sessions (admin:session:<id>), vault TOTP sessions. Env: REDIS_URL, REDIS_TOKEN. If unset, cache is disabled; admin login needs it.",
+   "required_for_mvp": false,
+   "free_tier_ok": true,
+   "alternative": "Skip it (the app degrades). The docker-compose TCP redis://redis:6379 does NOT work with the @upstash/redis REST client."
+  },
+  {
+   "service": "App secrets (local, no vendor)",
+   "purpose": "ADMIN_SESSION_SECRET (required: admin-auth.ts throws at module load), ADMIN_PASSWORD, ENCRYPTION_SECRET, CRON_SECRET, TOTP_ENCRYPTION_KEY, VOTE_IP_SALT, SEED_SECRET, ADMIN_ALLOWED_IPS, NEXT_PUBLIC_SITE_URL/NAME",
+   "required_for_mvp": true,
+   "free_tier_ok": true,
+   "alternative": "Generate with openssl rand -hex 32. Note docker-compose still passes the outdated ADMIN_SECRET name."
+  },
+  {
+   "service": "data.gov.in Open Government Data API",
+   "purpose": "Agmarknet crop prices, plus schools, police, elections, housing, MGNREGA, soil, finance and transport scrapers (several resource IDs unverified or Karnataka-specific). Env: DATA_GOV_API_KEY.",
+   "required_for_mvp": true,
+   "free_tier_ok": true,
+   "alternative": "Free registration; or download dataset CSVs manually and commit them"
+  },
+  {
+   "service": "OpenWeatherMap",
+   "purpose": "Current weather every 5 min. Env: OPENWEATHER_API_KEY.",
+   "required_for_mvp": false,
+   "free_tier_ok": true,
+   "alternative": "Open-Meteo (no key, free) or IMD. Upstream doc cites a 1,000 calls/day OWM free tier."
+  },
+  {
+   "service": "Google News RSS (no key)",
+   "purpose": "News, alerts, and the input to the infra/exam extraction pipelines",
+   "required_for_mvp": true,
+   "free_tier_ok": true,
+   "alternative": "Publisher RSS feeds directly"
+  },
+  {
+   "service": "OpenRouter",
+   "purpose": "All AI through callAI(): free models (gpt-oss-20b, qwen3 etc.) for news classification and infra/exam extraction; Gemini 2.5 Pro (paid) for module insights, infra analysis, weekly platform report; Claude Sonnet (paid) for the fact-checker. Env: OPENROUTER_API_KEY.",
+   "required_for_mvp": false,
+   "free_tier_ok": false,
+   "alternative": "Disable the AI cards. Free models only work partially (docs note the free tier hitting ~200 req/day limits). The students' RTI helper doesn't need an LLM."
+  },
+  {
+   "service": "Anthropic API (optional direct provider)",
+   "purpose": "ANTHROPIC_API_KEY / ANTHROPIC_BASE_URL with FTP_AI_PROVIDER=anthropic bypasses OpenRouter",
+   "required_for_mvp": false,
+   "free_tier_ok": false,
+   "alternative": "Omit. (@google/generative-ai is a dependency, but no GEMINI_* env var is read in code, even though CONTRIBUTING.md mentions GEMINI_API_KEY.)"
+  },
+  {
+   "service": "Razorpay",
+   "purpose": "Supporter/sponsor payments and subscriptions. Env: RAZORPAY_KEY_ID/SECRET, NEXT_PUBLIC_RAZORPAY_KEY_ID, RAZORPAY_WEBHOOK_SECRET, RAZORPAY_PLAN_*. The client throws if keys are missing when invoked.",
+   "required_for_mvp": false,
+   "free_tier_ok": false,
+   "alternative": "Drop (live mode needs business KYC; not appropriate for a course project)"
+  },
+  {
+   "service": "Resend",
+   "purpose": "Admin alert emails. Env: RESEND_API_KEY, ADMIN_EMAIL, ADMIN_RECOVERY_EMAIL/PHONE. Returns an error object if unset.",
+   "required_for_mvp": false,
+   "free_tier_ok": true,
+   "alternative": "Omit or use console logging"
+  },
+  {
+   "service": "Sentry",
+   "purpose": "Error monitoring plus the admin error feed. Env: NEXT_PUBLIC_SENTRY_DSN, SENTRY_AUTH_TOKEN, SENTRY_API_TOKEN, SENTRY_ORG, SENTRY_PROJECT.",
+   "required_for_mvp": false,
+   "free_tier_ok": true,
+   "alternative": "Omit"
+  },
+  {
+   "service": "Plausible Analytics",
+   "purpose": "Cookieless analytics plus the admin Traffic tab. Env: NEXT_PUBLIC_PLAUSIBLE_DOMAIN, PLAUSIBLE_API_KEY, PLAUSIBLE_SITE_ID.",
+   "required_for_mvp": false,
+   "free_tier_ok": false,
+   "alternative": "Omit, self-host, or use Umami / Vercel Analytics free"
+  },
+  {
+   "service": "Google Fonts / next/font (Noto Sans regional scripts)",
+   "purpose": "Kannada/Devanagari via next/font; Tamil/Bengali/Telugu via CSS @import. Gujarati is missing.",
+   "required_for_mvp": true,
+   "free_tier_ok": true,
+   "alternative": "Add Noto Sans Gujarati via next/font"
+  }
+ ],
+ "rti_module_summary": "The upstream has two RTI modules, and neither is a citizen filing helper.\n\n1) RTI Tracker (/[district]/rti, 142 LOC)\n- Reads /api/data/rti, which returns RtiStat rows (department, year, month, filed, disposed, pending, avgDays, source) and RtiTemplate rows for the district.\n- Shows total filed / disposed / pending and pendency % for the latest year, a department-wise stacked bar chart and a table, plus a \"File RTI\" call-to-action. It falls back to NoDataCard when empty.\n- The only automated feed is src/scraper/jobs/rti.ts, a daily Railway job. It parses the Karnataka Information Commission \"RTI Statistics\" HTML table for every active district with no state check. For Surat it would write nothing, or attach Karnataka numbers to Surat.\n- Its Math.random() \"estimated\" fallback was removed in June 2026 (BUG-TRACKER DATA-1).\n- Latent bug: RtiStat.avgDays is nullable and the scraper never sets it, but the page calls s.avgDays.toFixed(1) and the hook types it as number.\n- So for Gujarat this module needs a different source, e.g. Gujarat Information Commission annual reports (state/department level) and SMC/AMC RTI disclosures, or crowd-sourced outcomes.\n\n2) File RTI (/[district]/file-rti, 116 LOC client page)\n- Lists hand-seeded RtiTemplate rows: topic, topicLocal, department, pioName, pioAddress, feeAmount, templateText with [placeholders], templateTextLocal, tips. Example: prisma/seed-pune-rti.ts has 5 templates with PIO postal addresses and a \"₹10\" fee.\n- The user picks a topic, sees a \"To:\" block and the text, clicks Copy, and gets a \"File Online\" link hard-wired to rtionline.gov.in. That portal serves central public authorities only, not SMC/AMC or Gujarat state departments.\n- The local-language heading is hardcoded in Kannada.\n\nWhat it does not have:\n- No step-by-step walkthrough.\n- No placeholder filling or document generation (PDF/print).\n- No state-specific rules: Gujarat RTI Rules fee, payment modes and BPL exemption must be verified and encoded.\n- No PIO/FAA directory separate from templates.\n- No routing between central, state and municipal authorities.\n- No deadlines, first/second appeal flow, reminders or filing history.\n- No link from a metric gap to a template.\n- No citizen accounts (only admin auth exists).\n\nHow the students' helper would differ and plug in:\n(a) PIO directory: a new PublicAuthority/PIO model. Fields: authority, level (central/state/ULB), department/zone, PIO and APIO, First Appellate Authority name/designation/address/email, State Information Commission, the Section 4(1)(b) source URL, and lastVerifiedAt. Seed it for SMC or AMC departments and zones, the Collectorate, police commissionerate and relevant state departments. GovOffice seeds are a starting point.\n(b) Richer templates: extend RtiTemplate with a metric link (module + metric key), structured placeholders, Gujarati text, applicable rules and fee, and an authority foreign key. These templates come straight from the dashboard's \"not publicly available\" gaps.\n(c) Guided wizard:\n  - choose the metric gap, then the matching authority;\n  - specific, dated questions under Section 6(1), with no \"why\" questions;\n  - fill in applicant details client-side;\n  - generate a printable PDF;\n  - pick the right channel: rtionline.gov.in for central bodies, state/municipal filing (offline or any state online facility) for SMC/AMC and Gujarat departments.\n(d) Deadline and appeal tracker:\n  - reply due in 30 days (Section 7(1)); 48 hours for life/liberty; +5 days if filed via an APIO (Section 5(2)); 40 days when a third party is involved (Section 11);\n  - first appeal to the First Appellate Authority within 30 days of the reply or deemed refusal (Section 19(1));\n  - second appeal or complaint to the Gujarat Information Commission within 90 days (Section 19(3) / Section 18).\n  Store this client-side (localStorage plus .ics calendar reminders) to avoid holding personal data under DPDP, or add opt-in auth.\n(e) Integration hooks: NoDataCard (src/components/common/NoDataCard.tsx) and DataSourceBanner render on every module page. Adding an \"Ask for this via RTI\" call-to-action there, pre-filled with the module/metric and authority, is the natural way to turn dashboard gaps into RTI filings.\n(f) Optionally, anonymised, consented filing outcomes (response time, disposal) could populate an RtiStat-style table, replacing the Karnataka-only scraper with Gujarat data.\n\nCaveat for upstreaming: docs/LEGAL-COMPLIANCE.md bans UI copy such as \"hold power accountable\" and \"corruption\". An accountability-framed RTI helper would have to follow those copy rules if contributed upstream.",
+ "license_obligations": "The LICENSE is MIT plus extra attribution conditions, so it is not plain OSI MIT, even though package.json just says \"MIT\". Its text: \"Copyright (c) 2026 Jayanth M B\" and \"Original Creator: Jayanth M B, Karnataka, India\", with the standard MIT grant, then these conditions.\n\n(A) \"The above copyright notice, this permission notice, and the attribution to the original creator (Jayanth M B) shall be included in all copies or substantial portions of the Software.\"\n\n(B) \"Any derivative work, fork, or deployment of this Software must:\"\n1. \"Retain the original creator attribution in the source code headers.\" This is the /** ForThePeople.in — Your District. Your Data. Your Right. © 2026 Jayanth M B. MIT License with Attribution. https://github.com/jayanthmb14/forthepeople */ block. It is present in 364 of 690 src .ts/.tsx files; keep it in every copied file.\n2. Include \"Originally created by Jayanth M B\" in any public-facing About page, README, or documentation. That exact phrase is not in upstream src/README today, so a fork has to add it.\n3. \"Not remove or obscure the X-Creator HTTP headers from API responses.\" X-Creator: Jayanth M B is set in next.config.ts:22, vercel.json:18 and src/lib/watermark.ts:28. Keep all three.\n\nThe usual MIT warranty disclaimer also applies.\n\nWhat this means in practice:\n- A full fork must keep the LICENSE file, the copyright line, the per-file headers, the About/README credit line, and the X-Creator header on API responses. The students can add their own copyright to new files.\n- In a build-fresh or hybrid approach, any file or substantial portion copied (components, seeds, scraper logic, the Gujarat GeoJSON the upstream committed) must carry the notice and header, and the app should credit \"Originally created by Jayanth M B\" on its About page and README.\n- Reusing only ideas, the module taxonomy or UX patterns, with no copied code, does not trigger the license. Crediting the inspiration is still good practice.\n\nSeparate from the code license, the data has its own attribution rules:\n- Government data: GODL-India or source attribution.\n- Wikipedia content: CC-BY-SA.\n- DataMeet boundaries: CC-BY 2.5 IN. The upstream geo files lack inline attribution (docs call this historical debt), so the students must record provenance themselves.",
+ "recommendation": {
+  "approach": "hybrid",
+  "rationale": "Build a fresh, lighter app for Surat (or Ahmedabad). Use forthepeople as a reference and a small asset donor, not as the codebase, and optionally send one small, well-scoped Gujarat PR upstream at the end.\n\nWhy not fork:\n- The upstream is very large: ~117k LOC of TS/TSX in 690 src files, 108 Prisma models, 127 API route files, 81 pages, 279 components, 67 seed files (22k LOC) and 91 scripts, with zero automated tests.\n- Its docs are mostly long AI-session logs (BLUEPRINT-UNIFIED is 3,264 lines) and partly out of date: CONTRIBUTING, docker-compose, the README module count.\n- More than half the surface is irrelevant to the course: admin vault/TOTP, Razorpay sponsorships, tenders (Karnataka portals), India-level pages, AI fact-checker and platform reports.\n- Setup friction is real: a mandatory ADMIN_SESSION_SECRET, a DB needed at build time, Upstash for admin sessions, and paid or complex services assumed (Vercel Pro crons, Railway worker, OpenRouter Gemini, Razorpay, Plausible).\n- For a new district, the 'live' layer mostly doesn't carry over. Only weather (OWM), crop prices (Agmarknet via data.gov.in), and news/alerts via Google News RSS work nationally, and news still needs its hardcoded 'Karnataka' query fixed. The RTI, courts and JJM scrapers hardcode Karnataka with no state guard; power and dams skip non-Karnataka states. Pune's launch was 17 hand-written seed files.\n- So a fork would spend most of the semester stripping and seeding someone else's schema. The students' own work would be a thin, hard-to-grade slice of a codebase they didn't design, with attribution headers on every file.\n\nWhy not contribute upstream:\n- The upstream Ahmedabad effort (issue #13 per LIVE-STATE; README 'in progress') stalled.\n- Expansion follows the maintainer's own Claude Code 6-prompt workflow and review cadence.\n- Its copy rules ban accountability language central to the students' framing.\n- The model is district-level (State→District→Taluk) with no ULB/ward layer, while SMC/AMC publish most civic data.\n- Grading their share would be ambiguous.\n\nWhy hybrid works:\n- Fresh Next.js (or Astro) plus SQLite/Postgres or versioned CSV/JSON in git.\n- GitHub Actions for scheduled refresh; free hosting; Recharts. The students own the design and schema, e.g. a city→zone→ward model for the municipal corporation.\n- Borrow proven patterns, credited, without copying code: the StateConfig single source of truth; the zero-fabrication rule with DataSourceBanner provenance and a NoDataCard honest empty state; the RtiTemplate schema; aggregate-first seeding; the Agmarknet/OWM fetch approach.\n- Copy only small assets under the license terms (header plus credit plus attribution), e.g. gujarat-districts.json with its slug fixed.\n- Spend most of the effort on the differentiator: the metric-gap-to-RTI wizard, the PIO directory, and the deadline/appeal tracker.\n\nOptional give-back PR, small and uncontroversial: GUJARAT StateConfig, the 'ahmadabad' slug fix, the schemes 'GJ' code, state guards on the Karnataka-only scrapers, Surat RTI templates.\n\nCity choice, from the codebase alone:\n- Near parity.\n- Surat is marginally easier: its slug matches the geo file and its polygon is likely current. Ahmedabad needs the slug fix and probably a boundary update.\n- The data-availability comparison should decide it."
+ },
+ "effort_estimate": "These are my rough estimates, not measured figures, in person-weeks (pw) of ~40 h.\n\nTeam capacity:\n- A 3-5 person student team at ~8-12 h/week each over a ~14-week semester has roughly 10-20 pw of development capacity in total.\n\nFork path (Surat MVP of ~10-12 modules plus the RTI helper): ~15-24 pw, which is over that capacity.\n- Local setup, secrets, a DB for the build, and stripping or disabling payments/tenders/admin/AI: 2-3 pw.\n- Gujarat foundation (hierarchy seed, districts.ts, GUJARAT StateConfig, scraper name fixes and state guards, Gujarati font/locale, geo slug and zone file): 1-2 pw.\n- Manual, source-cited seeding of ~8-10 data modules (leaders, budget, schools, police, elections, population, offices, services, industries): 6-10 pw. Budget PDFs, often Gujarati, are the slowest part.\n- New health model and UI: 2-3 pw.\n- RTI helper (PIO directory, templates, wizard, deadline/appeal tracker): 4-6 pw.\n\nHybrid / build-fresh path: ~12-20 pw, which fits the team.\n- Skeleton, data model, CI/cron and deploy: 2-3 pw.\n- 6-8 metric pipelines at 1-2 pw each, prioritising crop/food prices, weather, municipal budget, schools, health, crime, population: 6-12 pw. Crop and weather reuse the national APIs quickly.\n- RTI helper, the students' graded core: 4-6 pw.\n- Testing, docs and attribution: 1-2 pw.\n\nScope levers:\n- Drop transport, power, dams, JJM, gram panchayat, tenders, contributors and famous people.\n- Treat metrics that aren't publicly available as RTI templates rather than pipelines.",
+ "challenges": [
+  "Codebase size and opacity: ~117k LOC across 690 TS/TSX files, 108 Prisma models, 127 API route files, 81 pages, 279 components, 67 seed files (22k LOC), 91 scripts, 0 tests. It was built largely through AI-assisted sessions, and the docs are long session logs (BLUEPRINT-UNIFIED is 3,264 lines).",
+  "Out-of-date or contradictory docs and config. CONTRIBUTING says to add the district to schema.prisma, use public/geojson/, '45+ models', and GEMINI_API_KEY; the reality is public/geo/, 108 models, and OpenRouter only. The '29 dashboards' marketing count differs from the 36 sidebar modules. docker-compose passes a TCP REDIS_URL, which the Upstash REST client can't use, and ADMIN_SECRET instead of the required ADMIN_SESSION_SECRET.",
+  "The live data layer barely transfers to Gujarat:\n- rti.ts (KIC URL), courts.ts (NJDG state_code '17') and jjm.ts (StateCode '29') hardcode Karnataka with no state guard, so they could mis-attribute Karnataka data to a Gujarat district.\n- news.ts queries '<district> Karnataka' and uses Karnataka RSS feeds.\n- schemes.ts falls back to state code 'KA'.\n- power, dams and transport skip non-Karnataka states; budget.ts is a no-op.\n- Several data.gov.in resource IDs look unverified and filter on lowercase slugs.\n- Real district content (e.g. Pune) was hand-seeded in 17 files.",
+  "City vs district mismatch: the model is State→District→Taluk→Village, with no ULB or ward entity. StateConfig allows one municipalBody and one discom per state, so SMC and AMC can't both be represented. SMC/AMC municipal data covers only part of Surat/Ahmedabad district, while Census, NFHS and MPI data are district-level. Every metric needs its geography labelled.",
+  "Geo issues: gujarat-districts.json is Census-2011 vintage (26 districts; newer districts such as Botad are missing, so the Ahmedabad polygon is likely stale). The Ahmedabad slug is 'ahmadabad' against the constant 'ahmedabad', so the map click 404s. There are no zone or ward polygons, and there is no attribution. TalukMap's default projection centres on Mandya.",
+  "Health, a core metric for the students, has no data model upstream: only static helplines, national schemes and a staffing widget. It needs new schema, UI and sources (HMIS, NFHS-5 district factsheets, municipal hospitals).",
+  "Setup cost and paid services:\n- ADMIN_SESSION_SECRET is required at module load.\n- `next build` needs a reachable DB.\n- Admin login needs Upstash.\n- The upstream assumes Vercel Pro crons, a Railway worker (~$5/mo), OpenRouter paid models (Gemini 2.5 Pro insights, Claude fact-check), Razorpay (business KYC) and Plausible.\n- prisma/seed.ts wipes 52 tables with deleteMany({}), a trap for newcomers.",
+  "Language: the app only has en/kn locales. --font-regional is hard-wired to Kannada, the File RTI page has a hardcoded Kannada label, and Noto Sans Gujarati isn't loaded. Many SMC/AMC and state documents are Gujarati PDFs, possibly scanned, so extraction takes effort.",
+  "RTI specifics: rtionline.gov.in, the only filing link upstream, covers central authorities only. SMC/AMC and Gujarat departments follow the state RTI rules and channels (fee and payment modes need verifying). PIO/FAA details must be collected from Section 4(1)(b) disclosures and kept current. A deadline/appeal tracker handles personal data, so prefer client-side storage or explicit consent (DPDP Act).",
+  "Latent bugs a fork would inherit, e.g. RtiStat.avgDays is nullable but the RTI page calls .toFixed() on it (the client type says number). The upstream also left fabricated 'estimated' RTI/court rows in prod that need a manual purge script (BUG-TRACKER DATA-1).",
+  "Governance and grading: contributing upstream depends on the maintainer's review and his own district-launch workflow, and the prior Ahmedabad effort stalled. The upstream copy rules ban phrases like 'hold power accountable' and 'corruption'. In a fork, the students' own contribution is hard to isolate, and the license requires keeping the creator headers, the 'Originally created by Jayanth M B' credit and the X-Creator response headers."
+ ]
+}

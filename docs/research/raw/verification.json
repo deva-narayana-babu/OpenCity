@@ -1,0 +1,150 @@
+{
+ "checks": [
+  {
+   "dimension": "budget",
+   "claim": "SMC audited balance sheet FY2025-26 is a 4-page English text PDF at https://www.suratmunicipal.gov.in/Departments/Accounts/BalanceSheet_25_26.pdf, showing Rs 200 cr secured and about Rs 1,059 cr unsecured loans.",
+   "verdict": "corrected",
+   "evidence": "The cited URL returned HTTP 404 (HTML). The index links /Content/Documents/..., and that path returned 200, a 4-page PDF of 2.6 MB. It has a text layer headed 'BALANCE SHEET AS ON 31ST MARCH, 2026', with secured loans 2,00,00,00,000 and unsecured 10,59,40,69,467.",
+   "correction": "Use https://www.suratmunicipal.gov.in/Content/Documents/Departments/Accounts/BalanceSheet_25_26.pdf. The content claims hold."
+  },
+  {
+   "dimension": "budget",
+   "claim": "SMC Revenue-Capital Budget Summary is updated weekly by zone (HQ + 10 zones), last on 27/09/2026. Surat edge.",
+   "verdict": "confirmed",
+   "evidence": "Live fetch returned 200. The page says 'Weekly Update (Last on 27/09/2026)' and lists All Zone, HQ, West, Central, North, East-A, South-A, Athwa, South East, East-B and South-B (Kanakpur). The table rows still load via XHR."
+  },
+  {
+   "dimension": "budget",
+   "claim": "CityFinance has no data for Ahmedabad ('Financial data is unavailable'), so the CityFinance row is a Surat edge.",
+   "verdict": "refuted",
+   "evidence": "CityFinance's own ULB list gives AMC the slug 'amdavad' (code GJ167, id 5e4a75dc47cb2749e5a56bdf), not 'ahmedabad'. /api/v1/ledger/lastUpdated?ulb=<AMC id> returns success, year 2023-24. Surat's returns the same year, 2023-24.",
+   "correction": "AMC standardised audited accounts are on CityFinance up to 2023-24 at /municipal-data/city/amdavad (slug from the ULB list; checked via the API). The row is a Tie."
+  },
+  {
+   "dimension": "budget",
+   "claim": "AMC FY2025-26 balance sheet (ViewFile?TYPE=FileRepository,2689) is a scanned 49-page PDF with almost no text layer.",
+   "verdict": "confirmed",
+   "evidence": "Re-downloaded with legacy TLS: HTTP 200, 14,079,038 bytes, 49 pages, producer iLovePDF. pdftotext gives 123 characters, and pdfimages shows full-page JPEGs (1654x2326 at 200 ppi). It needs OCR."
+  },
+  {
+   "dimension": "budget",
+   "claim": "AMC budget books run from 2005-06 to 2026-27, the longest series. Ahmedabad edge.",
+   "verdict": "confirmed",
+   "evidence": "Live /SP/Budget (legacy TLS, 200) lists year labels from 2005-06 through 2026-27. The local 2026-27 Budget A PDF is 334 pages."
+  },
+  {
+   "dimension": "budget",
+   "claim": "SMC green bond offer document dated 18 Sep 2025 is hosted on the SMC site (verified_live=false).",
+   "verdict": "confirmed",
+   "evidence": "A HEAD request to /Content/Documents/Departments/Accounts/SMCBond/GreenBond/Surat_Municipal_Corporation_Offer_Document_dated_September_18_2025.pdf returned HTTP 200, application/pdf, 14.2 MB. Its content was not parsed."
+  },
+  {
+   "dimension": "education",
+   "claim": "The AMC School Board Student/Teacher Data List gives zone x class enrolment of 172,576 students and 4,653 teachers as of 31-07-2025, with an anomalous Std 3 count of 7,842.",
+   "verdict": "confirmed",
+   "evidence": "Plain curl returned 200. The date is shown in Gujarati numerals (31-07-2025). The totals row reads 16133|19611|20317|7842|24633|...|172576, and 4653 appears on the page. There is no TLS quirk."
+  },
+  {
+   "dimension": "education",
+   "claim": "The Surat municipal school board site is a JS-only shell with no enrolment or teacher data; figures appear only in news.",
+   "verdict": "confirmed",
+   "evidence": "The raw HTML of the board site (Next.js/zibma, 162 KB) has no strings for student, school, teacher or the Gujarati equivalents, and no __NEXT_DATA__. A web search found only third-party or news figures (318 schools), with no official statistics. The Surat RTI gap stands."
+  },
+  {
+   "dimension": "food_prices",
+   "claim": "The Agmarknet JSON backend is live. Ahmedabad APMC reports more consistently than Surat APMC, and Agmarknet's 'Surat' list includes Tapi-district markets.",
+   "verdict": "confirmed",
+   "evidence": "A POST for 25 Sep 2026 over all 54 Surat and Ahmedabad market IDs succeeded. Ahmedabad APMC returned 36 rows, Vasana 5, plus Viramgam, Mandal and Sanad. Surat APMC returned 0 rows. The Surat list returned Songadh, Songadh (Badarpada) and Songadh (Umrada), which are in Tapi district."
+  },
+  {
+   "dimension": "food_prices",
+   "claim": "IMPDS lists 'AHMEDABAD CITY' separately from rural 'AHMADABAD', while 'SURAT' is combined. Sep 2026 portability: Surat 7,313, Ahmedabad City 5,139.",
+   "verdict": "confirmed",
+   "evidence": "The IMPDS Gujarat table (September 2026) saved from impds.nic.in earlier this session shows AHMADABAD total 412, AHMEDABAD CITY 5139 and SURAT 7313. It was not re-fetched live because of the call budget."
+  },
+  {
+   "dimension": "health_env",
+   "claim": "The SMC VBDC page has no case counts, and neither corporation publishes disease surveillance on its portal.",
+   "verdict": "refuted",
+   "evidence": "Live SMC /Departments/HealthDepartmentDiseaseReports (200) has 7 HTML tables of monthly cases and deaths for gastroenteritis, enteric fever, pulmonary TB, malaria (slides, Pv/Pf), pneumonia, hepatitis and cholera, from 1995 to 2022. There is also a VBDC_Annual_Report.pdf (24 pages, 2019).",
+   "correction": "Surat has a city-level disease time series in HTML up to 2022 (stale, ease 3). Nothing like it was found for AMC."
+  },
+  {
+   "dimension": "health_env",
+   "claim": "No public SWM tonnage on the SMC site, so water/SWM statistics are a Tie.",
+   "verdict": "refuted",
+   "evidence": "Live SMC /Departments/SolidWasteManagementStatistics (200) has 8 monthly HTML tables. Door-to-door collection for July-2026 was 678 vehicles, 1,555 trips and 2,440.77 MT/day, with a series back to 2019. AMC's /StaticPage/solid_waste_mgmt has no tables or tonnage.",
+   "correction": "Surat edge: monthly MSW collection by mode up to Jul 2026 in scrapeable HTML (ease 4)."
+  },
+  {
+   "dimension": "health_env",
+   "claim": "Swachh Survekshan 2024-25: Ahmedabad #1 cleanest city with 10 lakh+ population; Surat #2 in the Super Swachh League. EoLI 2020: Ahmedabad 3, Surat 5; MPI 2020: Surat 2.",
+   "verdict": "confirmed",
+   "evidence": "Search results from several outlets (PIB PRID 2145461, DeshGujarat, DD News, ThePrint) agree on SS 2024-25. PIB PRID 1702417 gives EoLI million+ as Bengaluru, Pune, Ahmedabad, Chennai, Surat, and MPI as Indore, Surat, Bhopal. The PIB pages were not fetched."
+  },
+  {
+   "dimension": "governance",
+   "claim": "SMC's ward-wise corporator list (30 wards x 4) is undated and may not reflect the 2026 election.",
+   "verdict": "corrected",
+   "evidence": "Live Corp_list lists Ward 1 as Naynaben Dobariya, Bhavishaben Patel, Vijay Bhatiya and Rajendrabhai Patel. These match the SMC General Election 2026 winners in Gujarat Gazette Ex. 357 dated 28-04-2026. There are 30 wards.",
+   "correction": "The SMC list is the current 2026-31 term. It is in English HTML, but party and phone are not shown."
+  },
+  {
+   "dimension": "governance",
+   "claim": "The AMC Statistical Outline is a city-level annual source with references to 2025-26 and 2026-27 (ease 3).",
+   "verdict": "refuted",
+   "evidence": "Live /SP/StatisticalOutline (legacy TLS, 200) lists only 'STATISTICAL OUTLINE FOR 2003-04' and '2006-07'. The recent years seen earlier came from the site navigation, not from outline editions.",
+   "correction": "The latest edition is 2006-07, stale by 19 years (ease about 2)."
+  },
+  {
+   "dimension": "district_modules",
+   "claim": "SMC rainfallinfo gives 2-hourly Ukai level (337.82 ft on 27/09/2026), and the WRD daily PDF shows Ukai at 83.26% ALERT and Sardar Sarovar at 99.05%. Also, the upstream geo slug is 'ahmadabad' while districts.ts uses 'ahmedabad'.",
+   "verdict": "confirmed",
+   "evidence": "Live rainfallinfo: 27/09/2026 24:00, 337.82 ft, inflow and outflow 6133 cusec. WRD PDF for 27-09-2026: Ukai 83.26% ALERT, but listed under Tapi district (Songadh); Sardar Sarovar 99.05%. Upstream gujarat-districts.json has slug 'ahmadabad'; districts.ts:1155 has lockedDistrict('ahmedabad')."
+  }
+ ],
+ "revised_scores": [
+  {
+   "dimension": "budget",
+   "surat": 7.5,
+   "ahmedabad": 5.5,
+   "reason": "CityFinance does have AMC audited accounts up to 2023-24 (the slug is 'amdavad'), so that row is a tie and Ahmedabad gains. Surat keeps a clear lead: weekly budget-vs-actuals by zone, a text balance sheet for FY26 (URL corrected) and a live bond offer document. AMC's FY26 balance sheet is confirmed to be a scan."
+  },
+  {
+   "dimension": "education",
+   "surat": 5,
+   "ahmedabad": 7,
+   "reason": "Confirmed that AMC's board has current (31-07-2025) enrolment and teacher counts as scrapeable HTML, while Surat's board publishes nothing crawlable. National sources are the same for both."
+  },
+  {
+   "dimension": "food_prices",
+   "surat": 6,
+   "ahmedabad": 7,
+   "reason": "Confirmed live: Ahmedabad APMC reported on 25-09-2026 and Surat APMC did not. Surat's Agmarknet list includes Tapi markets. IMPDS shows AHMEDABAD CITY as a separate district."
+  },
+  {
+   "dimension": "health_env",
+   "surat": 6.5,
+   "ahmedabad": 4.5,
+   "reason": "The claims that neither city has data were wrong for Surat. SMC publishes monthly SWM tonnage up to Jul 2026 and monthly disease cases and deaths for 1995-2022 in HTML. AMC has neither; its only city data is the 2018-20 air-quality PDF plus press figures. SS, EoLI and NFHS rankings are the same for both."
+  },
+  {
+   "dimension": "governance",
+   "surat": 6,
+   "ahmedabad": 5.5,
+   "reason": "SMC's English corporator list is confirmed to be the current 2026-31 term. AMC's Statistical Outline stops at 2006-07. Ahmedabad keeps the edge on ward GeoJSON (datameet has no Surat folder) and on party and phone data."
+  },
+  {
+   "dimension": "district_modules",
+   "surat": 7.5,
+   "ahmedabad": 5,
+   "reason": "Confirmed: live Ukai and zone-rain HTML, the WRD PDF (note that Ukai sits in Tapi district) and the upstream 'ahmadabad' slug mismatch. The only Ahmedabad win is its ward polygons."
+  },
+  {
+   "dimension": "rti",
+   "surat": 7.5,
+   "ahmedabad": 4.5,
+   "reason": "Not re-researched, as instructed. The earlier findings stand: SMC has a current PIO list, 20 years of returns and a status tracker, while AMC's RTI pages are stale since 2011-12."
+  }
+ ]
+}

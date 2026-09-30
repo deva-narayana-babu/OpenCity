@@ -1,0 +1,249 @@
+{
+ "dimension": "education",
+ "sources": [
+  {
+   "metric": "Municipal primary school enrolment by zone x class (Balvatika-Std 8) and teacher counts (HTAT/primary/upper-primary) by zone and medium",
+   "city": "Ahmedabad",
+   "source_name": "AMC School Board (Nagar Prathmik Shikshan Samiti, Ahmedabad) - Student / Teacher Data List",
+   "url": "https://www.amcschoolboard.org/student-teacher-data-list/",
+   "format": "HTML tables (Gujarati headers, Latin digits)",
+   "granularity": "12 zones/medium-wings x class",
+   "latest_period": "As of 31-07-2025",
+   "ease_score": 4,
+   "verified_live": true,
+   "access_notes": "Fetched this session with plain curl (no TLS quirk, unlike ahmedabadcity.gov.in). Total 172,576 students, 4,653 teachers (289 HTAT). Std 3 column looks anomalously low (7,842 vs ~20k in adjacent grades) - flag as a data-quality issue. Scrapeable."
+  },
+  {
+   "metric": "AMC school list (school names/addresses)",
+   "city": "Ahmedabad",
+   "source_name": "AMC School Board - 453 school list PDF",
+   "url": "https://www.amcschoolboard.org/wp-content/uploads/2025/11/453-school-list.pdf",
+   "format": "PDF",
+   "granularity": "School",
+   "latest_period": "Uploaded 2025-11",
+   "ease_score": 3,
+   "verified_live": false,
+   "access_notes": "Linked from the board homepage (fetched); PDF itself not downloaded. Also a School-List-2023.pdf. The board site is WordPress, so /wp-json/ may allow listing uploads."
+  },
+  {
+   "metric": "Municipal primary school board (enrolment, schools, teachers)",
+   "city": "Surat",
+   "source_name": "Municipal School Board Surat (Surat Nagar Prathmik Shikshan Samiti) website",
+   "url": "https://municipalschoolboardsurat.org/",
+   "format": "JS-rendered Next.js site (zibma CMS); no data in the served HTML",
+   "granularity": "Unknown",
+   "latest_period": "Unknown",
+   "ease_score": 2,
+   "verified_live": true,
+   "access_notes": "Linked as 'Primary' from the SMC Education menu. Returns 200, but the HTML is an empty shell (title only), so it needs a headless browser. No enrolment/teacher table found. Press reports ~270-318 schools, ~1.3 lakh students (news only)."
+  },
+  {
+   "metric": "SMC secondary school (Suman High Schools): student details, 5-year result summary, teaching staff",
+   "city": "Surat",
+   "source_name": "SMC Services > Education > Secondary (Suman High School)",
+   "url": "https://www.suratmunicipal.gov.in/Services/SumanHighSchool",
+   "format": "HTML pages + PDFs (StudentsDetails.pdf, Last5YearsResultSummary.pdf)",
+   "granularity": "Suman High School network",
+   "latest_period": "Unknown (PDFs not opened)",
+   "ease_score": 3,
+   "verified_live": true,
+   "access_notes": "The page was fetched. PDF links are at /Content/Documents/Services/Education/SumanHighSchool/ but were not downloaded. AMC has no comparable secondary-school result disclosure found."
+  },
+  {
+   "metric": "UDISE+ school, enrolment, teacher and infrastructure indicators",
+   "city": "National",
+   "source_name": "UDISE+ Dashboard (MoE)",
+   "url": "https://dashboard.udiseplus.gov.in/",
+   "format": "SPA dashboard; report module with Excel/PDF exports",
+   "granularity": "District (Surat, Ahmedabad) and block; not municipal-corporation level",
+   "latest_period": "Not confirmed this session (usually 2024-25)",
+   "ease_score": 3,
+   "verified_live": true,
+   "access_notes": "Returns 200. It is JS-rendered, so exports need manual download or reverse-engineering the API. Data is district-level: Ahmedabad district includes the AMC area plus rural blocks. Both cities are symmetric here."
+  },
+  {
+   "metric": "Performance Grading Index - District (PGI-D)",
+   "city": "National",
+   "source_name": "PGI portal (UDISE+)",
+   "url": "https://pgi.udiseplus.gov.in/",
+   "format": "SPA / PDF reports",
+   "granularity": "District",
+   "latest_period": "Not confirmed this session",
+   "ease_score": 3,
+   "verified_live": true,
+   "access_notes": "Returns 200. District score cards are available for both districts, so the cities are symmetric. PGI-D lags by 2+ years."
+  },
+  {
+   "metric": "Learning outcomes (Class 3/6/9 language, maths) - PARAKH Rashtriya Sarvekshan 2024",
+   "city": "Gujarat-state",
+   "source_name": "NCERT PARAKH - Gujarat state report",
+   "url": "https://parakh.ncert.gov.in/sites/default/files/2025-07/REPORT_Gujarat_IND024.pdf",
+   "format": "Text PDF, 46 pages",
+   "granularity": "State (district-level figures are not in tables)",
+   "latest_period": "Survey Dec 2024; published 2025-07",
+   "ease_score": 3,
+   "verified_live": true,
+   "access_notes": "Downloaded (2.6 MB). District report cards are behind a JS dropdown on https://parakh.ncert.gov.in/prs-reports-2024 (fetched; no static district links). The page's JS config exposes API credentials; we did not use them, and the team should not either."
+  },
+  {
+   "metric": "PARAKH district dashboard",
+   "city": "National",
+   "source_name": "PARAKH dashboard",
+   "url": "https://dashboard.parakh.ncert.gov.in/en",
+   "format": "Interactive dashboard",
+   "granularity": "District",
+   "latest_period": "PRS 2024",
+   "ease_score": 2,
+   "verified_live": true,
+   "access_notes": "Returns 200. We did not confirm whether it has an export. Surat and Ahmedabad districts are covered equally."
+  },
+  {
+   "metric": "GSEB SSC/HSC district/centre-wise pass %",
+   "city": "Gujarat-state",
+   "source_name": "Gujarat Secondary & Higher Secondary Education Board",
+   "url": "https://www.gseb.org/",
+   "format": "Result-statistics PDFs (per news); homepage HTML",
+   "granularity": "District / exam centre",
+   "latest_period": "SSC 2026 (declared 2026-05, overall 83.86% per news)",
+   "ease_score": 3,
+   "verified_live": true,
+   "access_notes": "Homepage returns 200, but no statistics link was found in the static HTML. News reports of district results contradict each other (e.g. 'Ahmedabad Rural 100%'), so use the official GSEB PDF, not news."
+  },
+  {
+   "metric": "RTE 12(1)(c) 25% private-school admissions (seats, applications, allotments)",
+   "city": "Gujarat-state",
+   "source_name": "RTE Gujarat online admission portal",
+   "url": "https://rte.orpgujarat.com/",
+   "format": "Seasonal portal",
+   "granularity": "District / school",
+   "latest_period": "Unknown",
+   "ease_score": 2,
+   "verified_live": false,
+   "access_notes": "Returned HTTP 503 on 2026-09-28. It is likely live only during the admission season (Feb-May). The AMC board separately posts EWS/SEBC/ST waiting lists as PDFs (2026-02)."
+  },
+  {
+   "metric": "NAS 2021 district report cards",
+   "city": "National",
+   "source_name": "National Achievement Survey portal",
+   "url": "https://nas.education.gov.in/",
+   "format": "Unknown",
+   "granularity": "District",
+   "latest_period": "2021",
+   "ease_score": 1,
+   "verified_live": false,
+   "access_notes": "Connection failed (curl code 000/DNS). Stale and superseded by PARAKH 2024."
+  },
+  {
+   "metric": "Vidya Samiksha Kendra / Gunotsav school-level assessment",
+   "city": "Gujarat-state",
+   "source_name": "Gujarat VSK",
+   "url": "https://vsk.gujarat.gov.in/",
+   "format": "Unknown",
+   "granularity": "School/cluster (internal)",
+   "latest_period": "Unknown",
+   "ease_score": 0,
+   "verified_live": false,
+   "access_notes": "The guessed host did not resolve. No public dashboard was confirmed. Treat as non-public, so an RTI is needed."
+  }
+ ],
+ "city_comparison": [
+  {
+   "metric": "Municipal primary enrolment published",
+   "surat": "No crawlable data. The board site (municipalschoolboardsurat.org) is a JS-only shell; the enrolment figure (~1.3 lakh) appears only in news",
+   "ahmedabad": "Zone x class HTML table as of 31-07-2025: 172,576 students",
+   "edge": "Ahmedabad"
+  },
+  {
+   "metric": "Municipal teacher counts / PTR",
+   "surat": "Not found publicly",
+   "ahmedabad": "Zone- and medium-wise HTAT/primary/upper-primary counts, 4,653 total (31-07-2025), so a PTR can be computed",
+   "edge": "Ahmedabad"
+  },
+  {
+   "metric": "Municipal secondary schools and board results",
+   "surat": "SMC hosts Suman High School student details and a 5-year result summary (PDF)",
+   "ahmedabad": "No equivalent found on the AMC board site",
+   "edge": "Surat"
+  },
+  {
+   "metric": "Site accessibility for scraping",
+   "surat": "suratmunicipal.gov.in fetches cleanly, but the school board is on a separate JS-rendered site",
+   "ahmedabad": "amcschoolboard.org is WordPress, fetches with plain curl and has a wp-json API, avoiding the ahmedabadcity.gov.in TLS quirk",
+   "edge": "Ahmedabad"
+  },
+  {
+   "metric": "UDISE+ / PGI-D district data",
+   "surat": "Surat district covered",
+   "ahmedabad": "Ahmedabad district covered",
+   "edge": "Tie"
+  },
+  {
+   "metric": "PARAKH 2024 learning outcomes",
+   "surat": "District card via JS dropdown; state PDF only static",
+   "ahmedabad": "Same",
+   "edge": "Tie"
+  },
+  {
+   "metric": "GSEB SSC/HSC results",
+   "surat": "District-level via GSEB statistics",
+   "ahmedabad": "Same, plus a City vs Rural split, which matches AMC better",
+   "edge": "Ahmedabad"
+  },
+  {
+   "metric": "RTE 25% admissions",
+   "surat": "State portal only (503 off-season)",
+   "ahmedabad": "State portal, plus AMC board posts EWS/SEBC/ST waiting-list PDFs (2026-02)",
+   "edge": "Ahmedabad"
+  }
+ ],
+ "scores": {
+  "surat": 5,
+  "ahmedabad": 7,
+  "rationale": "National sources (UDISE+, PGI-D, PARAKH, GSEB, RTE) are the same for both cities. The difference is the municipal school board. AMC's board publishes a current (Jul 2025) zone x class enrolment table and teacher counts as scrapeable HTML. Surat's board site is JS-only and has no data. Surat's only advantage is Suman High School result PDFs."
+ },
+ "gaps": [
+  {
+   "metric": "Municipal primary enrolment, schools and teachers by zone/class/medium",
+   "city": "Surat",
+   "rti_public_authority": "Surat Nagar Prathmik Shikshan Samiti (Municipal School Board), Surat Municipal Corporation - PIO, Administrative Officer's office",
+   "rti_question": "Provide, as of 31-07-2025 and 31-07-2026, the zone-wise, medium-wise and class-wise (Balvatika to Std 8) number of students, number of schools and sanctioned vs filled posts of HTAT principals, primary and upper-primary teachers, in Excel or CSV if available."
+  },
+  {
+   "metric": "Learning outcomes (Gunotsav/VSK school grades) for municipal schools",
+   "city": "Both",
+   "rti_public_authority": "Gujarat Council of School Education (Samagra Shiksha) / Vidya Samiksha Kendra, Gandhinagar - state PIO; copy to the municipal school board PIO",
+   "rti_question": "Provide the latest Gunotsav/VSK school-wise grades and subject-wise average scores for all schools under the Nagar Prathmik Shikshan Samiti of [Surat/Ahmedabad] for 2024-25 and 2025-26."
+  },
+  {
+   "metric": "Municipal school board budget and per-student spend",
+   "city": "Both",
+   "rti_public_authority": "Nagar Prathmik Shikshan Samiti (SMC / AMC) - PIO, Accounts branch",
+   "rti_question": "Provide the school board's sanctioned budget and actual expenditure for 2023-24, 2024-25 and 2025-26 by head (salaries, infrastructure, mid-day meal, uniforms/kits), with the state grant and municipal contribution shown separately."
+  },
+  {
+   "metric": "RTE 12(1)(c) seats, applications and admissions",
+   "city": "Both",
+   "rti_public_authority": "District Primary Education Officer / DEO (Surat; Ahmedabad City and Ahmedabad Rural) - PIO",
+   "rti_question": "For 2024-25, 2025-26 and 2026-27, provide the number of RTE 25% seats notified, applications received, seats allotted, admissions confirmed and seats left vacant, ward- or school-wise, in the municipal limits."
+  },
+  {
+   "metric": "Std 3 enrolment anomaly in AMC data",
+   "city": "Ahmedabad",
+   "rti_public_authority": "AMC School Board (Nagar Prathmik Shikshan Samiti, Ahmedabad) - PIO",
+   "rti_question": "The Student/Teacher Data List (31-07-2025) shows 7,842 Std 3 students against ~20,000 in Std 2 and Std 4. Provide the corrected zone-wise Std 3 enrolment and the reason for the discrepancy."
+  },
+  {
+   "metric": "Out-of-school children survey",
+   "city": "Both",
+   "rti_public_authority": "Nagar Prathmik Shikshan Samiti (SMC / AMC) - PIO",
+   "rti_question": "Provide the zone-wise number of out-of-school children identified in the latest survey (2025-26), and the number enrolled or mainstreamed since."
+  }
+ ],
+ "challenges": [
+  "City vs district mismatch: UDISE+, PGI-D and PARAKH report at district level. Ahmedabad district includes rural blocks outside AMC, and Surat district includes rural talukas outside SMC. Only the municipal school boards give city-limit data.",
+  "Surat's school board site (municipalschoolboardsurat.org) is client-rendered with no data in the HTML. Scraping needs a headless browser or the underlying API, and it may hold no statistics at all.",
+  "PARAKH 2024 and UDISE+ district data sit behind JS dropdowns/SPAs with no stable static URLs, so plan manual download of Excel/PDF exports and store them in the repo.",
+  "Gujarati headers and Gujarati numerals (e.g. dates) in municipal tables need transliteration and normalisation. The AMC data also has quality anomalies (Std 3 count).",
+  "GSEB district results and RTE stats are seasonal (the RTE portal returned 503 off-season), and news coverage of district results is contradictory. Only official GSEB statistics PDFs should be used."
+ ]
+}

@@ -1,0 +1,661 @@
+{
+ "dimension": "rti",
+ "sources": [
+  {
+   "metric": "Gujarat RTI Rules 2010: fee, payment modes, copy/inspection charges, BPL exemption, appeal forms, citizenship check",
+   "city": "Gujarat-state",
+   "source_name": "Gujarat Right to Information Rules, 2010 (GAD notification GS/2112010/VHS/1005/2664/RTI Cell, Gazette Extra No. 40, 22-03-2010), copy hosted by SMC",
+   "url": "https://www.suratmunicipal.gov.in/Content/Documents/rtiact/other/Gujarat_RTI_rules_2010.pdf",
+   "format": "PDF-text",
+   "ease_score": 4,
+   "verified_live": true,
+   "access_notes": "This is an OCR'd scan: the text can be extracted but has OCR noise. Rule 3(1): apply on Form A, on plain paper with the same details, or by e-media. An e-media applicant must pay the fee within 7 days or the application is treated as withdrawn. Rule 3(2): the Rs 20 application fee can be paid in cash where a receipt facility exists, or by DD, pay order, non-judicial stamp or stamp paper, franking, e-stamping, court fee stamp, judicial stamp paper, IPO, revenue stamp, or treasury challan (head 0070-60-800-(17)). Rule 3(4): other charges can only be paid by cash, DD, pay order, IPO or challan, not by stamps. Rule 5: copies are Rs 2 per page for A4/A3 and actual cost for larger paper; inspection is free for the first half hour, then Rs 20 per half hour; samples at actual cost; floppy/CD Rs 50. BPL applicants are exempt from both the application fee and other charges if they attach a certified or true copy of the BPL card or certificate. Rule 4: transfer on Form D within 5 days. Rule 6: first appeal on Form E within 30 days; second appeal to GIC within 90 days, with the details listed in the rule. Rule 7: the PIO may verify citizenship, within the s.7 time limit. There is no word limit and no one-subject rule. Gujarati version: .../Gujarat_RTI_rules_2010_Guj.pdf.",
+   "granularity": "state (applies to all state PAs including SMC, AMC and Collectorates)",
+   "language": "English (Gujarati version also hosted)",
+   "latest_period": "2010 rules; no later amendment to fee rules found",
+   "update_frequency": "static"
+  },
+  {
+   "metric": "GIC FAQ: application language, fee modes, BPL proof rules, online second appeal",
+   "city": "Gujarat-state",
+   "source_name": "Gujarat Information Commission FAQs",
+   "url": "https://gic.gujarat.gov.in/front-page/81/FAQs.aspx",
+   "format": "HTML table",
+   "ease_score": 4,
+   "verified_live": true,
+   "access_notes": "Applications can be in English, Hindi or the official language of the area (Gujarati). They can be submitted in person, by post, or electronically where an online facility exists. The fee is Rs 20 under the 2010 Rules. It cites GAD circular PRCH-102018-1527-RTI Cell dated 05-12-2018: a BPL ration card does NOT qualify for fee exemption; the applicant needs a BPL card or a competent-authority certificate. Second appeals can be filed online via eApplication.aspx. The same FAQ covers the documents needed for a second appeal.",
+   "granularity": "state",
+   "language": "Gujarati (English toggle via ASP.NET postback)",
+   "latest_period": "page last updated 07-09-2026",
+   "update_frequency": "ad hoc"
+  },
+  {
+   "metric": "State executive instructions on RTI practice (free pages, e-delivery, inspection photos)",
+   "city": "Gujarat-state",
+   "source_name": "GAD circular GAD/MRT/e-file/1/2023/1655/RTI Cell (approved 06-05-2025), acting on GIC Annual Report 2023-24 recommendations",
+   "url": "https://artd.gujarat.gov.in/Portal/Document/1_459_1_13052025-circular.pdf",
+   "format": "PDF-text",
+   "ease_score": 3,
+   "verified_live": true,
+   "access_notes": "The Unicode Gujarati text has broken conjuncts after extraction. Key points: (i) up to 5 pages of information are to be given free; (ii) for requests made by email or the online portal, send scans or photos after the copy fee is paid, with no physical copy; (iii) allow photography during inspection, and (iv) allow pen drives; FAAs must pass speaking orders; the s.4(1)(b) PAD must be updated every year. The GIC home page links to this circular.",
+   "granularity": "state",
+   "language": "Gujarati",
+   "latest_period": "May 2025",
+   "update_frequency": "ad hoc"
+  },
+  {
+   "metric": "Online RTI filing for Gujarat state PAs (including municipal corporations)",
+   "city": "Gujarat-state",
+   "source_name": "Gujarat Online RTI Portal (ARTD/GAD + GIL/DST)",
+   "url": "https://onlinerti.gujarat.gov.in/rti_portal/",
+   "format": "dashboard-no-export",
+   "ease_score": 3,
+   "verified_live": true,
+   "access_notes": "Live in Sep 2026, with a maintenance notice for 10-11 Aug 2026. The banner says 'RTI Application is in phased-wise roll-out'. Registration is mandatory. Payment options: SBI net banking, debit/credit card, wallets. BPL applicants upload a certificate. First appeal is filed online with no fee. There is no public list of onboarded PAs. The FAQ looks copied from the central portal: it wrongly says second appeals go to the CIC and has a 'XXXX characters' placeholder for the length limit. Help line 079-23258077. Launched 30-11-2021 for Secretariat departments; per May 2026 news it has been extended to municipal corporations including AMC and SMC.",
+   "granularity": "state (per PA once logged in)",
+   "language": "English/Gujarati",
+   "latest_period": "2026",
+   "update_frequency": "live"
+  },
+  {
+   "metric": "Onboarding of SMC/AMC and other local bodies onto the state online RTI portal; known portal defects",
+   "city": "Both",
+   "source_name": "Counterview: 'Citizen-led campaign forces Gujarat government to expand online RTI access to local bodies' (May 2026)",
+   "url": "https://www.counterview.net/2026/05/citizen-led-campaign-forces-gujarat.html",
+   "format": "news-only",
+   "ease_score": 1,
+   "verified_live": true,
+   "access_notes": "Reports that by Mar-Apr 2026 the UD&UHD had mapped about 177 PAs to the portal, including municipal corporations (Ahmedabad, Surat, Vadodara, Rajkot, Gandhinagar) and over 160 municipalities. Collectorate mapping was 'underway' and police offices had been directed to connect. Reported defects: reply-upload dates are unclear, which breaks appeal-deadline maths; a forced 'reason for delay' field on timely first appeals; PIO names are missing; printouts are hard to read. This is news only: no primary GAD/UD notification was found.",
+   "granularity": "state",
+   "language": "English",
+   "latest_period": "May 2026",
+   "update_frequency": "one-off"
+  },
+  {
+   "metric": "Online RTI for central PAs in the cities (Railways, Posts, EPFO, Income Tax, central PSUs and institutes)",
+   "city": "National",
+   "source_name": "RTI Online portal (DoPT)",
+   "url": "https://rtionline.gov.in/",
+   "format": "dashboard-no-export",
+   "ease_score": 3,
+   "verified_live": true,
+   "access_notes": "Covers central ministries and departments only. It explicitly warns users not to file for state PAs, so it must not be used for SMC, AMC or Collectorates. Payment: net banking, card, RuPay, UPI. The central fee is Rs 10 under the RTI Rules 2012 (not stated on the page). First appeal is online, and the CIC second-appeal portal is integrated. The upstream File RTI button links only here, which is wrong for Gujarat state and municipal PAs.",
+   "granularity": "national",
+   "language": "English/Hindi",
+   "latest_period": "2026",
+   "update_frequency": "live"
+  },
+  {
+   "metric": "SMC RTI hub (Act, Rules, PIO lists, returns, circulars, appeal orders, status tracker, link to state portal)",
+   "city": "Surat",
+   "source_name": "Surat Municipal Corporation - Right to Information page",
+   "url": "https://www.suratmunicipal.gov.in/Downloads/Acts/RTI_Act",
+   "format": "HTML table",
+   "ease_score": 4,
+   "verified_live": true,
+   "access_notes": "Well organised with stable URLs. Links to: RTI Act (En/Gu); Gujarat RTI Rules 2010 (En/Gu); PIO/APIO lists (main, Audit, Secretary); Patrak-7 and Patrak-8; annual returns 2005-07 to 2025-26; Annexure-A PAD certificates 2014-2025; department-wise first-appeal orders; 14 GIC second-appeal orders (2023-2026); the Check RTI Application Status tracker; and 'Online RTI Portal - Gov. of Gujarat'. HQ: Shri Tapi Bhawan / Surat Mahanagar Seva Sadan, Gordhandas Chokhawala Marg, Tapipura, Surat 395003.",
+   "granularity": "city (municipal corporation)",
+   "language": "English + Gujarati",
+   "latest_period": "2026",
+   "update_frequency": "irregular, several updates a year"
+  },
+  {
+   "metric": "PIO / Appellate Authority directory (department- and zone-wise)",
+   "city": "Surat",
+   "source_name": "SMC list of Appellate Officers (Patrak-A) and PIOs (Patrak-B) with address, phone, mobile, email, dated 09-12-2025",
+   "url": "https://www.suratmunicipal.gov.in/Content/Documents/rtiact/piosandapios_guj.pdf",
+   "format": "PDF-text",
+   "ease_score": 3,
+   "verified_live": true,
+   "access_notes": "43 pages, current as of Dec 2025. Uses a legacy ASCII-mapped Gujarati font (Terafont/LMG-style), so pdftotext gives mojibake for names and designations and needs a legacy-to-Unicode converter. Phone numbers and @suratmunicipal emails extract cleanly, though emails wrap across lines. The 2025-26 annual return reports 353 PIOs and 74 AAs. Separate lists: audit_pios.pdf (Oct 2023) and secretary_pio_apio.pdf.",
+   "granularity": "department / zone (9 zones)",
+   "language": "Gujarati (legacy font)",
+   "latest_period": "09-12-2025",
+   "update_frequency": "roughly annual"
+  },
+  {
+   "metric": "RTI requests received, transferred, rejected (by section), first appeals, fees collected, PIO/AA counts - per year",
+   "city": "Surat",
+   "source_name": "SMC 'Gujarat State RTI Annual Return' printouts (from rti-ar.gujarat.gov.in), 2005-07 to 2025-26",
+   "url": "https://www.suratmunicipal.gov.in/Content/Documents/rtiact/Annual-Return/2025-2026.pdf",
+   "format": "PDF-text",
+   "ease_score": 4,
+   "verified_live": true,
+   "access_notes": "One-page browser printouts in English, easy to parse. Index page: /Downloads/Acts/RTI_ActAnnualReturn. 2025-26 (printed 20-05-2026): requests opening 5,875, received 8,653, transferred 2,926, rejected 25, accepted 7,633; first appeals opening 831, received 737, rejected 88, accepted 721; s.8(1)(j) invoked 14, s.11 invoked 13; registration fee Rs 94,440, other charges Rs 1,68,031; 0 penalties; 0 disciplinary actions; 353 PIOs, 74 AAs. 2024-25: received 15,213, transferred 5,180, rejected 112, first appeals 1,560. The 2025-26 fall may be partly an artefact of the upload date. This is a direct feed for the RTI Tracker (RtiStat) module.",
+   "granularity": "public authority (whole SMC), yearly",
+   "language": "English",
+   "latest_period": "FY 2025-26",
+   "update_frequency": "annual (May)"
+  },
+  {
+   "metric": "Quarterly RTI disposal incl. within-time disposal and end-of-quarter pendency, BPL applicants",
+   "city": "Surat",
+   "source_name": "SMC Patrak-7 quarterly return, Q4 FY2025-26 (01-01-2026 to 31-03-2026)",
+   "url": "https://www.suratmunicipal.gov.in/Content/Documents/rtiact/other/patrak-7.pdf",
+   "format": "PDF-text",
+   "ease_score": 3,
+   "verified_live": true,
+   "access_notes": "Excel-to-PDF in a legacy Gujarati font; row labels are mojibake but the numbers are clean. Q4: 353 PIOs; opening pending 3,150 (54 BPL); received 1,865; fully transferred 596; information fully given 1,214; rejected 8; disposed 1,818, of which 1,106 were within time (about 61%); pending at quarter end 3,197. Fees for the quarter Rs 21,920 + Rs 43,885. Only the latest quarter is published; the file is overwritten each quarter, so it must be archived on every scrape.",
+   "granularity": "public authority, quarterly",
+   "language": "Gujarati (legacy font)",
+   "latest_period": "Q4 2025-26",
+   "update_frequency": "quarterly (overwritten)"
+  },
+  {
+   "metric": "Citizen RTI application status tracking",
+   "city": "Surat",
+   "source_name": "SMC Check RTI Application Status",
+   "url": "https://www.suratmunicipal.gov.in/Information/RTIAppStatus",
+   "format": "dashboard-no-export",
+   "ease_score": 2,
+   "verified_live": true,
+   "access_notes": "POST form: search by Application ID (format XXX/XXX), contact number or BPL card number, behind an image CAPTCHA. Good for the walkthrough (tell users to keep the SMC inward ID) but not scrapeable. It shows SMC keeps a computerised RTI register that could be exported through an RTI request.",
+   "granularity": "application",
+   "language": "English",
+   "latest_period": "live",
+   "update_frequency": "live"
+  },
+  {
+   "metric": "First-appeal orders and GIC second-appeal orders involving SMC",
+   "city": "Surat",
+   "source_name": "SMC RTI appeal orders (department-wise, about 319 PDFs) and GIC orders page",
+   "url": "https://www.suratmunicipal.gov.in/Downloads/Acts/RtiActHukam",
+   "format": "PDF-scanned",
+   "ease_score": 2,
+   "verified_live": true,
+   "access_notes": "Department folders (Account, Affordable Housing, Zones, Health, Drainage, etc.) with inconsistent file naming, 2006 to 2025-26 or 2026, updated irregularly by department. GIC orders page: /Downloads/Acts/RTI_GIC_Orders, 14 orders (A-3992-2024 to A-0566-2026); sample 14_A-0566-2026.pdf is a 19-page scanner image (Avision). Useful for an 'appeals outcome' view, but needs OCR.",
+   "granularity": "order",
+   "language": "Gujarati",
+   "latest_period": "2026",
+   "update_frequency": "irregular"
+  },
+  {
+   "metric": "Proactive disclosure s.4(1)(b) compliance",
+   "city": "Surat",
+   "source_name": "SMC Proactive Disclosures (department-wise main.pdf) and Annexure-A PAD update certificates",
+   "url": "https://www.suratmunicipal.gov.in/Downloads/Acts/RTI_ActDisclosure",
+   "format": "PDF-text",
+   "ease_score": 3,
+   "verified_live": true,
+   "access_notes": "104 PAD links. Sampled files have Last-Modified 30-05-2026 and 04-06-2026, so they are current. Annexure-A certificates (PAD updated as of 1 May) exist for 2014-2025 at /Downloads/Acts/RTI_AnnexureA. The files are large (for example Account PAD 3.4 MB) and in Gujarati.",
+   "granularity": "department",
+   "language": "Gujarati",
+   "latest_period": "May-Jun 2026",
+   "update_frequency": "annual (1 May)"
+  },
+  {
+   "metric": "AMC RTI hub (Act, Rules, forms, fees, PIO list, filing points, annual report)",
+   "city": "Ahmedabad",
+   "source_name": "Amdavad Municipal Corporation - RTI static page",
+   "url": "https://ahmedabadcity.gov.in/StaticPage/RTI",
+   "format": "HTML table",
+   "ease_score": 2,
+   "verified_live": true,
+   "access_notes": "The server needs TLS unsafe legacy renegotiation and serves an incomplete certificate chain. Default curl/OpenSSL 3 fails (error 0A000152, then 'unable to get local issuer certificate'); it worked only with OPENSSL_CONF Options=UnsafeLegacyRenegotiation plus -k. WebFetch-style tools will fail. Content is stale: English Form A and fee sheet dated Oct 2005; PIO lists from 2008 and 07-03-2011; civic-centre list 2014; 'RTI Annual Report' covers only 2005-06 to 2010-11. One rules link is the superseded 2005 Gujarat RTI Rules; another is an 8-page scanned PDF created May 2010. The page says to apply at any City Civic Centre. There is no link to the state online portal and no status tracker.",
+   "granularity": "city (municipal corporation)",
+   "language": "English + Gujarati",
+   "latest_period": "mostly 2005-2014",
+   "update_frequency": "rarely updated"
+  },
+  {
+   "metric": "PIO / Appellate Officer directory",
+   "city": "Ahmedabad",
+   "source_name": "AMC 'List of the P.I.O. & Appellate Officer (NEW)' dated 07-03-2011",
+   "url": "https://ahmedabadcity.gov.in/Images/RTI_piolist07-03-11.pdf",
+   "format": "PDF-text",
+   "ease_score": 2,
+   "verified_live": true,
+   "access_notes": "28 pages in a legacy ASCII-mapped Gujarati font. It is 15 years old and effectively unusable for a current directory: officer names and phone extensions have changed. Current PIO/FAA details are scattered across about 40 departmental PADs (mostly 2022-24). The RTI Cell PAD 2023-24 names the Office Superintendent as PIO and the Assessor & Tax Collector as Appellate Authority, 5th floor, Sardar Patel Bhavan, Danapith. No consolidated current list was found.",
+   "granularity": "department / zone",
+   "language": "Gujarati (legacy font)",
+   "latest_period": "March 2011",
+   "update_frequency": "none since 2011"
+  },
+  {
+   "metric": "RTI applications, disposal, appeals, fees - per year",
+   "city": "Ahmedabad",
+   "source_name": "AMC 'RTI Annual Return Information System' summary 2005-06 to 2010-11",
+   "url": "https://ahmedabadcity.gov.in/Images/RTI_rti_am.pdf",
+   "format": "PDF-text",
+   "ease_score": 2,
+   "verified_live": true,
+   "access_notes": "English, one page, created 2012. 2010-11: 8,077 applications received, 8,037 disposed, 551 pending; 826 appeals. Nothing after 2011 is published on the AMC site even though AMC files annual returns to rti-ar.gujarat.gov.in. This is a core RTI gap.",
+   "granularity": "public authority, yearly",
+   "language": "English",
+   "latest_period": "2010-11",
+   "update_frequency": "none since 2012"
+  },
+  {
+   "metric": "Proactive disclosure s.4(1)(b) incl. RTI Cell structure",
+   "city": "Ahmedabad",
+   "source_name": "AMC Pro-Active Disclosure page (department PADs incl. RTI CELL PAD 2023-24)",
+   "url": "https://ahmedabadcity.gov.in/StaticPage/PAD",
+   "format": "PDF-text",
+   "ease_score": 2,
+   "verified_live": true,
+   "access_notes": "About 40 department PADs, mostly 2022-23 or 2023-24 (the RTI Cell PAD was created 13-06-2023). Shruti Unicode font with glyph breakage; some are ZIP or 7z. The RTI Cell PAD shows a Deputy Municipal Commissioner (RTI) in charge, a 7-person cell, and that GIC second-appeal hearings are coordinated by video conference. Needs the same TLS workaround.",
+   "granularity": "department",
+   "language": "Gujarati",
+   "latest_period": "2023-24",
+   "update_frequency": "irregular"
+  },
+  {
+   "metric": "AMC RTI volume 2010-2019 (historic)",
+   "city": "Ahmedabad",
+   "source_name": "All Gujarat News: 'AMC has received a whopping 1,16,400 RTI applications' (15-03-2020)",
+   "url": "https://allgujaratnews.in/en/ahmedabad-municipal-corporation-amc-has-received-a-whopping-116400-right-to-information-rti-applications/",
+   "format": "news-only",
+   "ease_score": 1,
+   "verified_live": true,
+   "access_notes": "About 1,16,400 applications over 9 years, 24,535 without satisfactory reply, about 1,463 appeals pending. The AMC RTI Cell said it holds no record of second appeals to GIC. This is the only post-2011 AMC RTI statistic found.",
+   "granularity": "public authority, multi-year",
+   "language": "English",
+   "latest_period": "2010-2019",
+   "update_frequency": "one-off"
+  },
+  {
+   "metric": "Surat Collectorate PIO information and branch PADs",
+   "city": "Surat",
+   "source_name": "Surat District (Collectorate) RTI page - Prant, Mamlatdar and branch proactive disclosures",
+   "url": "https://surat.nic.in/rti/",
+   "format": "PDF-scanned",
+   "ease_score": 2,
+   "verified_live": true,
+   "access_notes": "S3WaaS site with 6 Prant, 21 Mamlatdar/other and 17 Collectorate branch PADs, all uploaded Aug 2026 (fresh). The sample (Chitnis, 102 pages) mixes scanned JPEG pages with legacy-font text. No consolidated RTI contact list was found. District level: covers Surat city prants (City North/South) as well as rural talukas.",
+   "granularity": "district / prant / taluka / branch",
+   "language": "Gujarati",
+   "latest_period": "Aug 2026",
+   "update_frequency": "annual"
+  },
+  {
+   "metric": "Ahmedabad Collectorate PIO/AA directory",
+   "city": "Ahmedabad",
+   "source_name": "Ahmedabad District (Collectorate) RTI page - RTI contact list (as on 13-11-2024), branch contact list (as on 01-03-2025), Prant/Mamlatdar/branch PADs",
+   "url": "https://ahmedabad.nic.in/rti/",
+   "format": "PDF-text",
+   "ease_score": 3,
+   "verified_live": true,
+   "access_notes": "Consolidated contact lists with PIO, mobile, email and Appellate Officer. The PDFs are Unicode Gujarati but table extraction is messy. 7 Prant and 15 Mamlatdar PADs, uploaded 2025-26. The page links the RTI Online Portal. Covers Ahmedabad City East/West prants, which overlap AMC territory but are separate PAs.",
+   "granularity": "district / prant / taluka / branch",
+   "language": "Gujarati",
+   "latest_period": "Nov 2024 - Mar 2025",
+   "update_frequency": "irregular"
+  },
+  {
+   "metric": "GIC monthly pendency (opening, received, disposed, closing)",
+   "city": "Gujarat-state",
+   "source_name": "Gujarat Information Commission home page ticker",
+   "url": "https://gic.gujarat.gov.in/default.aspx",
+   "format": "HTML table",
+   "ease_score": 4,
+   "verified_live": true,
+   "access_notes": "A small HTML table in Gujarati numerals, easy to scrape. As of 31-08-2026: opening 624, received 834, disposed 419, closing 1,039. It probably covers the month; the period is only shown in a tooltip. The Commissioners panel shows the State Chief Information Commissioner post as 'Vacant', with 5 SICs listed. The site also links e-second appeal, e-status, daily board and orders.",
+   "granularity": "state",
+   "language": "Gujarati",
+   "latest_period": "31-08-2026",
+   "update_frequency": "monthly"
+  },
+  {
+   "metric": "GIC annual report: statewide RTI volume, department-wise appeals, rejections by section, penalties by named PIO",
+   "city": "Gujarat-state",
+   "source_name": "GIC Annual Reports 2005-06 to 2024-25 (AR-24-25-Guj.pdf, 54 pp, Feb 2026)",
+   "url": "https://gic.gujarat.gov.in/front-page/60/Annual-Reports.aspx",
+   "format": "PDF-text",
+   "ease_score": 3,
+   "verified_live": true,
+   "access_notes": "Gujarati only (KrishnaUni font; conjuncts break on extraction); 10.7 MB. 2024-25 figures: 1,70,860 applications statewide (from PA uploads to RTI-AR); UD&UHD department plus its PAs (which include SMC and AMC) 43,006 (25.17%, the highest); 6,080 appeals/complaints received (UD&UHD 1,034); 6,413 disposed; overall rejection rate 4.63%; penalties in 21 cases totalling Rs 1,41,750 (Appendix 5 names PIOs and applicants). Under-reporting warning: 2023-24 was reported as 1,31,875 applications but uploads later reached 1,63,955 (+24%). Data is department-level, not per municipal corporation. The report records GIC ordering AMC to replace its civic-centre Form A, which lacked the citizenship declaration; AMC reprinted it for 61 civic centres.",
+   "granularity": "state / administrative department",
+   "language": "Gujarati",
+   "latest_period": "FY 2024-25",
+   "update_frequency": "annual (about 11 months lag)"
+  },
+  {
+   "metric": "GIC decisions / case status (second appeals & complaints) filterable by district",
+   "city": "Gujarat-state",
+   "source_name": "GIC 'Aayog na Hukamo' (Commission orders) search",
+   "url": "https://gic.gujarat.gov.in/front-page/Decisions.aspx",
+   "format": "HTML table",
+   "ease_score": 3,
+   "verified_live": true,
+   "access_notes": "ASP.NET postback: court (1-6 or All) and date range in dd/Mon/yy format. A query for Aug 2026 returned paginated rows with inward no., appeal no. (A-/F- prefixes), court, applicant name, PIO designation/office/taluka/district, department, status, order link, hearing dates, and application and final-order dates. It took more than 150 s to respond. Can be filtered to 'Jilla Surat' or 'Jilla Amdavad' client side. Contains applicant names, so aggregate before display.",
+   "granularity": "case",
+   "language": "Gujarati",
+   "latest_period": "live",
+   "update_frequency": "daily"
+  },
+  {
+   "metric": "Online second appeal / complaint filing and e-status",
+   "city": "Gujarat-state",
+   "source_name": "GIC e-Second Appeal / Complaint and e-Status",
+   "url": "https://gic.gujarat.gov.in/front-page/eApplication.aspx?lang=Eng",
+   "format": "dashboard-no-export",
+   "ease_score": 3,
+   "verified_live": true,
+   "access_notes": "Choose second appeal u/s 19(3) or complaint u/s 18(1). e-Status: /front-page/eStatus.aspx (search by appeal/complaint no.; 'online linkup' PDF upload). The daily board /front-page/CauseList.aspx returned HTTP 500 on 27-09-2026.",
+   "granularity": "case",
+   "language": "Gujarati/English",
+   "latest_period": "live",
+   "update_frequency": "live"
+  },
+  {
+   "metric": "Why GIC rejects second appeals (walkthrough error-proofing)",
+   "city": "Gujarat-state",
+   "source_name": "GIC analysis of rejected appeals/complaints, Jul-Dec 2024",
+   "url": "https://gic.gujarat.gov.in/image/Download/ApplicationChecklist.pdf",
+   "format": "PDF-text",
+   "ease_score": 4,
+   "verified_live": true,
+   "access_notes": "337 rejections. Causes: more than one second appeal filed (105); one appeal covering more than one Form A (74); no first appeal filed (55); more than 90 days after the FAA order (26); central PA (21); more than 135 days after the first appeal (20); complaint covering more than one Form A (18); second appeal before 45 days from the first appeal (6); missing documents (5); not a PA (5); complaint more than 30 days after cause with no condonation request (2). Encode these as validation rules.",
+   "granularity": "state",
+   "language": "Gujarati",
+   "latest_period": "H2 2024",
+   "update_frequency": "one-off"
+  },
+  {
+   "metric": "Per-public-authority RTI annual returns (all Gujarat PAs)",
+   "city": "Gujarat-state",
+   "source_name": "Gujarat State RTI Annual Return Information System (NIC, GAD RTI Cell)",
+   "url": "https://rti-ar.gujarat.gov.in/RTI_AR/Login",
+   "format": "dashboard-no-export",
+   "ease_score": 2,
+   "verified_live": true,
+   "access_notes": "Department login only; there is no public report view. GIC downloads it for its annual report. The only public item is RTI_Nodal_list.pdf (department nodal officers, 13-01-2026). Contact: so-rti-gad@gujarat.gov.in, 079-23250440. SMC publishes its own printouts; AMC does not. The best route to a clean multi-PA dataset is an RTI to GAD.",
+   "granularity": "public authority, yearly",
+   "language": "English",
+   "latest_period": "2025-26",
+   "update_frequency": "annual"
+  },
+  {
+   "metric": "GIC performance benchmark vs other commissions (backlog, wait time, penalties)",
+   "city": "National",
+   "source_name": "Satark Nagrik Sangathan - Report Card of Information Commissions 2024-25 (RC2025.pdf, Apr 2026)",
+   "url": "https://www.snsindia.org/wp-content/uploads/2026/04/RC2025.pdf",
+   "format": "PDF-text",
+   "ease_score": 4,
+   "verified_live": true,
+   "access_notes": "Gujarat, Jul 2024 to Jun 2025: 8,425 appeals/complaints registered; 7,324 disposed; 1,953 disposals per commissioner a year; 1,489 returned without orders; backlog 6,131 (30-06-2024) down to 3,175 (30-06-2025); estimated wait 5 months, down from 1 year 1 month; 10,767 show-cause notices (highest in India); penalties in 65 cases totalling Rs 5,04,750; 0 disciplinary actions recommended; 0 compensation awarded; answered SNS's RTI in full.",
+   "granularity": "state commission",
+   "language": "English",
+   "latest_period": "Jul 2024 - Jun 2025",
+   "update_frequency": "annual"
+  },
+  {
+   "metric": "Civil-society RTI help (helpline, news)",
+   "city": "Ahmedabad",
+   "source_name": "Mahiti Adhikar Gujarat Pahel (MAGP)",
+   "url": "https://mahitiadhikar.blogspot.com/",
+   "format": "HTML table",
+   "ease_score": 3,
+   "verified_live": true,
+   "access_notes": "RTI helpline 09924085000 (Mon-Sat 11am-6pm); B-3 Sahajanand Tower, Jivrajpark, Ahmedabad 380051; magpgujarat@gmail.com. The blog posts RTI news daily (latest 27-09-2026). Based in Ahmedabad, but the helpline serves all of Gujarat. It is a referral partner, not a data source.",
+   "granularity": "state",
+   "language": "English/Gujarati",
+   "latest_period": "Sep 2026",
+   "update_frequency": "daily"
+  },
+  {
+   "metric": "GIC restrictions on 'disproportionate' applicants (product risk)",
+   "city": "Surat",
+   "source_name": "MAGP repost: Three of a family in Surat barred from filing more than 6 RTI pleas a year (GIC order 24-04-2025)",
+   "url": "https://mahitiadhikar.blogspot.com/2025/05/blog-post_03.html",
+   "format": "news-only",
+   "ease_score": 1,
+   "verified_live": true,
+   "access_notes": "GIC capped three Surat applicants at 6 applications a year after 2,741 appeals/complaints over 2009-2025, citing s.6(1) specificity and the specimen format. The GIC AR 2024-25 records similar relief for Rajkot MC against one applicant. The helper should discourage bulk or omnibus filing.",
+   "granularity": "case",
+   "language": "English",
+   "latest_period": "Apr 2025",
+   "update_frequency": "one-off"
+  },
+  {
+   "metric": "RTI for district/city civil courts (separate fee rules)",
+   "city": "Gujarat-state",
+   "source_name": "Gujarat District Courts Right to Information Rules, 2025 (Gazette)",
+   "url": "https://gujarathighcourt.nic.in/hccms/sites/default/files/rti_files/02_Gazette_copy_of_The_Gujarat_District_Courts_Right_to_Information_Rules_2025.pdf",
+   "format": "PDF-text",
+   "ease_score": 4,
+   "verified_live": true,
+   "access_notes": "Fee is Rs 50 per application, or Rs 500 for tender/bid/contract information. Online filing and first appeal go through the Gujarat High Court RTI portal. BPL exemption applies. Relevant if templates target Surat District Court or the Ahmedabad City Civil Court. Do not apply the Rs 20 rule here.",
+   "granularity": "state (judiciary)",
+   "language": "English",
+   "latest_period": "2025",
+   "update_frequency": "static"
+  },
+  {
+   "metric": "DPDP Act 2023 / Rules 2025 interaction with RTI s.8(1)(j)",
+   "city": "National",
+   "source_name": "PIB backgrounder 'DPDP Rules, 2025 Notified' (Nov 2025)",
+   "url": "https://static.pib.gov.in/WriteReadData/specificdocs/documents/2025/nov/doc20251117695301.pdf",
+   "format": "PDF-text",
+   "ease_score": 4,
+   "verified_live": true,
+   "access_notes": "Confirms the DPDP Act revises RTI s.8(1)(j), removing the public-interest balancing inside (j); s.8(2) remains. Rules notified 14-11-2025 with 18-month phased compliance: main Data Fiduciary duties from about May 2027, consent managers from about Nov 2026. Matters because (a) PIOs may cite 8(1)(j) more often (SMC already invoked it 14 times in 2025-26), and (b) the app will hold applicants' names and addresses.",
+   "granularity": "national",
+   "language": "English",
+   "latest_period": "Nov 2025",
+   "update_frequency": "static"
+  },
+  {
+   "metric": "Existing ForThePeople RTI Tracker / File-RTI module (code to reuse)",
+   "city": "National",
+   "source_name": "forthepeople repo: src/scraper/jobs/rti.ts, src/app/[locale]/[state]/[district]/rti/page.tsx, file-rti/page.tsx, prisma RtiStat/RtiTemplate",
+   "url": "https://github.com/jayanthmb14/forthepeople/blob/main/src/scraper/jobs/rti.ts",
+   "format": "none",
+   "ease_score": 3,
+   "verified_live": true,
+   "access_notes": "Cloned (depth 1) on 27-09-2026 to scratchpad/ftp. The scraper fetches a hard-coded Karnataka IC URL for every active district and parses any 4-column table into RtiStat. It does not await its Prisma writes (it uses a 300 ms sleep), and tags rows 'Karnataka Information Commission'. The /rti page shows filed/disposed/pending cards, a pendency bar and a department bar chart. /file-rti lists RtiTemplate rows (topic, department, PIO address, fee, text, tips), offers copy-to-clipboard and 'File Online' linked to rtionline.gov.in only. There is no Gujarat StateConfig, and the local-language label is hard-coded to Kannada.",
+   "granularity": "district",
+   "language": "TypeScript",
+   "latest_period": "main @ 2026-09",
+   "update_frequency": "n/a"
+  },
+  {
+   "metric": "Third-party RTI template/guide libraries (reference only)",
+   "city": "Gujarat-state",
+   "source_name": "RTI Wiki Gujarat fee page; FileMyRTI Gujarat guide (commercial); onlinerti.com (commercial)",
+   "url": "https://righttoinformation.wiki/fees/gujarat",
+   "format": "HTML table",
+   "ease_score": 2,
+   "verified_live": true,
+   "access_notes": "RTI Wiki (ad-supported) correctly states Rs 20 and the broad payment-mode list. FileMyRTI (https://filemyrti.com/rti-guide/gujarat) sells drafting (Rs 399) and its page mixes Rs 20 and Rs 10 fee claims, so it is unreliable. onlinerti.com returned HTTP 522 on 27-09-2026. Do not copy their text (copyright); cite the primary rules instead.",
+   "granularity": "state",
+   "language": "English",
+   "latest_period": "2026",
+   "update_frequency": "irregular"
+  }
+ ],
+ "city_comparison": [
+  {
+   "metric": "Online RTI filing to the municipal corporation",
+   "surat": "Per May 2026 news, SMC is mapped to onlinerti.gujarat.gov.in, and SMC's RTI menu links the state portal directly.",
+   "ahmedabad": "Per May 2026 news, AMC is also mapped, but the AMC RTI page does not mention or link the portal; its own guidance still says to file on paper at civic centres.",
+   "edge": "Surat"
+  },
+  {
+   "metric": "Application status tracking",
+   "surat": "SMC has its own RTI status tracker (Application ID, phone or BPL card no., CAPTCHA).",
+   "ahmedabad": "No AMC tracker found; only the state portal for online filers.",
+   "edge": "Surat"
+  },
+  {
+   "metric": "PIO/APIO/FAA directory currency and format",
+   "surat": "A consolidated 43-page list dated 09-12-2025 (Appellate Officers plus PIOs, with phone, mobile and email). Legacy-font Gujarati PDF.",
+   "ahmedabad": "The consolidated list is dated 07-03-2011 (legacy font). Current PIOs have to be pieced together from about 40 department PADs from 2022-24.",
+   "edge": "Surat"
+  },
+  {
+   "metric": "RTI volume/disposal statistics (per PA)",
+   "surat": "Annual returns every year from 2005-07 to 2025-26 (English, parseable) plus the latest quarterly Patrak-7 (Q4 2025-26: 1,106 of 1,818 disposed within time; 3,197 pending).",
+   "ahmedabad": "Only 2005-06 to 2010-11 is on the AMC site; after that, one 2020 news figure (1.16 lakh applications over 2010-19).",
+   "edge": "Surat"
+  },
+  {
+   "metric": "Appeal outcomes published",
+   "surat": "About 319 department-wise first-appeal order PDFs up to 2025-26, plus 14 GIC orders against SMC (2023-2026).",
+   "ahmedabad": "None published by AMC; only the GIC decisions search (district filter possible).",
+   "edge": "Surat"
+  },
+  {
+   "metric": "Proactive disclosure s.4(1)(b)",
+   "surat": "104 department PADs refreshed May-Jun 2026; annual Annexure-A update certificates for 2014-2025.",
+   "ahmedabad": "About 40 department PADs, mostly 2022-24. The RTI Cell PAD is from Jun 2023.",
+   "edge": "Surat"
+  },
+  {
+   "metric": "Forms and fee guidance on the corporation site",
+   "surat": "Hosts the correct Gujarat RTI Rules 2010 (En/Gu) and the Act (En/Gu).",
+   "ahmedabad": "Hosts the superseded 2005 Rules, a 2005 English Form A and fee sheet, and a scanned Gujarati Form A. In 2024-25 GIC found AMC civic centres handing out a defective Form A without the citizenship declaration; AMC reprinted it.",
+   "edge": "Surat"
+  },
+  {
+   "metric": "Application fee and payment modes",
+   "surat": "Rs 20 under the Gujarat Rules 2010: cash, DD, pay order, IPO, court fee, revenue or non-judicial stamp, e-stamp, challan, or online on the state portal. BPL exempt with a BPL card or certificate; a ration card is not enough.",
+   "ahmedabad": "Identical (same state rules). AMC's 2005 fee sheet matches the Rs 20, Rs 2 per page and inspection charges.",
+   "edge": "Tie"
+  },
+  {
+   "metric": "Physical filing points",
+   "surat": "SMC HQ (Muglisara/Tapipura) and zonal offices listed in the PIO directory. RTI acceptance at civic centres is not documented.",
+   "ahmedabad": "The AMC page explicitly allows filing at any City Civic Centre (list from 2014; the GIC report cites 61 civic centres) plus the RTI Cell at Danapith.",
+   "edge": "Ahmedabad"
+  },
+  {
+   "metric": "Website machine-accessibility",
+   "surat": "Standard TLS; stable document URLs; plain curl works.",
+   "ahmedabad": "Needs OpenSSL UnsafeLegacyRenegotiation and a certificate-verification bypass (incomplete chain); breaks standard fetchers.",
+   "edge": "Surat"
+  },
+  {
+   "metric": "District Collectorate RTI directory",
+   "surat": "surat.nic.in/rti: branch, prant and mamlatdar PADs uploaded Aug 2026, but scanned or legacy font; no consolidated contact list.",
+   "ahmedabad": "ahmedabad.nic.in/rti: consolidated RTI contact list (13-11-2024) and branch contact list (01-03-2025) with PIO, AA, mobile and email; Unicode PDFs.",
+   "edge": "Ahmedabad"
+  },
+  {
+   "metric": "Second appeal (GIC) access",
+   "surat": "Same GIC channel (online e-appeal, video-conference hearings, decisions search). GIC capped one Surat family at 6 applications a year (2025).",
+   "ahmedabad": "Same channel. GIC sits in Gandhinagar, next to Ahmedabad, which makes in-person hearings more convenient.",
+   "edge": "Tie"
+  },
+  {
+   "metric": "Civil-society support",
+   "surat": "No Surat-based RTI helpline found; MAGP's statewide helpline covers Surat.",
+   "ahmedabad": "MAGP is headquartered in Ahmedabad (helpline 09924085000).",
+   "edge": "Ahmedabad"
+  }
+ ],
+ "scores": {
+  "surat": 7.5,
+  "ahmedabad": 4.5,
+  "rationale": "Surat is clearly easier to support in the RTI dimension. SMC runs the best municipal RTI disclosure found in Gujarat: a PIO/AA directory updated in Dec 2025, twenty years of annual returns in parseable English (up to FY2025-26), a quarterly return with within-time disposal and pendency, published first-appeal and GIC orders, PADs refreshed in May-Jun 2026, its own status tracker, and a link to the state online portal. That is enough to fill the RTI Tracker for the city corporation with official, citable numbers. It loses points because the PIO list and Patrak-7 use legacy Gujarati fonts, the Collectorate PADs are scanned, and appeal orders need OCR. AMC's RTI section has barely changed since 2011: PIO list from 2011, statistics only to 2010-11, superseded 2005 rules, 2022-24 PADs, and a site that breaks standard TLS clients. So both AMC RTI statistics and a current PIO directory would have to come from RTI requests, which is useful as the project's first demo template but slow. Ahmedabad scores back some points for the better Collectorate contact list, explicit filing at civic centres, MAGP's presence and nearness to GIC. The state layer (Rules 2010, GIC ticker, annual report, decisions DB, SNS benchmarks) is shared, so it does not favour either city."
+ },
+ "gaps": [
+  {
+   "metric": "AMC RTI annual statistics 2011-12 to 2025-26 (applications received, transferred, rejected by section, first appeals, fees, PIO/AA counts)",
+   "city": "Ahmedabad",
+   "rti_public_authority": "Amdavad Municipal Corporation. PIO: Office Superintendent, RTI Cell, 5th floor, Sardar Patel Bhavan (B-block), Danapith, Ahmedabad 380001. FAA: Assessor & Tax Collector (RTI Cell), per the RTI Cell PAD 2023-24.",
+   "rti_question": "Please provide copies (PDF, or XLS/CSV if held electronically) of the Annual Return AMC submitted on the Gujarat State RTI Annual Return Information System (rti-ar.gujarat.gov.in) for each financial year from 2011-12 to 2025-26. Each should show opening balance, requests received, transferred u/s 6(3), rejected (with the sections invoked), accepted, first appeals received and decided, number of PIOs/APIOs/AAs designated, and application fee and other charges collected. Please also provide the Patrak-7 and Patrak-8 quarterly returns for all four quarters of 2025-26.",
+   "why_missing": "The AMC website stops at 2010-11. The state RTI-AR system is login-only. The GIC annual report is aggregated by department."
+  },
+  {
+   "metric": "Current AMC PIO / APIO / First Appellate Authority directory",
+   "city": "Ahmedabad",
+   "rti_public_authority": "Amdavad Municipal Corporation. PIO: Office Superintendent, RTI Cell, Danapith. The RTI Cell coordinates designations for all departments and zones.",
+   "rti_question": "Please provide the current list of all Public Information Officers, Assistant PIOs and First Appellate Authorities designated under sections 5(1), 5(2) and 19(1) of the RTI Act for every AMC department, zone and ward (including AMTS, AMC School Board and hospitals), with designation, office address, office phone and official email, and the number and date of the latest office order designating them. If held electronically, please provide it in spreadsheet format.",
+   "why_missing": "The only consolidated list on ahmedabadcity.gov.in is dated 07-03-2011 and uses a legacy font."
+  },
+  {
+   "metric": "PA-wise RTI annual return dataset for all Urban Development PAs (SMC, AMC, SUDA, AUDA, municipalities)",
+   "city": "Both",
+   "rti_public_authority": "General Administration Department (RTI Cell), Government of Gujarat, Sachivalaya, Gandhinagar. PIO: Section Officer, RTI Cell, GAD (so-rti-gad@gujarat.gov.in). FAA: Deputy Secretary, GAD RTI Cell.",
+   "rti_question": "From the Gujarat State RTI Annual Return Information System, please provide an electronic export (XLS/CSV) of the annual return data for 2023-24, 2024-25 and 2025-26 for every public authority under the Urban Development & Urban Housing Department, including Surat Municipal Corporation and Amdavad Municipal Corporation, with all fields of the return form. Please also provide the list of public authorities that had not uploaded their return for each of those years as of the date of reply.",
+   "why_missing": "The data exists centrally but only behind a department login. GIC AR 2024-25 notes about 24% of applications are uploaded after its report."
+  },
+  {
+   "metric": "GIC second appeals, complaints, show-cause notices and penalties involving SMC and AMC",
+   "city": "Both",
+   "rti_public_authority": "Gujarat Information Commission, Karmayogi Bhavan Block 1, Sector 10-A, Gandhinagar. PIO: Registrar / Deputy Secretary of GIC as designated. FAA: Secretary, GIC.",
+   "rti_question": "For 2023-24, 2024-25 and 2025-26, please provide separately for Surat Municipal Corporation and Amdavad Municipal Corporation: (a) the number of second appeals u/s 19(3) and complaints u/s 18 registered, disposed and pending at year end; (b) the number of show-cause notices issued u/s 20; (c) the number of cases where penalty was imposed, the amount imposed and the amount recovered; (d) the number of cases where compensation u/s 19(8)(b) or disciplinary action u/s 20(2) was ordered; and (e) a list of the appeal/complaint numbers with dates of final orders.",
+   "why_missing": "The GIC annual report and SNS report card are at state or department level. The decisions search is slow and case-level only."
+  },
+  {
+   "metric": "SMC RTI timeliness by department (within 30 days, delayed, deemed refusals, median days)",
+   "city": "Surat",
+   "rti_public_authority": "Surat Municipal Corporation, RTI Cell (Section Officer, RTI Cell), Shri Tapi Bhawan / Mahanagar Seva Sadan, Muglisara, Surat 395003.",
+   "rti_question": "From the computerised RTI register that powers SMC's 'Check RTI Application Status' facility, please provide department-wise and zone-wise figures for 2024-25 and 2025-26: applications received; disposed within 30 days; disposed after 30 days; pending beyond 30 days with no reply (deemed refusals); transferred u/s 6(3); first appeals received and allowed. Please provide an anonymised electronic export (without applicant names or addresses) if available.",
+   "why_missing": "The SMC annual return and Patrak-7 show only whole-PA totals. Patrak-7 is overwritten every quarter."
+  },
+  {
+   "metric": "AMC RTI timeliness by department",
+   "city": "Ahmedabad",
+   "rti_public_authority": "Amdavad Municipal Corporation, RTI Cell (PIO: Office Superintendent), Danapith.",
+   "rti_question": "For 2024-25 and 2025-26, please provide department-wise and zone-wise: RTI applications received (including those received at civic centres and through onlinerti.gujarat.gov.in); disposed within 30 days; disposed late; pending beyond 30 days; transferred u/s 6(3); first appeals received and decided within 30 or 45 days.",
+   "why_missing": "AMC publishes no RTI statistics after 2010-11."
+  },
+  {
+   "metric": "AMC proactive disclosure compliance (s.4(1)(b))",
+   "city": "Ahmedabad",
+   "rti_public_authority": "Amdavad Municipal Corporation, RTI Cell (PIO: Office Superintendent).",
+   "rti_question": "Please provide copies of the Annexure-A certificates (PAD updated as on 1 May) submitted by each AMC department and zone for 2024, 2025 and 2026, the list of departments whose PAD was not updated for each year, and the dates and findings of the PAD inspection-cum-audit for 2025-26, as required by GAD circulars dated 17-07-2019 and 06-05-2025.",
+   "why_missing": "Most AMC PADs online are from 2022-24, and there is no compliance summary."
+  },
+  {
+   "metric": "Ward-wise capital works: budget sanctioned vs spent, contractor, completion (budget dimension)",
+   "city": "Both",
+   "rti_public_authority": "SMC: PIO, Accounts Department (Chief Accountant's office) and City Engineer's office. AMC: PIO, Chief Accountant / Engineering Department. Both are municipal-corporation departmental PIOs.",
+   "rti_question": "For 2024-25 and 2025-26, please provide a ward-wise list of all capital works (roads, drainage, water supply, street lights) sanctioned under the corporation budget, including councillor grants, with: work ID, description, sanctioned amount, contractor name, work order date, amount paid to date, and status (completed, in progress, not started). Please provide it in electronic spreadsheet form if available.",
+   "why_missing": "Budget books give head-wise totals, not ward-wise execution. Tender portals do not link payments."
+  },
+  {
+   "metric": "Municipal primary schools: enrolment, teacher vacancies, pupil-teacher ratio (education dimension)",
+   "city": "Both",
+   "rti_public_authority": "Surat Nagar Prathmik Shikshan Samiti (SMC school board) and AMC School Board (Amdavad Municipal School Board). PIO: the Administrative Officer's office of each board.",
+   "rti_question": "As on 30-09-2025, please provide a school-wise list of all municipal primary schools with: school name, UDISE code, ward, medium, enrolment by class, sanctioned and filled teacher posts, number of vacancies, number of usable classrooms, and number of functional toilets (boys and girls).",
+   "why_missing": "UDISE+ is district-level and lags. The school boards publish no school-wise staffing."
+  },
+  {
+   "metric": "Urban health centres: staff vacancies, OPD load, drug stock-outs (health dimension)",
+   "city": "Both",
+   "rti_public_authority": "SMC Health Department (Medical Officer of Health) and AMC Health Department / Urban Health Society. PIO: the respective departmental PIO.",
+   "rti_question": "For 2025-26, please provide for each Urban Health Centre / Urban Primary Health Centre: sanctioned and filled posts of Medical Officers, Staff Nurses, ANMs, Pharmacists and Lab Technicians; monthly OPD attendance; and the number of days each essential drug on the EDL was out of stock.",
+   "why_missing": "HMIS data is not public at facility level for municipal UHCs."
+  },
+  {
+   "metric": "Drinking-water quality test results (health / water dimension)",
+   "city": "Both",
+   "rti_public_authority": "SMC Hydraulic Engineering Department / Central Laboratory; AMC Water Projects / Central Laboratory / Public Health Laboratory. PIO: the respective departmental PIO.",
+   "rti_question": "For each month of 2025-26, please provide ward-wise: the number of drinking-water samples tested (bacteriological and chemical), the number found unfit with the parameter that failed, the locations of unfit samples, and the corrective action taken with dates.",
+   "why_missing": "Neither corporation publishes ward-wise test results."
+  },
+  {
+   "metric": "Collectorate RTI statistics (district administration)",
+   "city": "Both",
+   "rti_public_authority": "Collector Office, Surat and Collector Office, Ahmedabad. PIO: Chitnis to Collector (or as listed on the district site). FAA: Resident Additional Collector / Additional Resident Deputy Collector.",
+   "rti_question": "Please provide the annual RTI return (as uploaded to rti-ar.gujarat.gov.in) for 2023-24, 2024-25 and 2025-26 for the Collector Office and for each Prant and Mamlatdar office in the district, and the number of first appeals received and decided within 45 days in each office.",
+   "why_missing": "Neither Collectorate publishes RTI statistics; the district sites carry only PADs and contact lists."
+  },
+  {
+   "metric": "PDS fair-price-shop allocation vs off-take (food prices / food security dimension)",
+   "city": "Both",
+   "rti_public_authority": "District Supply Officer (Surat / Ahmedabad) and the Zonal Supply offices in each city. PIO: Supply Branch, Collectorate.",
+   "rti_question": "For each month of 2025-26, please provide an FPS-wise list for the municipal area showing allocation and actual off-take of wheat, rice, sugar and oil under NFSA, the number of ration cards attached, and inspections done with irregularities found.",
+   "why_missing": "State dashboards show district aggregates only; there are no ward or FPS files for the city."
+  }
+ ],
+ "challenges": [
+  "City vs district mismatch: upstream RTI modules are district-scoped, but SMC and AMC are separate public authorities from the Surat and Ahmedabad Collectorates, Police Commissionerates, SUDA/AUDA and district courts. The RTI Tracker needs a per-PA key (PA name + administrative department), not just districtId.",
+  "The AMC website fails with OpenSSL 3 (unsafe legacy renegotiation, error 0A000152) and has an incomplete certificate chain. Scrapers need a custom OPENSSL_CONF with UnsafeLegacyRenegotiation and a CA bundle fix. WebFetch-style tools and Vercel/Node default fetch will fail.",
+  "Legacy ASCII-mapped Gujarati fonts (Terafont/LMG-style) appear in the SMC PIO list, SMC Patrak-7, the AMC 2011 PIO list and the Surat Collectorate PADs. The text layer is mojibake and needs a legacy-to-Unicode converter. Numbers, phones and emails survive. Unicode PDFs (GIC report in KrishnaUni, AMC PAD in Shruti, Ahmedabad Collectorate lists) have broken conjuncts after extraction.",
+  "Scanned PDFs need OCR with Gujarati support (e.g. tesseract guj): GIC orders hosted by SMC, Surat Collectorate PAD pages, the AMC Gujarati Form A and one AMC rules PDF.",
+  "Per-PA RTI statistics live in the login-only rti-ar.gujarat.gov.in. GIC reports only by department and says about 24% of applications are uploaded after its report, so statewide numbers are revised later. Store 'as-published' and 'revised' values.",
+  "SMC Patrak-7 is overwritten each quarter at a fixed URL, so each quarter must be archived on scrape to build a time series.",
+  "GIC decisions search is an ASP.NET postback with viewstate. It took more than 150 s for one month, is paginated, and exposes applicant names. The GIC daily board (CauseList.aspx) returned HTTP 500 on 27-09-2026.",
+  "The Gujarat online RTI portal is in phased rollout with no public list of onboarded PAs. Its FAQ is partly copied from the central portal: it wrongly says second appeals go to the CIC and has an 'XXXX characters' limit. News reports defects: unclear reply dates, a forced 'delay reason' on first appeals, and missing PIO names. The app can link to it but cannot deep-link a specific PA.",
+  "Upstream code will not work for Gujarat as-is. scrapeRTI hard-codes kic.karnataka.gov.in for every district and would write Karnataka rows under Gujarat districtIds. Its Prisma writes are not awaited (300 ms sleep hack). There is no Gujarat StateConfig, so getModuleSources falls back to a generic 'State Information Commission'. The File RTI button links only to rtionline.gov.in, which is wrong for SMC, AMC and Collectorates. The local-language heading is hard-coded to Kannada. pendingPct divides by filed+pending, and the value is mislabelled.",
+  "The RtiTemplate schema lacks the fields a Gujarat walkthrough needs: PA type (state, central or court), payment modes, FAA name and address, second-appeal body, deadline logic, and the language of the template. It also needs Gujarati templateTextLocal rendering.",
+  "Legal/product cautions: (1) RTI is for Indian citizens only. Gujarat Form A carries a citizenship declaration, and Rule 7 lets the PIO verify it. (2) A postal address is required. (3) Ask for records ('certified copies of...', 'number of...', 'list of...'), not opinions or 'why' questions, which PIOs can reject as not 'information' under s.2(f). (4) Section 8/9/11 exemptions exist, and the DPDP-amended s.8(1)(j) now bars personal information more broadly (SMC already cited it 14 times in 2025-26). (5) The app should not give legal advice; add a disclaimer and refer users to the MAGP helpline. (6) Storing applicant names and addresses makes the project a Data Fiduciary under DPDP 2023, with main duties phased in by about May 2027. Minimise data, prefer client-side generation, and get explicit consent. (7) GIC has capped 'disproportionate' applicants (a Surat family at 6 per year), so discourage bulk or omnibus filings.",
+  "Walkthrough rules to encode from GIC rejection data: one second appeal per RTI application; a first appeal must come first; a second appeal only after the FAA order or after 45 days without one, within 90 days of the order (GIC rejects appeals filed more than 135 days after the first appeal); a complaint within 30 days of the cause or with a condonation request; no central PAs at GIC; the BPL ration card is not valid proof; e-media applicants must pay within 7 days; district courts charge Rs 50 (Rs 500 for tender information); central PAs charge Rs 10 via rtionline.gov.in.",
+  "The GIC website (Sep 2026) shows the State Chief Information Commissioner post as vacant, with 5 SICs sitting. That may affect second-appeal timelines; the GIC ticker shows pendency rising in Aug 2026 (624 at opening, 1,039 at closing)."
+ ],
+ "notes": "I cloned the forthepeople repo myself (depth 1) because the expected clone at scratchpad/ftp was missing. It is now at /tmp/claude-1000/-home-deva-src-OpenCity/473ae9f8-f0a2-4667-963a-27ce0f03f491/scratchpad/ftp. The documents I downloaded to check formats are in /tmp/claude-1000/-home-deva-src-OpenCity/473ae9f8-f0a2-4667-963a-27ce0f03f491/scratchpad/dl/rti/, including smc_Annual-Return_2025-2026.pdf, smc_piosandapios_guj.pdf, smc_other_patrak-7.pdf, amc_RTI_piolist07-03-11.pdf, amc_RTI_rti_am.pdf, gic_AR-24-25-Guj.pdf with text in gic_ar2425.txt, sns_RC2025.pdf with text in sns_rc2025.txt, and gic_decisions_aug2026.html. The OpenSSL config needed to reach the AMC site is scratchpad/openssl-legacy.cnf.\n\n**Timelines and appeals** (RTI Act, plus the Gujarat Rules 2010 where they add something):\n- **Reply:** within 30 days, or 48 hours where life or liberty is involved. Add 5 days if the application went through an APIO. Where a third party is involved under s.11, the limit is 40 days.\n- **Deemed refusal:** no reply in time counts as a refusal under s.7(2).\n- **Transfer:** a PIO must transfer an application to the right PA within 5 days under s.6(3), using Form D.\n- **Late replies:** if the PIO misses the deadline, the information must be given free under s.7(6).\n- **First appeal:** to the FAA on Form E within 30 days. The FAA should decide in 30 days, or 45 at most.\n- **Second appeal or complaint:** to GIC within 90 days, on the GIC form or online.\n- **Language:** English, Hindi or Gujarati.\n- **Fee:** Rs 20, with no word limit and no one-subject rule.\n- **Free pages:** under the GAD circular of May 2025, up to 5 pages are free.\n\n**What the upstream RTI module does:**\n- **RTI Tracker (/rti):** reads RtiStat rows (department, year, month, filed, disposed, pending, avgDays, source). It shows headline cards, a pendency bar, a department-wise stacked bar chart and a full table, with an AI insight card and a data-source banner. When there are no rows it shows an empty state.\n- **File RTI (/file-rti):** a 'wizard' that is really a picker. It lists that district's RtiTemplate rows, shows the PIO address, fee, template text, local-language text and a tip, and offers copy-to-clipboard and a 'File Online' link to rtionline.gov.in.\n- **Scraper:** scheduled daily at 2 AM for every active district, but it only works for Karnataka.\n- **Templates:** added through per-city seed scripts (for example prisma/seed-pune-rti.ts). A Gujarat port needs a new StateConfig with GIC, the onlinerti.gujarat.gov.in portal URL and Gujarati text.\n\n**Recommended data plan for Surat:**\n- Parse the SMC annual-return PDFs for 2005-2026 into RtiStat at PA level: filed, disposed and pending, plus rejections by section and fees in extra columns.\n- Archive Patrak-7 every quarter to get within-time disposal and pendency.\n- Scrape the GIC ticker monthly as a state-level context card.\n- Load the SNS report-card figures once a year.\n\n**For Ahmedabad:** file the AMC annual-statistics and PIO-directory RTIs first. They double as the project's first live demonstration.\n\nNumbers above come from documents fetched on 27-09-2026. The claim that SMC and AMC are onboarded to the state online portal rests only on the May 2026 Counterview report and SMC's link to the portal; confirm it by logging in and checking the PA dropdown."
+}

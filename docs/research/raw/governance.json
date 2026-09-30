@@ -1,0 +1,262 @@
+{
+ "dimension": "governance",
+ "sources": [
+  {
+   "metric": "Ward boundaries (GeoJSON)",
+   "city": "Ahmedabad",
+   "source_name": "datameet Municipal_Spatial_Data / Ahmedabad/Wards.geojson",
+   "url": "https://raw.githubusercontent.com/datameet/Municipal_Spatial_Data/master/Ahmedabad/Wards.geojson",
+   "format": "GeoJSON (1.2 MB), CC BY-SA 2.5 IN",
+   "granularity": "48 wards (e.g. '48 RAMOL HATHIJAN'), plus ward/zonal offices, libraries, gyms, pools",
+   "latest_period": "2015-delimitation wards; still match 48-ward 2026-31 council",
+   "ease_score": 4,
+   "verified_live": true,
+   "access_notes": "Downloaded and parsed: 48 features, property 'Name' only. Scraped from an AMC Google My Map, so no official version; still matches the current 48 wards."
+  },
+  {
+   "metric": "Ward boundaries",
+   "city": "Surat",
+   "source_name": "datameet Municipal_Spatial_Data (repo root listing)",
+   "url": "https://github.com/datameet/Municipal_Spatial_Data",
+   "format": "n/a",
+   "granularity": "n/a",
+   "latest_period": "n/a",
+   "ease_score": 0,
+   "verified_live": true,
+   "access_notes": "No Surat folder in repo (GitHub API listing checked). Needs OSM admin_level extraction or scraping SMC GIS."
+  },
+  {
+   "metric": "Election/census ward boundary layers",
+   "city": "Surat",
+   "source_name": "SMC GIS Portal",
+   "url": "https://gis.suratmunicipal.org/",
+   "format": "Web map viewer",
+   "granularity": "Zone, Election Ward, Census Ward, TP scheme, building footprints; imagery 2006-2023",
+   "latest_period": "Imagery to 2023",
+   "ease_score": 2,
+   "verified_live": true,
+   "access_notes": "Portal loads and lists 'Election Ward Boundary' layer, but no public WMS/WFS/ArcGIS REST endpoint in page source; export not evident."
+  },
+  {
+   "metric": "Corporators by ward",
+   "city": "Surat",
+   "source_name": "SMC Ward wise list of Corporators",
+   "url": "https://www.suratmunicipal.gov.in/Corporation/Corp_list",
+   "format": "HTML (English)",
+   "granularity": "30 wards x 4 = 120 corporators, ward names, corporator names",
+   "latest_period": "Undated on page; term not stated (verify if post-2026 election)",
+   "ease_score": 4,
+   "verified_live": true,
+   "access_notes": "Clean English HTML, easy to scrape. No party/contact seen in the text we extracted. Page does not state the term."
+  },
+  {
+   "metric": "Councillors by ward",
+   "city": "Ahmedabad",
+   "source_name": "AMC Councillor's List (term 2026-31)",
+   "url": "https://ahmedabadcity.gov.in/ViewFile/ViewFile?TYPE=FileRepository,2638",
+   "format": "PDF, 10 pp, Gujarati (Unicode but broken glyph shaping), 'Print To PDF'",
+   "granularity": "192 councillors, 48 wards, zone, address, party, phone",
+   "latest_period": "Term 2026-31; PDF created 2026-07-30",
+   "ease_score": 3,
+   "verified_live": true,
+   "access_notes": "Current and richer than SMC's list (party, phone), but Gujarati PDF extraction garbles conjuncts. Needs manual cleanup or OCR/transliteration. Needs legacy-TLS curl."
+  },
+  {
+   "metric": "Smart Cities open data catalogs",
+   "city": "Both",
+   "source_name": "Smart Cities Mission Data Portal (smartcities.data.gov.in)",
+   "url": "https://smartcities.data.gov.in/catalog/vehicle-registrations-data-surat/",
+   "format": "Catalog pages (JS-rendered)",
+   "granularity": "City catalogs",
+   "latest_period": "Surat catalog dated 2019; resources show 'No Result Found', published date NA",
+   "ease_score": 1,
+   "verified_live": true,
+   "access_notes": "Catalog pages load but list no resources (Surat vehicle-registrations and environment-surat checked). /city/surat and /city/ahmedabad give 404. Effectively hollow for both cities."
+  },
+  {
+   "metric": "Crime (IPC/BNS, crimes vs women etc.) metro-city tables",
+   "city": "National",
+   "source_name": "NCRB Crime in India 2023 (Vol I)",
+   "url": "https://www.ncrb.gov.in/uploads/files/1CrimeinIndia2023PartI.pdf",
+   "format": "PDF tables; CSV mirrors on data.opencity.in",
+   "granularity": "Metro city (police commissionerate), annual",
+   "latest_period": "2023 (released 2025)",
+   "ease_score": 4,
+   "verified_live": false,
+   "access_notes": "Both Surat and Ahmedabad are among the 19 metros (confirmed via search). ncrb.gov.in/crime-in-india.html returned HTTP 200. CSV mirror: data.opencity.in/dataset/crime-in-india-2023."
+  },
+  {
+   "metric": "Court pendency",
+   "city": "National",
+   "source_name": "National Judicial Data Grid (NJDG)",
+   "url": "https://njdg.ecourts.gov.in/njdgnew/",
+   "format": "Dashboard, captcha-gated, no export",
+   "granularity": "District / court establishment",
+   "latest_period": "Live",
+   "ease_score": 2,
+   "verified_live": false,
+   "access_notes": "Our curl got HTTP 403 (anti-bot). Needs manual browser reads or snapshots. Same difficulty for both cities."
+  },
+  {
+   "metric": "Grievances (complaint registration)",
+   "city": "Ahmedabad",
+   "source_name": "AMC CCRS (Comprehensive Complaint Redressal System)",
+   "url": "https://www.amccrs.com/AMCPortal/Complaint/Register",
+   "format": "Web portal (registration/tracking)",
+   "granularity": "Zone/ward/department problem lists",
+   "latest_period": "Live 2026",
+   "ease_score": 1,
+   "verified_live": true,
+   "access_notes": "Live, with zone-wise ward lists and department-wise problem lists, but no public aggregate statistics (registered/resolved/pending) found."
+  },
+  {
+   "metric": "Grievances (complaint registration)",
+   "city": "Surat",
+   "source_name": "SMC Online Services / Complaint",
+   "url": "https://www.suratmunicipal.gov.in/OnlineServices/",
+   "format": "Login-based citizen portal",
+   "granularity": "Per complaint",
+   "latest_period": "Live 2026",
+   "ease_score": 1,
+   "verified_live": true,
+   "access_notes": "Login needed to file or track. No published complaint statistics found."
+  },
+  {
+   "metric": "Transit (BRTS/AMTS/metro) info",
+   "city": "Ahmedabad",
+   "source_name": "Amdavad One (BRTS/AMTS portal linked from AMC)",
+   "url": "https://amdavadone.in/",
+   "format": "Web app",
+   "granularity": "Routes/services",
+   "latest_period": "Live 2026",
+   "ease_score": 1,
+   "verified_live": true,
+   "access_notes": "Loads (13 KB shell). No public GTFS or ridership download found. ahmedabadbrts.org failed to connect."
+  },
+  {
+   "metric": "Transit (Sitilink BRTS + city bus)",
+   "city": "Surat",
+   "source_name": "SMC Surat Sitilink app page",
+   "url": "https://www.suratmunicipal.gov.in/EServices/SuratSitilinkApp",
+   "format": "App / web info",
+   "granularity": "Routes; real-time feed shared with Google Maps",
+   "latest_period": "Live",
+   "ease_score": 1,
+   "verified_live": false,
+   "access_notes": "Surat supplies real-time transit to Google Maps, so a GTFS/GTFS-RT feed exists internally, but no public download was found. Ridership only in news or budget documents."
+  },
+  {
+   "metric": "City statistical outline (civic stats)",
+   "city": "Ahmedabad",
+   "source_name": "AMC Statistical Outline",
+   "url": "https://ahmedabadcity.gov.in/SP/StatisticalOutline",
+   "format": "HTML index of files",
+   "granularity": "City-level annual",
+   "latest_period": "References to 2025-26 / 2026-27",
+   "ease_score": 3,
+   "verified_live": true,
+   "access_notes": "Page loads with legacy-TLS curl. We did not inspect the content (likely PDFs). Also links Standing/Special committee lists and an air-quality 2018-21 file."
+  }
+ ],
+ "city_comparison": [
+  {
+   "metric": "Ward boundary GeoJSON",
+   "surat": "None on datameet. SMC GIS has an 'Election Ward Boundary' layer but no export found",
+   "ahmedabad": "datameet Wards.geojson, 48 features, matching the current 48 wards",
+   "edge": "Ahmedabad"
+  },
+  {
+   "metric": "Wards / seats",
+   "surat": "30 wards x 4 = 120 corporators",
+   "ahmedabad": "48 wards x 4 = 192 councillors",
+   "edge": "Tie"
+  },
+  {
+   "metric": "Corporator list usability",
+   "surat": "English HTML, ward-wise, easy to scrape; term undated",
+   "ahmedabad": "Current 2026-31 PDF with party + phone, but Gujarati text garbles on extraction",
+   "edge": "Surat"
+  },
+  {
+   "metric": "Smart Cities open data portal",
+   "surat": "Catalogs exist (2019) but show no resources",
+   "ahmedabad": "City page 404; nothing usable found",
+   "edge": "Tie"
+  },
+  {
+   "metric": "NCRB metro crime tables",
+   "surat": "One of the 19 metros",
+   "ahmedabad": "One of the 19 metros",
+   "edge": "Tie"
+  },
+  {
+   "metric": "Court pendency (NJDG)",
+   "surat": "Captcha/403 dashboard; single Surat district",
+   "ahmedabad": "Same dashboard. Ahmedabad court data may be split across city and rural establishments",
+   "edge": "Surat"
+  },
+  {
+   "metric": "Grievance statistics",
+   "surat": "Login portal, no stats",
+   "ahmedabad": "CCRS portal live, no public stats",
+   "edge": "Tie"
+  },
+  {
+   "metric": "Transit GTFS / ridership",
+   "surat": "No public GTFS; real-time feed goes only to Google Maps",
+   "ahmedabad": "No public GTFS. Amdavad One portal live. More systems (AMTS, Janmarg, metro) to cover",
+   "edge": "Tie"
+  },
+  {
+   "metric": "Site access",
+   "surat": "Fetches cleanly",
+   "ahmedabadcity.gov.in": "",
+   "ahmedabad": "Needs a legacy-TLS workaround",
+   "edge": "Surat"
+  }
+ ],
+ "scores": {
+  "surat": 5.5,
+  "ahmedabad": 5.5,
+  "rationale": "Mixed. Ahmedabad wins on ready-made ward GeoJSON and a current (2026-31) councillor list with party and phone. Surat wins on clean English HTML, a single court district and an easy-to-fetch site. Both have hollow Smart City portals, identical NCRB coverage, no public GTFS and no grievance statistics."
+ },
+ "gaps": [
+  {
+   "metric": "Grievance statistics (registered/resolved/pending, by ward/department, avg resolution time)",
+   "city": "Surat",
+   "rti_public_authority": "Surat Municipal Corporation, PIO of the Information Technology Dept / complaint cell (HQ level)",
+   "rti_question": "Provide month-wise counts of complaints registered, resolved and pending on the SMC complaint system (web, app, helpline) for Apr 2023 to date, broken down by zone, ward and department, with average resolution days, in Excel/CSV."
+  },
+  {
+   "metric": "Grievance statistics",
+   "city": "Ahmedabad",
+   "rti_public_authority": "Amdavad Municipal Corporation, PIO of the CCRS cell / IT Dept (HQ level)",
+   "rti_question": "Provide month-wise CCRS complaint counts (registered, resolved, pending beyond SLA) for Apr 2023 to date, by zone, ward and department, with average resolution time, in Excel/CSV."
+  },
+  {
+   "metric": "Transit GTFS and ridership",
+   "city": "Surat",
+   "rti_public_authority": "Surat Municipal Corporation, PIO of the BRTS Cell / Sitilink (Surat Sitilink Ltd)",
+   "rti_question": "Provide the current GTFS static feed shared with Google Maps for Sitilink BRTS and city bus, and route-wise daily ridership and fare revenue for FY2023-24 to date, in electronic form."
+  },
+  {
+   "metric": "Transit GTFS and ridership",
+   "city": "Ahmedabad",
+   "rti_public_authority": "Ahmedabad Janmarg Ltd and AMTS, each with its own PIO (AMC subsidiary/undertaking)",
+   "rti_question": "Provide the GTFS feed (stops, routes, timetables) for Janmarg BRTS and AMTS, and route-wise monthly ridership, fleet in service and revenue for FY2023-24 to date, as CSV."
+  },
+  {
+   "metric": "Official ward boundary shapefile",
+   "city": "Surat",
+   "rti_public_authority": "Surat Municipal Corporation, PIO of the Election and Census Dept / GIS cell",
+   "rti_question": "Provide the current election-ward boundary map for all 30 SMC wards in digital GIS format (shapefile/GeoJSON/KML), as used for the latest general election."
+  }
+ ],
+ "challenges": [
+  "City vs district mismatch: NCRB counts police-commissionerate cities, NJDG counts district court establishments (Ahmedabad may be split into city and rural), and SMC/AMC data covers municipal limits. The upstream forthepeople model is district-keyed.",
+  "smartcities.data.gov.in is effectively empty for both cities: catalogs load but list no resources, and the /city pages give 404. Don't plan around it.",
+  "NJDG returns 403 to scripts and is captcha-gated, so court pendency needs manual periodic snapshots.",
+  "AMC's councillor PDF is Gujarati text that garbles on extraction (conjuncts break). Budget time for cleanup or transliteration. The AMC site also needs legacy-TLS workarounds.",
+  "No public GTFS or ridership for Sitilink, Janmarg, AMTS or the metro. Transit metrics will depend on RTI or news. The term of SMC's corporator list is unstated after the 2026 elections, so confirm it is current."
+ ]
+}

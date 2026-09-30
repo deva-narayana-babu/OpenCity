@@ -1,0 +1,207 @@
+{
+ "dimension": "food_prices",
+ "sources": [
+  {
+   "metric": "Daily APMC mandi prices and arrivals (min/max/modal Rs/qtl) by market and commodity",
+   "city": "Both",
+   "source_name": "Agmarknet v2 JSON backend (api.agmarknet.gov.in market-report/daily)",
+   "url": "https://api.agmarknet.gov.in/v1/prices-and-arrivals/market-report/daily",
+   "format": "JSON via POST {date, marketIds, stateIds:[11]}; no key",
+   "granularity": "APMC market x commodity x variety x day",
+   "latest_period": "2026-09-26 (fetched live this session)",
+   "access_notes": "Undocumented backend of agmarknet.gov.in SPA, needs Origin/Referer headers. In a 30-day scan (28 Aug-26 Sep 2026), Surat APMC reported 23 days/40 commodities and Ahmedabad APMC 27 days/43 commodities. Every Surat/Ahmedabad market is flagged api_allowed_market=false.",
+   "ease_score": 4,
+   "verified_live": true
+  },
+  {
+   "metric": "Daily mandi prices (same Agmarknet feed, official open-data API)",
+   "city": "Both",
+   "source_name": "data.gov.in: Current Daily Price of Various Commodities from Various Markets (Mandi)",
+   "url": "https://www.data.gov.in/resource/current-daily-price-various-commodities-various-markets-mandi",
+   "format": "REST API JSON/CSV/XML (resource 9ef84268-d588-465a-a308-a864a43d0070); sample key shown on page",
+   "granularity": "Market x commodity, current day only",
+   "latest_period": "Dataset page loads (2026-09-28); API data not retrieved",
+   "access_notes": "Dataset page returned 200, but API calls timed out after 40-60s this session. A prior run got repeated 429/502/504 errors with the sample key. Too unreliable for a production feed; use it only as a backup and cache it.",
+   "ease_score": 3,
+   "verified_live": true
+  },
+  {
+   "metric": "Agmarknet market master (market IDs, district, principal/sub yard)",
+   "city": "Both",
+   "source_name": "Agmarknet portal",
+   "url": "https://agmarknet.gov.in/",
+   "format": "SPA; JSON filter endpoints",
+   "granularity": "Market",
+   "latest_period": "current",
+   "access_notes": "Lists 33 markets under 'Surat' district and 21 under 'Ahmedabad'. The Surat list still includes markets now in Tapi district (Vyara, Songadh, Uchhal, Nizar, Kukarmunda, Valod). Filter these out.",
+   "ease_score": 4,
+   "verified_live": true
+  },
+  {
+   "metric": "Daily retail/wholesale prices of 22+ essential commodities (DoCA Price Monitoring Cell)",
+   "city": "Both",
+   "source_name": "Dept of Consumer Affairs PMC, fcainfoweb.nic.in reports",
+   "url": "https://fcainfoweb.nic.in/reports/report_menu_web.aspx",
+   "format": "ASP.NET HTML report (postback form, export via page); no API",
+   "granularity": "Reporting centre x commodity x day",
+   "latest_period": "current (portal live 2026-09-28)",
+   "access_notes": "Centre list includes Ahmedabad, Rajkot and Surat (plus Bhuj, Vapi, Bilimora and others) as Gujarat reporting centres. The scraper must replay the ASP.NET __VIEWSTATE postback.",
+   "ease_score": 3,
+   "verified_live": true
+  },
+  {
+   "metric": "CPI-IW centre index (cost-of-living/food inflation proxy)",
+   "city": "Both",
+   "source_name": "Labour Bureau, Centre-wise General Index",
+   "url": "https://labourbureau.gov.in/centre-wise-general-index",
+   "format": "HTML table + monthly PDFs",
+   "granularity": "Centre x month",
+   "latest_period": "Table period not labelled clearly; linked PDFs go up to Mar 2023",
+   "access_notes": "Ahmedabad and Surat are both CPI-IW centres, along with Bhavnagar, Rajkot and Vadodara. General index only; food sub-index would need the monthly press release. Check which base year the table uses before charting.",
+   "ease_score": 3,
+   "verified_live": true
+  },
+  {
+   "metric": "FPS-level allocation, permit, stock, delivery challan, sale register",
+   "city": "Gujarat-state",
+   "source_name": "Gujarat FCSCAD iPDS Social Audit portal",
+   "url": "https://ipds.gujarat.gov.in/PDSSocialAudit/",
+   "format": "ASP.NET dropdown HTML (Gujarati), per-FPS drill-down",
+   "granularity": "District > taluka/zone > FPS > month",
+   "latest_period": "current",
+   "access_notes": "'Ahmedabad Shaher' (Ahmedabad City) is its own PDS district (code 27), split by AMC-aligned zones. Surat city has no district of its own: its zones 901-910 sit as talukas inside Surat district. Labels are Gujarati. Scraping needs postbacks.",
+   "ease_score": 2,
+   "verified_live": true
+  },
+  {
+   "metric": "Ration card abstract / beneficiaries by district-month",
+   "city": "Gujarat-state",
+   "source_name": "Gujarat iPDS NFSA Ration Card Abstract",
+   "url": "https://ipds.gujarat.gov.in/Register/frm_RationCardAbstract.aspx",
+   "format": "HTML form behind CAPTCHA",
+   "granularity": "District x month",
+   "latest_period": "Month selector offers 2026 months up to October",
+   "access_notes": "CAPTCHA-gated, so it cannot be automated and must be collected by hand. The iPDS dashboard showed statewide 1.11 cr ration cards and 15,478 FPS dealers, with no district split.",
+   "ease_score": 2,
+   "verified_live": true
+  },
+  {
+   "metric": "ONORC portability transactions; ration cards/beneficiaries/transactions by district",
+   "city": "Both",
+   "source_name": "IMPDS / Annavitran (NIC, DFPD)",
+   "url": "https://impds.nic.in/",
+   "format": "HTML tables",
+   "granularity": "District (incl. 'AHMEDABAD CITY' separate from 'AHMADABAD'; 'SURAT' combined) x month",
+   "latest_period": "Sep 2026 (page snapshot)",
+   "access_notes": "The Gujarat inter-state portability table showed 7,313 transactions for Surat and 5,139 for Ahmedabad City (Surat's migrant-worker signal). Some sub-pages have captchas.",
+   "ease_score": 3,
+   "verified_live": true
+  },
+  {
+   "metric": "National NFSA FPS count, e-PoS, allocation vs offtake reports",
+   "city": "National",
+   "source_name": "NFSA portal (DFPD)",
+   "url": "https://nfsa.gov.in/",
+   "format": "HTML report pages",
+   "granularity": "State, some district",
+   "latest_period": "current",
+   "access_notes": "Portal loads (200). Allocation and offtake are published mainly at state level, so district or city offtake has to come from iPDS or an RTI request.",
+   "ease_score": 3,
+   "verified_live": true
+  }
+ ],
+ "city_comparison": [
+  {
+   "metric": "Main city APMC daily prices (Agmarknet)",
+   "surat": "Surat APMC: reported on 23 of 30 days, 40 commodities. The Old Sardar Market sub-yard reported nothing in 30 days.",
+   "ahmedabad": "Ahmedabad APMC: 27 of 30 days, 43 commodities, plus Vasana (Chimanbhai Patel) onion/potato yard on 27 days",
+   "edge": "Ahmedabad"
+  },
+  {
+   "metric": "District mandi coverage / geography match",
+   "surat": "21 of 33 listed markets reported, but about 12 of those are really in Tapi district (legacy mapping), which inflates the count and needs filtering",
+   "ahmedabad": "7 of 21 listed markets reported. Viramgam, Mandal and others are rural, but the city yards are clearly labelled",
+   "edge": "Ahmedabad"
+  },
+  {
+   "metric": "DoCA daily retail price centre",
+   "surat": "Yes (reporting centre)",
+   "ahmedabad": "Yes (reporting centre)",
+   "edge": "Tie"
+  },
+  {
+   "metric": "Labour Bureau CPI-IW centre",
+   "surat": "Yes",
+   "ahmedabad": "Yes",
+   "edge": "Tie"
+  },
+  {
+   "metric": "PDS unit matches the municipal corporation",
+   "surat": "No. City zones 901-910 sit as talukas inside Surat district, and city totals must be summed",
+   "ahmedabad": "Yes. 'Ahmedabad City' is a separate PDS district with its own Food Controller office, split by AMC zones",
+   "edge": "Ahmedabad"
+  },
+  {
+   "metric": "National IMPDS district tables",
+   "surat": "Only 'SURAT' (district incl. city)",
+   "ahmedabad": "'AHMEDABAD CITY' listed separately from rural 'AHMADABAD'",
+   "edge": "Ahmedabad"
+  },
+  {
+   "metric": "ONORC migrant portability signal (story value)",
+   "surat": "7,313 inter-state portability transactions (Sep 2026 snapshot), the higher of the two",
+   "ahmedabad": "5,139 (Ahmedabad City)",
+   "edge": "Surat"
+  },
+  {
+   "metric": "Municipal food data (SMC/AMC)",
+   "surat": "None found; food supply is a state and APMC function",
+   "ahmedabad": "None found; same",
+   "edge": "Tie"
+  }
+ ],
+ "scores": {
+  "surat": 6,
+  "ahmedabad": 7,
+  "rationale": "Both cities have a live daily mandi JSON feed, a DoCA price centre and a CPI-IW centre. Ahmedabad wins on two points. Its main APMC reports more consistently. Its PDS data sits in a separate 'Ahmedabad City' district that matches AMC boundaries. Surat's Agmarknet district is polluted by Tapi markets, and its PDS city data has to be summed from zones inside the district."
+ },
+ "gaps": [
+  {
+   "metric": "Monthly PDS allocation vs offtake (wheat/rice) per FPS zone, city",
+   "city": "Surat",
+   "rti_public_authority": "District Supply Officer, Surat (Collectorate), PIO under Food, Civil Supplies & Consumer Affairs Dept, Gujarat",
+   "rti_question": "Provide month-wise allocation, lifting and distribution (quintals) of wheat, rice, sugar and salt under NFSA/PMGKAY for each SMC-area zone (codes 901-910) from April 2024 to date, in soft copy (Excel)."
+  },
+  {
+   "metric": "Monthly PDS allocation vs offtake, ration cards and FPS count by AMC zone",
+   "city": "Ahmedabad",
+   "rti_public_authority": "Food Controller, Ahmedabad City (Food & Civil Supplies office), PIO",
+   "rti_question": "Provide zone-wise numbers of AAY/PHH/NFSA ration cards and beneficiaries, number of active FPS, and month-wise allocation vs distribution of foodgrains for April 2024 to date, in Excel."
+  },
+  {
+   "metric": "FPS inspections, licence suspensions and complaints",
+   "city": "Both",
+   "rti_public_authority": "Directorate of Food & Civil Supplies, Gujarat (state PIO), and the District Supply Officer, Surat / Food Controller, Ahmedabad City",
+   "rti_question": "For 2023-24 to date, give the number of FPS inspections, irregularities found, licences suspended or cancelled, and PGRS complaints received and resolved, broken down by zone of Surat city and Ahmedabad city."
+  },
+  {
+   "metric": "Surat Old Sardar Market sub-yard prices not reported to Agmarknet",
+   "city": "Surat",
+   "rti_public_authority": "Agricultural Produce Market Committee, Surat (PIO), cc Gujarat State Agricultural Marketing Board",
+   "rti_question": "Provide daily commodity-wise arrivals and min/max/modal prices recorded at the Old Sardar Market sub-yard from 1 Aug 2026 to date, and state why this data was not uploaded to Agmarknet."
+  },
+  {
+   "metric": "DoCA centre-level retail price submissions (raw)",
+   "city": "Both",
+   "rti_public_authority": "Food, Civil Supplies & Consumer Affairs Dept, Gujarat (state price reporting cell PIO)",
+   "rti_question": "Provide the daily retail price returns for the 22 essential commodities submitted to the DoCA Price Monitoring Division for the Surat and Ahmedabad centres, Jan 2025 to date, including the markets or shops surveyed."
+  }
+ ],
+ "challenges": [
+  "data.gov.in mandi API (sample key) timed out or returned 429/502/504 errors repeatedly. Use the Agmarknet JSON backend instead: it is undocumented and can change without notice, so cache its data daily.",
+  "Agmarknet 'Surat' district still contains Tapi-district markets (Vyara, Songadh, Uchhal, Nizar, Kukarmunda, Valod). Keep a manual market allowlist per city.",
+  "Gujarat iPDS data is Gujarati-labelled ASP.NET behind postbacks, and the ration card abstract is CAPTCHA-gated, so it cannot be fully automated.",
+  "DoCA fcainfoweb reports need ASP.NET VIEWSTATE replay. The CPI-IW centre table is only the general index, and its base year and period need checking before charting.",
+  "Unit mismatch: food data sits at APMC, district or PDS-zone level, not municipal wards. Surat PDS must be summed across zones 901-910, while Ahmedabad City lines up with AMC zones."
+ ]
+}
