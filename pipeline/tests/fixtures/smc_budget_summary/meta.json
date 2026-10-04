@@ -1,0 +1,64 @@
+{
+ "fetched_at": "2026-10-04T00:58:32+05:30",
+ "endpoint": "https://www.suratmunicipal.gov.in/Departments/getBudgetSummary",
+ "as_of": "2026-10-03",
+ "budget_year": 2026,
+ "headers": [
+  "Description",
+  "Actuals 24-25",
+  "Original 25-26",
+  "Revised 25-26",
+  "Actuals (Tent.) 25-26",
+  "% of Rev. 25-26",
+  "Original 26-27",
+  "Actuals (Tent.) 26-27",
+  "% of Ori.26-27"
+ ],
+ "unit": "Rs. in '000",
+ "zones": [
+  [
+   "0",
+   "All Zone"
+  ],
+  [
+   "1",
+   "Head Quarter"
+  ],
+  [
+   "2",
+   "West Zone"
+  ],
+  [
+   "3",
+   "Central Zone"
+  ],
+  [
+   "4",
+   "North Zone"
+  ],
+  [
+   "5",
+   "East Zone - A"
+  ],
+  [
+   "6",
+   "South Zone-A"
+  ],
+  [
+   "7",
+   "Athwa Zone"
+  ],
+  [
+   "8",
+   "South East Zone"
+  ],
+  [
+   "9",
+   "East Zone - B"
+  ],
+  [
+   "10",
+   "South Zone-B (Kanakpur)"
+  ]
+ ]
+}

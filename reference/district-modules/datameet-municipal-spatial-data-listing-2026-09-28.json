@@ -1,0 +1,482 @@
+[
+  {
+    "name": "Ahmedabad",
+    "path": "Ahmedabad",
+    "sha": "586bef92a9a81527240ac789674e71dfde6d389a",
+    "size": 0,
+    "url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Ahmedabad?ref=master",
+    "html_url": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Ahmedabad",
+    "git_url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/586bef92a9a81527240ac789674e71dfde6d389a",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Ahmedabad?ref=master",
+      "git": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/586bef92a9a81527240ac789674e71dfde6d389a",
+      "html": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Ahmedabad"
+    }
+  },
+  {
+    "name": "Bangalore",
+    "path": "Bangalore",
+    "sha": "3740311b14388248146eded0f84d085dc3c511e1",
+    "size": 0,
+    "url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Bangalore?ref=master",
+    "html_url": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Bangalore",
+    "git_url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/3740311b14388248146eded0f84d085dc3c511e1",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Bangalore?ref=master",
+      "git": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/3740311b14388248146eded0f84d085dc3c511e1",
+      "html": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Bangalore"
+    }
+  },
+  {
+    "name": "Bhopal",
+    "path": "Bhopal",
+    "sha": "4487e571c30abcd99a436f3b5e7e9be77637df6c",
+    "size": 0,
+    "url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Bhopal?ref=master",
+    "html_url": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Bhopal",
+    "git_url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/4487e571c30abcd99a436f3b5e7e9be77637df6c",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Bhopal?ref=master",
+      "git": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/4487e571c30abcd99a436f3b5e7e9be77637df6c",
+      "html": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Bhopal"
+    }
+  },
+  {
+    "name": "Bhubaneswar",
+    "path": "Bhubaneswar",
+    "sha": "01993f2377b3d424f09ca4f4206ce656cd2157e4",
+    "size": 0,
+    "url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Bhubaneswar?ref=master",
+    "html_url": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Bhubaneswar",
+    "git_url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/01993f2377b3d424f09ca4f4206ce656cd2157e4",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Bhubaneswar?ref=master",
+      "git": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/01993f2377b3d424f09ca4f4206ce656cd2157e4",
+      "html": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Bhubaneswar"
+    }
+  },
+  {
+    "name": "Bodh_Gaya",
+    "path": "Bodh_Gaya",
+    "sha": "2269409de2613f26436f1d6c8cf8bac3d0e932c2",
+    "size": 0,
+    "url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Bodh_Gaya?ref=master",
+    "html_url": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Bodh_Gaya",
+    "git_url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/2269409de2613f26436f1d6c8cf8bac3d0e932c2",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Bodh_Gaya?ref=master",
+      "git": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/2269409de2613f26436f1d6c8cf8bac3d0e932c2",
+      "html": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Bodh_Gaya"
+    }
+  },
+  {
+    "name": "Chandigarh",
+    "path": "Chandigarh",
+    "sha": "989d377566ab7cbd9b5e9dfef12f8f5642efcca7",
+    "size": 0,
+    "url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Chandigarh?ref=master",
+    "html_url": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Chandigarh",
+    "git_url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/989d377566ab7cbd9b5e9dfef12f8f5642efcca7",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Chandigarh?ref=master",
+      "git": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/989d377566ab7cbd9b5e9dfef12f8f5642efcca7",
+      "html": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Chandigarh"
+    }
+  },
+  {
+    "name": "Chennai",
+    "path": "Chennai",
+    "sha": "63e98b656397b2ad979b26b374ff44238349ea42",
+    "size": 0,
+    "url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Chennai?ref=master",
+    "html_url": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Chennai",
+    "git_url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/63e98b656397b2ad979b26b374ff44238349ea42",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Chennai?ref=master",
+      "git": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/63e98b656397b2ad979b26b374ff44238349ea42",
+      "html": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Chennai"
+    }
+  },
+  {
+    "name": "Coimbatore",
+    "path": "Coimbatore",
+    "sha": "e0d5bcb7499b2cb56964dfce401f7b6566942506",
+    "size": 0,
+    "url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Coimbatore?ref=master",
+    "html_url": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Coimbatore",
+    "git_url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/e0d5bcb7499b2cb56964dfce401f7b6566942506",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Coimbatore?ref=master",
+      "git": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/e0d5bcb7499b2cb56964dfce401f7b6566942506",
+      "html": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Coimbatore"
+    }
+  },
+  {
+    "name": "Delhi",
+    "path": "Delhi",
+    "sha": "3a134669178ba5c78ddee49a69b6969b04db8e86",
+    "size": 0,
+    "url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Delhi?ref=master",
+    "html_url": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Delhi",
+    "git_url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/3a134669178ba5c78ddee49a69b6969b04db8e86",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Delhi?ref=master",
+      "git": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/3a134669178ba5c78ddee49a69b6969b04db8e86",
+      "html": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Delhi"
+    }
+  },
+  {
+    "name": "Faridabad",
+    "path": "Faridabad",
+    "sha": "2a7f39bea72cfe6eafd006c95b8fe614a7c48b4d",
+    "size": 0,
+    "url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Faridabad?ref=master",
+    "html_url": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Faridabad",
+    "git_url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/2a7f39bea72cfe6eafd006c95b8fe614a7c48b4d",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Faridabad?ref=master",
+      "git": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/2a7f39bea72cfe6eafd006c95b8fe614a7c48b4d",
+      "html": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Faridabad"
+    }
+  },
+  {
+    "name": "Hyderabad",
+    "path": "Hyderabad",
+    "sha": "12129d7620952acf4cc993db18e445d82d328adf",
+    "size": 0,
+    "url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Hyderabad?ref=master",
+    "html_url": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Hyderabad",
+    "git_url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/12129d7620952acf4cc993db18e445d82d328adf",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Hyderabad?ref=master",
+      "git": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/12129d7620952acf4cc993db18e445d82d328adf",
+      "html": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Hyderabad"
+    }
+  },
+  {
+    "name": "Jaipur",
+    "path": "Jaipur",
+    "sha": "7715d637601f310cee9a0d5895bb6881009f6399",
+    "size": 0,
+    "url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Jaipur?ref=master",
+    "html_url": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Jaipur",
+    "git_url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/7715d637601f310cee9a0d5895bb6881009f6399",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Jaipur?ref=master",
+      "git": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/7715d637601f310cee9a0d5895bb6881009f6399",
+      "html": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Jaipur"
+    }
+  },
+  {
+    "name": "Kanpur",
+    "path": "Kanpur",
+    "sha": "a169cb74ba3eefa72d711b7b2a4ad90bb4ac18f7",
+    "size": 0,
+    "url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Kanpur?ref=master",
+    "html_url": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Kanpur",
+    "git_url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/a169cb74ba3eefa72d711b7b2a4ad90bb4ac18f7",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Kanpur?ref=master",
+      "git": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/a169cb74ba3eefa72d711b7b2a4ad90bb4ac18f7",
+      "html": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Kanpur"
+    }
+  },
+  {
+    "name": "Katihar",
+    "path": "Katihar",
+    "sha": "21012158e42e5c742be280b5a279e4b7527a8dab",
+    "size": 0,
+    "url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Katihar?ref=master",
+    "html_url": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Katihar",
+    "git_url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/21012158e42e5c742be280b5a279e4b7527a8dab",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Katihar?ref=master",
+      "git": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/21012158e42e5c742be280b5a279e4b7527a8dab",
+      "html": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Katihar"
+    }
+  },
+  {
+    "name": "Kishangarh",
+    "path": "Kishangarh",
+    "sha": "84c437c8e5e93518f589450c7f7d445f6ab360f2",
+    "size": 0,
+    "url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Kishangarh?ref=master",
+    "html_url": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Kishangarh",
+    "git_url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/84c437c8e5e93518f589450c7f7d445f6ab360f2",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Kishangarh?ref=master",
+      "git": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/84c437c8e5e93518f589450c7f7d445f6ab360f2",
+      "html": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Kishangarh"
+    }
+  },
+  {
+    "name": "Kochi",
+    "path": "Kochi",
+    "sha": "77e80ddc872d32e80dfd7062e8d136eab8b2ca6c",
+    "size": 0,
+    "url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Kochi?ref=master",
+    "html_url": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Kochi",
+    "git_url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/77e80ddc872d32e80dfd7062e8d136eab8b2ca6c",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Kochi?ref=master",
+      "git": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/77e80ddc872d32e80dfd7062e8d136eab8b2ca6c",
+      "html": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Kochi"
+    }
+  },
+  {
+    "name": "Kolkata",
+    "path": "Kolkata",
+    "sha": "7bb70a5ac282dbca9aa1234766eb58dac56ae242",
+    "size": 0,
+    "url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Kolkata?ref=master",
+    "html_url": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Kolkata",
+    "git_url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/7bb70a5ac282dbca9aa1234766eb58dac56ae242",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Kolkata?ref=master",
+      "git": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/7bb70a5ac282dbca9aa1234766eb58dac56ae242",
+      "html": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Kolkata"
+    }
+  },
+  {
+    "name": "Lucknow",
+    "path": "Lucknow",
+    "sha": "cd8d1b8493049ad713089cd3274d1a6c6d3e4a07",
+    "size": 0,
+    "url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Lucknow?ref=master",
+    "html_url": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Lucknow",
+    "git_url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/cd8d1b8493049ad713089cd3274d1a6c6d3e4a07",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Lucknow?ref=master",
+      "git": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/cd8d1b8493049ad713089cd3274d1a6c6d3e4a07",
+      "html": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Lucknow"
+    }
+  },
+  {
+    "name": "MMR",
+    "path": "MMR",
+    "sha": "2a7925f6eae5fddb545501fd45b2bfabb76f68d5",
+    "size": 0,
+    "url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/MMR?ref=master",
+    "html_url": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/MMR",
+    "git_url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/2a7925f6eae5fddb545501fd45b2bfabb76f68d5",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/MMR?ref=master",
+      "git": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/2a7925f6eae5fddb545501fd45b2bfabb76f68d5",
+      "html": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/MMR"
+    }
+  },
+  {
+    "name": "Mira-Bhayandar",
+    "path": "Mira-Bhayandar",
+    "sha": "ba360d66a674d94b3a3f94a7c8106c986249c8f9",
+    "size": 0,
+    "url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Mira-Bhayandar?ref=master",
+    "html_url": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Mira-Bhayandar",
+    "git_url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/ba360d66a674d94b3a3f94a7c8106c986249c8f9",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Mira-Bhayandar?ref=master",
+      "git": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/ba360d66a674d94b3a3f94a7c8106c986249c8f9",
+      "html": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Mira-Bhayandar"
+    }
+  },
+  {
+    "name": "Mumbai",
+    "path": "Mumbai",
+    "sha": "86b5b4758a3322483a86d7a67afe85175f174d74",
+    "size": 0,
+    "url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Mumbai?ref=master",
+    "html_url": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Mumbai",
+    "git_url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/86b5b4758a3322483a86d7a67afe85175f174d74",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Mumbai?ref=master",
+      "git": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/86b5b4758a3322483a86d7a67afe85175f174d74",
+      "html": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Mumbai"
+    }
+  },
+  {
+    "name": "NMMC",
+    "path": "NMMC",
+    "sha": "47453fd8423f745e19d6c81c85e331ec9ec22eea",
+    "size": 0,
+    "url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/NMMC?ref=master",
+    "html_url": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/NMMC",
+    "git_url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/47453fd8423f745e19d6c81c85e331ec9ec22eea",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/NMMC?ref=master",
+      "git": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/47453fd8423f745e19d6c81c85e331ec9ec22eea",
+      "html": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/NMMC"
+    }
+  },
+  {
+    "name": "PCMC",
+    "path": "PCMC",
+    "sha": "27c5793d51c86ff315dbda60bd8cf036b68fce74",
+    "size": 0,
+    "url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/PCMC?ref=master",
+    "html_url": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/PCMC",
+    "git_url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/27c5793d51c86ff315dbda60bd8cf036b68fce74",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/PCMC?ref=master",
+      "git": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/27c5793d51c86ff315dbda60bd8cf036b68fce74",
+      "html": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/PCMC"
+    }
+  },
+  {
+    "name": "Pune",
+    "path": "Pune",
+    "sha": "da6671ab0296b21f55475af58f69699be672cd1f",
+    "size": 0,
+    "url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Pune?ref=master",
+    "html_url": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Pune",
+    "git_url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/da6671ab0296b21f55475af58f69699be672cd1f",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Pune?ref=master",
+      "git": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/da6671ab0296b21f55475af58f69699be672cd1f",
+      "html": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Pune"
+    }
+  },
+  {
+    "name": "Purnia",
+    "path": "Purnia",
+    "sha": "25e916acf992c029ce9e49a104cafbb13ffa7f9b",
+    "size": 0,
+    "url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Purnia?ref=master",
+    "html_url": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Purnia",
+    "git_url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/25e916acf992c029ce9e49a104cafbb13ffa7f9b",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Purnia?ref=master",
+      "git": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/25e916acf992c029ce9e49a104cafbb13ffa7f9b",
+      "html": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Purnia"
+    }
+  },
+  {
+    "name": "Readme.md",
+    "path": "Readme.md",
+    "sha": "1565310688de7a9a965e16d0b634907969e66012",
+    "size": 1474,
+    "url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Readme.md?ref=master",
+    "html_url": "https://github.com/datameet/Municipal_Spatial_Data/blob/master/Readme.md",
+    "git_url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/blobs/1565310688de7a9a965e16d0b634907969e66012",
+    "download_url": "https://raw.githubusercontent.com/datameet/Municipal_Spatial_Data/master/Readme.md",
+    "type": "file",
+    "_links": {
+      "self": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Readme.md?ref=master",
+      "git": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/blobs/1565310688de7a9a965e16d0b634907969e66012",
+      "html": "https://github.com/datameet/Municipal_Spatial_Data/blob/master/Readme.md"
+    }
+  },
+  {
+    "name": "Vadodara",
+    "path": "Vadodara",
+    "sha": "96e81a4cbf5cedb3334b9212a3700ed4c3bfc981",
+    "size": 0,
+    "url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Vadodara?ref=master",
+    "html_url": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Vadodara",
+    "git_url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/96e81a4cbf5cedb3334b9212a3700ed4c3bfc981",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Vadodara?ref=master",
+      "git": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/96e81a4cbf5cedb3334b9212a3700ed4c3bfc981",
+      "html": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Vadodara"
+    }
+  },
+  {
+    "name": "Vijayawada",
+    "path": "Vijayawada",
+    "sha": "087056170301adfc8f6ce5e7c517c5ddb8333dda",
+    "size": 0,
+    "url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Vijayawada?ref=master",
+    "html_url": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Vijayawada",
+    "git_url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/087056170301adfc8f6ce5e7c517c5ddb8333dda",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/Vijayawada?ref=master",
+      "git": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/087056170301adfc8f6ce5e7c517c5ddb8333dda",
+      "html": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/Vijayawada"
+    }
+  },
+  {
+    "name": "docs",
+    "path": "docs",
+    "sha": "a3659afa2b328cf77fe79066af5cb4c36a570b5f",
+    "size": 0,
+    "url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/docs?ref=master",
+    "html_url": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/docs",
+    "git_url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/a3659afa2b328cf77fe79066af5cb4c36a570b5f",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/docs?ref=master",
+      "git": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/a3659afa2b328cf77fe79066af5cb4c36a570b5f",
+      "html": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/docs"
+    }
+  },
+  {
+    "name": "website",
+    "path": "website",
+    "sha": "249f4e935a6a621fc621983557a716f0ac7454c8",
+    "size": 0,
+    "url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/website?ref=master",
+    "html_url": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/website",
+    "git_url": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/249f4e935a6a621fc621983557a716f0ac7454c8",
+    "download_url": null,
+    "type": "dir",
+    "_links": {
+      "self": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/contents/website?ref=master",
+      "git": "https://api.github.com/repos/datameet/Municipal_Spatial_Data/git/trees/249f4e935a6a621fc621983557a716f0ac7454c8",
+      "html": "https://github.com/datameet/Municipal_Spatial_Data/tree/master/website"
+    }
+  }
+]

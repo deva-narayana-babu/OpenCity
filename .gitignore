@@ -1,0 +1,11 @@
+# pipeline runtime data (see pipeline/README.md): commit data/export/, not these
+data/*.db
+data/*.db-wal
+data/*.db-shm
+data/raw/
+data/logs/
+data/.refresh.lock
+
+# python
+__pycache__/
+*.pyc

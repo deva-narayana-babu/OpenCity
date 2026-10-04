@@ -1,0 +1,128 @@
+<html>
+	<head>
+		<title>Home</title>
+		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/jc_style.css">
+	<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+	<script>
+
+
+    function reloadpage(id) {
+
+
+    if (id == 1) {
+        var estcode = $("#estlist").val();
+        $.ajax({
+            url:  "reloadframependency.php",
+            type: "POST",
+            async: false,
+            data: ({
+                estcode: estcode
+
+            }),
+            success: function(result) {
+                $("#pendency").html(result);
+            },
+            error: function(xhr, ajaxopt, error) {
+
+            }
+
+        });
+    } else if (id == 2) {
+        var estcode = $("#estlist1").val();
+        $.ajax({
+            url: "reloadframeidp.php",
+            type: "POST",
+            async: false,
+            data: ({
+                estcode: estcode
+
+            }),
+            success: function(result) {
+                $("#idp").html(result);
+            },
+            error: function(xhr, ajaxopt, error) {
+
+            }
+
+        });
+    }
+}</script>
+	</head>
+	<body>
+<div id="idp" class="home">
+  <div class='header'>
+VIRTUAL JUSTICE CLOCK  FOR DISTRICT JUDICIARY OF GUJARAT
+   </div>   <div class='report_title'>
+   INSTITUTION,DISPOSAL &  CASE CLEARANCE RATE 
+   <select id="estlist1" name="estlist1" class="jc_select form-control"   onchange="reloadpage(2)" >  
+		   <option value='ALL'>ALL ESTABLISHMENTS  UNDER FAMILY COURT-AHMEDABAD</option>";
+          <option value='GJAH04' >FAMILY COURT-AHMEDABAD</option><option value='GJAH26' >TALUKA FAMILY COURT-DHANDHUKA (AHMEDABAD)</option><option value='GJAH25' >TALUKA FAMILY COURT-VIRAMGAM (AHMEDABAD)</option><option value='GJAH27' >TALUKA FAMILY COURT-DHOLKA (AHMEDABAD)</option>                         
+								   </select>
+   </div>
+   <div class='row table_content'>
+    <table class='tbl_ccr' border='1' style='border-collapse: collapse;'>
+		<thead class='tbl_headingcc'>
+		<tr><th class='magenta' >DURATION</th><th class='red' >INSTITUTION</th><th class='green' >DISPOSAL</th><th class='orange' >CCR</th></tr>
+		    <tbody>
+			<tr><td class='tbl_headingccr'>Today</td><td class='tbl_dataccr'>23</td><td class='tbl_dataccr'>11</td></td><td class='tbl_dataccr'>48%</td></tr>
+			<tr><td class='tbl_headingccr'>Last Day</td><td class='tbl_dataccr'>35</td><td class='tbl_dataccr'>29</td></td><td class='tbl_dataccr'>83%</td></tr>
+			<tr><td class='tbl_headingccr'>Last Week</td><td class='tbl_dataccr'>153</td><td class='tbl_dataccr'>164</td><td class='tbl_dataccr'>107%</td></tr>
+			<tr><td class='tbl_headingccr'>Last Month</td><td class='tbl_dataccr'>725</td><td class='tbl_dataccr'>432</td><td class='tbl_dataccr'>60%</td></tr>
+			<tr><td class='tbl_headingccr'>This Year</td><td class='tbl_dataccr'>7267</td><td class='tbl_dataccr'>6452</td><td class='tbl_dataccr'>89%</td></tr>
+			<tr><td class='tbl_headingccr'>Last Year</td><td class='tbl_dataccr'>9220</td><td class='tbl_dataccr'>9974</td><td class='tbl_dataccr'>108%</td></tr>
+			
+		</tbody>
+	</table>
+  
+   </div>
+   <div class='row'>
+<div id='clock' class='col-2 clock1'><p id="date">27/09/2026</p><p id="time"></p></div>
+<div class='adv_scroll1'>
+<div class='adv_scrolldi'>
+     ANYONE AND EVERYONE CAN GET UPDATES OF CASES BY USING "EMAIL MY CASE STATUS" SERVICE.   ANYONE AND EVERYONE CAN GET UPDATES OF CASES BY USING "EMAIL MY CASE STATUS" SERVICE.
+</div>
+</div>
+</div>
+<script>
+const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+ function currentTime() {
+  let date = new Date(); 
+  let hh = date.getHours();
+  //alert(hh);
+  let mm = date.getMinutes();
+  let ss = date.getSeconds();
+  let day = weekday[date.getDay()];
+  let session = "AM";
+  let dd=date.getDate();
+  let m1= (parseInt(date.getMonth())+1);
+  let yy=date.getFullYear(); 
+  if(hh >= 12){
+     
+     session = "PM";
+  }
+  if(hh == 0){
+      hh = 12;
+  }
+  if(hh > 12){
+      hh = hh - 12;
+      
+   }
+  
+   hh = (hh < 10) ? "0" + hh : hh;
+   mm = (mm < 10) ? "0" + mm : mm;
+   ss = (ss < 10) ? "0" + ss : ss;
+    
+   dd = (dd < 10) ? "0" + dd : dd;
+   m1 = (m1 < 10) ? "0" + m1 : m1;
+   yy = (yy < 10) ? "0" + yy : yy;
+   var x1= day+","+dd + "/" + m1+ "/" +yy; 
+   let time = hh + ":" + mm + " "  + session;
+ 
+  $("#clock").html('<p id="date">'+x1+'</p><p id="time">'+time+'</p>'); 
+  let t = setTimeout(function(){ currentTime() }, 60000);
+}
+currentTime();</script></div>
+</body>
+</html>
