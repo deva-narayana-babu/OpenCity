@@ -4,18 +4,17 @@ This folder holds a SQLite database of Surat civic data and the refresher that k
 
 ```
 scripts/refresh.sh            fetch whatever is due -> update data/opencity.db -> write data/export/*.csv
-scripts/db.sh status          is every source fresh? what failed?
-scripts/install-schedule.sh   run the refresher hourly (cron or a systemd user timer)
+scripts/db.sh                 is every source fresh? what failed?
+scripts/install-schedule.sh   run the refresher hourly with cron
 ```
 
 ## Quick start
 
 ```bash
 sudo apt install poppler-utils          # pdftotext, needed for PDF sources
-scripts/refresh.sh --all                # first full load (a few minutes; polite 2 s gap per host)
-scripts/db.sh status                    # one line per source: last success, rows, latest period, last error
-scripts/db.sh latest swm.avg_collection_mt_per_day 5
-scripts/db.sh query "SELECT * FROM v_observation WHERE module='rti' LIMIT 20"
+scripts/refresh.sh                      # first run loads every source (a few minutes; polite 2 s gap per host)
+scripts/refresh.sh smc_swm              # refresh one source now
+scripts/db.sh                           # one line per source: last success, rows, latest period, last error
 scripts/install-schedule.sh             # hourly cron entry; each source decides if it is due
 ```
 
@@ -31,7 +30,7 @@ fetch (polite HTTP) -> archive raw bytes -> parse -> validate -> upsert -> expor
    - It stops on 403/429: we don't work around blocks or captchas.
 2. **Archive.** Every response is saved once, gzipped, under `data/raw/<source>/` and named by its sha256.
    - Visitor counters and ASP.NET session tokens are blanked first, so an unchanged page is recognised as unchanged and no tokens are stored.
-   - `scripts/db.sh reparse` rebuilds the whole database from this archive without touching the network.
+   - `runner.reparse()` can rebuild the whole database from this archive without touching the network.
 3. **Parse.** `parse()` is pure: the same bytes always give the same rows. Tests run it against the frozen snapshots in `../reference/`.
 4. **Validate.**
    - The runner rejects a whole document rather than storing anything doubtful: undeclared metrics, unknown geographies, non-ISO periods, duplicate keys, or a "reported" value with no number.
@@ -42,7 +41,7 @@ fetch (polite HTTP) -> archive raw bytes -> parse -> validate -> upsert -> expor
    - Entities such as corporators keep validity history: `valid_from`/`valid_to`.
 6. **Export.** `data/export/` holds CSVs with stable ordering, rewritten only when they change, so git diffs show real data changes.
 
-A failure in one source never stops the others. The exit code is non-zero if anything failed, and `scripts/db.sh errors` shows what happened.
+A failure in one source never stops the others. The exit code is non-zero if anything failed; `scripts/db.sh` shows the last error per source and the `fetch` table has the full history.
 
 ## Database
 
@@ -77,7 +76,7 @@ Conventions:
 
 ## Sources
 
-Run `scripts/db.sh sources` for the live list and `data/export/catalog/` for the full metric catalogue. Each adapter's module docstring explains the page, its quirks and what every metric means. To add a source, read [opencity/sources/README.md](opencity/sources/README.md).
+Run `scripts/db.sh` for the list of sources and see `data/export/catalog/` for the full metric catalogue. Each adapter's module docstring explains the page, its quirks and what every metric means. To add a source, read [opencity/sources/README.md](opencity/sources/README.md).
 
 ## Tests
 
@@ -100,4 +99,4 @@ The tests use no network. Framework tests cover parsing helpers, archive normali
 
 ## What goes in git
 
-`data/export/` (CSV) is meant to be committed. The database, the raw archive and the logs are git-ignored: they're large, binary or regenerable. A new teammate runs `scripts/refresh.sh --all` to build their own copy.
+`data/export/` (CSV) is meant to be committed. The database, the raw archive and the logs are git-ignored: they're large, binary or regenerable. A new teammate runs `scripts/refresh.sh` to build their own copy.

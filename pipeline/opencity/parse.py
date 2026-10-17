@@ -6,7 +6,6 @@ from __future__ import annotations
 
 import calendar
 import html as htmllib
-import re
 import subprocess
 import tempfile
 from dataclasses import dataclass, field
@@ -73,11 +72,15 @@ def fy_period(start_year: int) -> tuple[str, str]:
 
 
 def fy_start(label: str) -> int:
-    """'2025-26', '2025-2026', 'FY 2025-26', '2025/26' -> 2025."""
-    m = re.search(r'(20\d\d|19\d\d)\s*[-/–]\s*(\d{2,4})', label)
-    if not m:
-        raise ValueError(f'not a financial-year label: {label!r}')
-    return int(m.group(1))
+    """'2025-26', '2025-2026', 'FY 2025-26', '2025/26', '2019–20' -> the first year (2025)."""
+    s = label.replace('–', '-').replace('/', '-').replace(' ', '')
+    for i, ch in enumerate(s):
+        # a dash with a 4-digit year before it and at least 2 digits after it: "2025-26"
+        if ch == '-' and i >= 4 and s[i - 4:i].isdigit() and s[i + 1:i + 3].isdigit():
+            year = int(s[i - 4:i])
+            if 1900 <= year < 2100:
+                return year
+    raise ValueError(f'not a financial-year label: {label!r}')
 
 
 def quarter_of_fy(start_year: int, q: int) -> tuple[str, str]:
@@ -101,9 +104,9 @@ def parse_date(s: str, *fmts: str) -> date:
 def parse_dt(s: str, *fmts: str) -> str:
     """'27/09/2026 24:00' -> '2026-09-28T00:00'. Returns ISO local datetime (minutes)."""
     s = s.strip()
-    m = re.match(r'(.*\d)\s+24:00(?::00)?$', s)
-    if m:   # "24:00" means midnight at the end of that day
-        d = parse_date(m.group(1))
+    parts = s.split()
+    if len(parts) > 1 and parts[-1] in ('24:00', '24:00:00'):   # "24:00" means midnight at the end of that day
+        d = parse_date(' '.join(parts[:-1]))
         return (datetime(d.year, d.month, d.day) + timedelta(days=1)).isoformat(timespec='minutes')
     for f in fmts or ('%d/%m/%Y %H:%M', '%d-%m-%Y %H:%M', '%Y-%m-%d %H:%M', '%d/%m/%Y %H:%M:%S', '%d-%m-%Y %H:%M:%S'):
         try:
@@ -114,26 +117,54 @@ def parse_dt(s: str, *fmts: str) -> str:
 
 
 def month_year(label: str) -> tuple[int, int]:
-    """'July-2026', 'Jul 2026', 'July, 2026' -> (2026, 7)."""
-    m = re.match(r'\s*([A-Za-z]+)\.?[\s,\-/]*(\d{4})\s*$', label)
-    if not m:
+    """'July-2026', 'Jul 2026', 'July, 2026', 'Sept. 2025' -> (2026, 7)."""
+    s = label.strip()
+    month, year = s[:-4].strip(' ,-/.\t'), s[-4:]
+    if not (year.isdigit() and month.isascii() and month.isalpha()):
         raise ValueError(f'not a month-year label: {label!r}')
-    return int(m.group(2)), month_no(m.group(1))
+    return int(year), month_no(month)
 
 
 # ---------- text ----------
 
 def clean(s: str | None) -> str:
+    """Unescape HTML entities and collapse all whitespace to single spaces."""
     if s is None:
         return ''
-    return re.sub(r'\s+', ' ', htmllib.unescape(s).replace('\xa0', ' ')).strip()
+    return ' '.join(htmllib.unescape(s).replace('\xa0', ' ').split())
+
+
+class _TextParser(HTMLParser):
+    """Collects visible text: skips script/style/noscript, breaks lines at <br> and after block elements."""
+    SKIP = {'script', 'style', 'noscript'}
+    BREAK_AFTER = {'p', 'div', 'tr', 'li', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'}
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.parts: list[str] = []
+        self._skipping = 0
+
+    def handle_starttag(self, tag, attrs):
+        if tag in self.SKIP:
+            self._skipping += 1
+        self.parts.append('\n' if tag == 'br' else ' ')
+
+    def handle_endtag(self, tag):
+        if tag in self.SKIP and self._skipping:
+            self._skipping -= 1
+        self.parts.append('\n' if tag in self.BREAK_AFTER else ' ')
+
+    def handle_data(self, data):
+        if not self._skipping:
+            self.parts.append(data)
 
 
 def html_text(html: str) -> str:
-    t = re.sub(r'(?is)<(script|style|noscript)[^>]*>.*?</\1>', ' ', html)
-    t = re.sub(r'(?i)<br\s*/?>|</p>|</div>|</tr>|</li>|</h\d>', '\n', t)
-    t = re.sub(r'(?s)<[^>]+>', ' ', t)
-    return '\n'.join(clean(line) for line in htmllib.unescape(t).splitlines() if clean(line))
+    """Visible text of a page, one cleaned line per block."""
+    p = _TextParser()
+    p.feed(html)
+    p.close()
+    return '\n'.join(clean(line) for line in ''.join(p.parts).splitlines() if clean(line))
 
 
 # ---------- HTML tables ----------
@@ -274,15 +305,45 @@ def html_tables(html: str | bytes) -> list[Table]:
     return p.tables
 
 
+class _LinkParser(HTMLParser):
+    """Collects (href, text) for every <a href="...">...</a>."""
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.found: list[tuple[str, str]] = []
+        self._href: str | None = None
+        self._text: list[str] = []
+
+    def handle_starttag(self, tag, attrs):
+        if tag == 'a':
+            self._href = (dict(attrs).get('href') or '').strip() or None
+            self._text = []
+        elif self._href is not None:
+            self._text.append(' ')
+
+    def handle_endtag(self, tag):
+        if self._href is None:
+            return
+        if tag == 'a':
+            self.found.append((self._href, clean(''.join(self._text))))
+            self._href = None
+        else:
+            self._text.append(' ')
+
+    def handle_data(self, data):
+        if self._href is not None:
+            self._text.append(data)
+
+
 def links(html: str | bytes, base: str = '') -> list[tuple[str, str]]:
     """All <a href> as (absolute_url, link_text)."""
     from urllib.parse import urljoin
     if isinstance(html, bytes):
         html = html.decode('utf-8', errors='replace')
-    out = []
-    for m in re.finditer(r'(?is)<a\b[^>]*?href\s*=\s*["\']([^"\']+)["\'][^>]*>(.*?)</a>', html):
-        out.append((urljoin(base, htmllib.unescape(m.group(1).strip())), clean(re.sub(r'<[^>]+>', ' ', m.group(2)))))
-    return out
+    p = _LinkParser()
+    p.feed(html)
+    p.close()
+    return [(urljoin(base, href), text) for href, text in p.found]
 
 
 # ---------- PDF ----------

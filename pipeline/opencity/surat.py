@@ -5,8 +5,6 @@ so every adapter must go through zone_code() to keep zone codes consistent.
 """
 from __future__ import annotations
 
-import re
-
 from .model import Geo
 
 SMC = Geo('smc_city', 'smc', 'Surat Municipal Corporation area')
@@ -32,28 +30,39 @@ ZONES = {
     'south_east': 'South East Zone (Limbayat)',
 }
 
-_ALIASES = [
-    (r'head ?quarter|^hq$', 'hq'),
-    (r'south ?-? ?west|athwa', 'south_west'),
-    (r'south ?-? ?east|limbayat', 'south_east'),
-    (r'south.*\bb\b|kanakpur|udh?a?na ?-? ?b', 'south_b'),
-    (r'south.*\ba\b|udh?a?na ?-? ?a', 'south_a'),
-    (r'^south( zone)?$|udh?a?na', 'south'),
-    (r'east.*\bb\b|varachha ?-? ?b', 'east_b'),
-    (r'east.*\ba\b|varachha ?-? ?a', 'east_a'),
-    (r'west|rander', 'west'),
-    (r'north|katargam', 'north'),
-    (r'central', 'central'),
-]
-
-
 def zone_code(name: str) -> str:
-    """Map any SMC zone label to its canonical code. Raises KeyError for unknown labels."""
-    s = re.sub(r'\(mm\)|\bzone\b|\s+', ' ', name.lower()).strip()
-    s = re.sub(r'\s+', ' ', s)
-    for pat, code in _ALIASES:
-        if re.search(pat, s):
-            return code
+    """Map any SMC zone label to its canonical code. Raises KeyError for unknown labels.
+    'East Zone - A (mm)' -> words ['east', 'a'] -> 'east_a'."""
+    text = name.lower()
+    for ch in '-()_,':
+        text = text.replace(ch, ' ')
+    words = [w for w in text.split() if w not in ('zone', 'mm')]
+    joined = ''.join(words)                                  # 'south west' -> 'southwest'
+    south = any(w in words for w in ('south', 'udhna', 'udhana'))
+    east = any(w in words for w in ('east', 'varachha'))
+
+    if 'head' in words or joined in ('hq', 'headquarter'):
+        return 'hq'
+    if 'southwest' in joined or 'athwa' in words:
+        return 'south_west'
+    if 'southeast' in joined or 'limbayat' in words:
+        return 'south_east'
+    if 'kanakpur' in words or (south and 'b' in words):
+        return 'south_b'
+    if south and 'a' in words:
+        return 'south_a'
+    if south:
+        return 'south'
+    if east and 'b' in words:
+        return 'east_b'
+    if east and 'a' in words:
+        return 'east_a'
+    if 'west' in words or 'rander' in words:
+        return 'west'
+    if 'north' in words or 'katargam' in words:
+        return 'north'
+    if 'central' in words:
+        return 'central'
     raise KeyError(f'unknown SMC zone label: {name!r}')
 
 

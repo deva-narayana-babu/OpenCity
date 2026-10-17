@@ -2,41 +2,78 @@
 
 Each distinct body is stored once, so re-fetching an unchanged page costs no disk.
 The archive is the audit trail: any number in the database can be traced to the
-exact bytes it was parsed from, and `opencity reparse` rebuilds the database from it.
+exact bytes it was parsed from, and runner.reparse() can rebuild the database from it.
 """
 from __future__ import annotations
 
 import gzip
 import hashlib
 import os
-import re
 import tempfile
 from pathlib import Path
 
 from . import config
 
-# Parts of HTML pages that change on every request without the data changing.
-# They are blanked before hashing/archiving, so an unchanged page is recognised as
-# unchanged and session tokens never land in the archive.
-_VOLATILE = [
-    # visitor counters (SMC site template: <div title="Website's Visitor Count">Visitor Count <span>79300522</span>)
-    (re.compile(rb'(Visitor\s+Count\s*(?:<[^>]+>\s*)*)[\d,]+', re.I), rb'\1'),
-    # ASP.NET state and anti-forgery tokens, in either attribute order
-    (re.compile(rb'(<input[^>]*?name="(?:__RequestVerificationToken|__VIEWSTATE|__VIEWSTATEGENERATOR|'
-                rb'__EVENTVALIDATION|__PREVIOUSPAGE)"[^>]*?value=")[^"]*(")', re.I), rb'\1\2'),
-    (re.compile(rb'(<input[^>]*?value=")[^"]*("[^>]*?name="(?:__RequestVerificationToken|__VIEWSTATE|'
-                rb'__VIEWSTATEGENERATOR|__EVENTVALIDATION|__PREVIOUSPAGE)")', re.I), rb'\1\2'),
-    (re.compile(rb'(<meta[^>]*?name="csrf-token"[^>]*?content=")[^"]*(")', re.I), rb'\1\2'),
-]
+# Hidden form fields that carry per-session ASP.NET / anti-forgery tokens, not data.
+TOKEN_FIELDS = ('__RequestVerificationToken', '__VIEWSTATE', '__VIEWSTATEGENERATOR', '__EVENTVALIDATION',
+                '__PREVIOUSPAGE')
+
+
+def blank_attribute(body: bytes, tag: bytes, must_contain: tuple[bytes, ...], attribute: bytes) -> bytes:
+    """Empty one attribute in every tag that contains one of `must_contain`, e.g.
+    blank_attribute(body, b'<input', (b'name="__VIEWSTATE"',), b'value')
+      <input name="__VIEWSTATE" value="abc123"> -> <input name="__VIEWSTATE" value="">"""
+    marker = b' ' + attribute + b'="'
+    out, pos = [], 0
+    while True:
+        start = body.find(tag, pos)
+        end = body.find(b'>', start) if start != -1 else -1
+        if end == -1:
+            break
+        piece = body[start:end + 1]
+        if any(m in piece for m in must_contain):
+            i = piece.find(marker)
+            j = piece.find(b'"', i + len(marker)) if i != -1 else -1
+            if j != -1:
+                piece = piece[:i + len(marker)] + piece[j:]
+        out += [body[pos:start], piece]
+        pos = end + 1
+    out.append(body[pos:])
+    return b''.join(out)
+
+
+def blank_number_after(body: bytes, label: bytes) -> bytes:
+    """Remove the number that follows `label`, skipping spaces and tags in between, e.g.
+      'Visitor Count <span>79,300,522</span>' -> 'Visitor Count <span></span>'"""
+    i = body.find(label)
+    while i != -1:
+        j = i + len(label)
+        while j < len(body):
+            if body[j:j + 1].isspace():
+                j += 1
+            elif body[j:j + 1] == b'<' and body.find(b'>', j) != -1:
+                j = body.find(b'>', j) + 1
+            else:
+                break
+        k = j
+        while k < len(body) and body[k:k + 1] in b'0123456789,':
+            k += 1
+        body = body[:j] + body[k:]
+        i = body.find(label, j)
+    return body
 
 
 def normalize(body: bytes, content_type: str = '') -> bytes:
-    """Blank volatile, non-data parts of HTML responses (counters, session/anti-forgery tokens)."""
+    """Blank the parts of an HTML page that change on every request without the data changing
+    (visitor counters, session/anti-forgery tokens). This runs before hashing and archiving, so an
+    unchanged page is recognised as unchanged and session tokens never land in the archive."""
     head = body[:2000].lower()
     if 'html' not in (content_type or '').lower() and b'<html' not in head and b'<!doctype' not in head:
         return body
-    for pat, rep in _VOLATILE:
-        body = pat.sub(rep, body)
+    body = blank_number_after(body, b'Visitor Count')
+    fields = tuple(f'name="{f}"'.encode() for f in TOKEN_FIELDS)
+    body = blank_attribute(body, b'<input', fields, b'value')
+    body = blank_attribute(body, b'<meta', (b'name="csrf-token"',), b'content')
     return body
 
 _EXT = {

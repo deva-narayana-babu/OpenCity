@@ -78,9 +78,9 @@ Optional hooks:
 - **SMC "Last Updated" is not a data date.** On some SMC pages it is just the server render time. Only use it as `publisher_as_of` after checking that it changes with the data.
 - **`parse()` sees two versions of the body.**
   - On a live fetch, `raw.body` is the original response.
-  - On `reparse`, it is the archived copy, with visitor counters and ASP.NET tokens blanked.
+  - On `runner.reparse()`, it is the archived copy, with visitor counters and ASP.NET tokens blanked.
   - Parse only the data, so both give the same result. `fetch()` may read tokens from the live body, e.g. `__VIEWSTATE` for a postback.
-- **`reparse` does not replay the request body.** For a POST, put everything `parse()` needs (date, ids) in `meta` or read it from the response.
+- **`runner.reparse()` does not replay the request body.** For a POST, put everything `parse()` needs (date, ids) in `meta` or read it from the response.
 - **Multi-document sources:**
   - Use `ctx.get(url, soft=True)` so that one missing page records an error and the other documents still load; the run is still reported as failed.
   - When several documents publish the same key (each balance sheet repeats the previous year), the one processed last wins. Yield documents oldest first, so the latest publication is authoritative.
@@ -104,7 +104,6 @@ Optional hooks:
 
 ```bash
 cd pipeline
-python3 -m opencity parse-file smc_xyz ../reference/<path>       # parse a saved file and print the observations
-OPENCITY_DATA_DIR=/tmp/oc OPENCITY_DB=/tmp/oc/t.db python3 -m opencity refresh -s smc_xyz   # live run into a scratch DB
-python3 -m unittest tests.test_smc_xyz -v
+python3 -m unittest tests.test_smc_xyz -v                          # parse the frozen snapshot (no network)
+OPENCITY_DATA_DIR=/tmp/oc python3 -m opencity refresh smc_xyz      # live run into a scratch data folder
 ```

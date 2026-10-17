@@ -7,7 +7,6 @@ from __future__ import annotations
 
 import hashlib
 import logging
-import re
 import sqlite3
 import traceback
 from datetime import datetime, timedelta
@@ -21,7 +20,17 @@ from .registry import Adapter
 
 log = logging.getLogger(__name__)
 
-_ISO = re.compile(r'^\d{4}-\d{2}-\d{2}(T\d{2}:\d{2}(:\d{2})?)?$')
+
+
+def _is_iso(s: str) -> bool:
+    """True for '2026-09-28', '2026-09-28T14:00' and '2026-09-28T14:00:00'."""
+    if len(s) not in (10, 16, 19) or s[4] != '-' or (len(s) > 10 and s[10] != 'T'):
+        return False
+    try:
+        datetime.fromisoformat(s)
+        return True
+    except ValueError:
+        return False
 
 
 def request_key(method: str, url: str, body: bytes | None) -> str:
@@ -147,7 +156,7 @@ def validate(adapter: Adapter, result: Result, raw: Raw, conn: sqlite3.Connectio
             raise ValidationError(f'{o.metric_id} {o.period_start}: reported but no value')
         if o.status != 'reported' and o.value is not None:
             raise ValidationError(f'{o.metric_id} {o.period_start}: {o.status} must not carry a value')
-        if not (_ISO.match(o.period_start) and _ISO.match(o.period_end)) or o.period_start > o.period_end:
+        if not (_is_iso(o.period_start) and _is_iso(o.period_end)) or o.period_start > o.period_end:
             raise ValidationError(f'{o.metric_id}: bad period {o.period_start}..{o.period_end}')
         if (o.geo_level, o.geo_code) not in known_geos and not db.geo_exists(conn, o.geo_level, o.geo_code):
             raise ValidationError(f'unknown geography {o.geo_level}:{o.geo_code} (emit a Geo for it)')
