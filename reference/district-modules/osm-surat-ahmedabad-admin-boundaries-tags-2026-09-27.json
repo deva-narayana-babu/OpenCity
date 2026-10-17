@@ -1,0 +1,406 @@
+{
+  "version": 0.6,
+  "generator": "Overpass API 0.7.62.11 87bfad18",
+  "osm3s": {
+    "timestamp_osm_base": "2026-09-27T07:40:54Z",
+    "timestamp_areas_base": "2026-09-26T02:15:26Z",
+    "copyright": "The data included in this document is from www.openstreetmap.org. The data is made available under ODbL."
+  },
+  "elements": [
+
+{
+  "type": "relation",
+  "id": 1952514,
+  "tags": {
+    "admin_level": "5",
+    "boundary": "administrative",
+    "name": "Surat",
+    "name:ar": "سورت",
+    "name:arz": "سورت",
+    "name:azb": "سورات",
+    "name:de": "Surat",
+    "name:es": "Surat",
+    "name:fa": "سورت",
+    "name:fr": "Surate",
+    "name:gu": "સુરત",
+    "name:hi": "सूरत",
+    "name:ja": "スーラト",
+    "name:ko": "수라트",
+    "name:ks": "سورت",
+    "name:pa": "ਸੂਰਤ",
+    "name:pnb": "سورت",
+    "name:ru": "Сурат",
+    "name:sr": "Сурат",
+    "name:ta": "சூரத்து",
+    "name:tt": "Сурат",
+    "name:ur": "سورت",
+    "official_name": "Surat District",
+    "ref:LGD:district": "459",
+    "type": "boundary",
+    "wikidata": "Q1797317"
+  }
+},
+{
+  "type": "relation",
+  "id": 9673373,
+  "tags": {
+    "admin_level": "6",
+    "boundary": "administrative",
+    "name": "Mahuva Taluka",
+    "ref:LGD:subdistrict": "3941",
+    "type": "boundary",
+    "wikidata": "Q12937937"
+  }
+},
+{
+  "type": "relation",
+  "id": 9673374,
+  "tags": {
+    "admin_level": "6",
+    "boundary": "administrative",
+    "name": "Bardoli Taluka",
+    "ref:LGD:subdistrict": "3940",
+    "type": "boundary",
+    "wikidata": "Q25565254"
+  }
+},
+{
+  "type": "relation",
+  "id": 9673375,
+  "tags": {
+    "admin_level": "6",
+    "boundary": "administrative",
+    "name": "Palsana Taluka",
+    "ref:LGD:subdistrict": "3939",
+    "type": "boundary",
+    "wikidata": "Q12931319"
+  }
+},
+{
+  "type": "relation",
+  "id": 9673376,
+  "tags": {
+    "admin_level": "6",
+    "boundary": "administrative",
+    "name": "Chorasi Taluka",
+    "ref:LGD:subdistrict": "3938",
+    "type": "boundary",
+    "wikidata": "Q2757125"
+  }
+},
+{
+  "type": "relation",
+  "id": 9673377,
+  "tags": {
+    "admin_level": "6",
+    "boundary": "administrative",
+    "name": "Kamrej Taluka",
+    "ref:LGD:subdistrict": "3936",
+    "type": "boundary",
+    "wikidata": "Q12918638"
+  }
+},
+{
+  "type": "relation",
+  "id": 9673378,
+  "tags": {
+    "admin_level": "6",
+    "boundary": "administrative",
+    "name": "Mandvi Taluka",
+    "ref:LGD:subdistrict": "3935",
+    "type": "boundary",
+    "wikidata": "Q12938008"
+  }
+},
+{
+  "type": "relation",
+  "id": 9673379,
+  "tags": {
+    "admin_level": "6",
+    "boundary": "administrative",
+    "name": "Umarpada Taluka",
+    "ref:LGD:subdistrict": "3934",
+    "type": "boundary",
+    "wikidata": "Q12916112"
+  }
+},
+{
+  "type": "relation",
+  "id": 9673380,
+  "tags": {
+    "admin_level": "6",
+    "boundary": "administrative",
+    "name": "Mangrol Taluka",
+    "ref:LGD:subdistrict": "3933",
+    "type": "boundary",
+    "wikidata": "Q25565253"
+  }
+},
+{
+  "type": "relation",
+  "id": 9673381,
+  "tags": {
+    "admin_level": "6",
+    "boundary": "administrative",
+    "name": "Olpad Taluka",
+    "ref:LGD:subdistrict": "3932",
+    "type": "boundary",
+    "wikidata": "Q12917175"
+  }
+},
+{
+  "type": "relation",
+  "id": 10753375,
+  "tags": {
+    "admin_level": "6",
+    "boundary": "administrative",
+    "name": "Puna Taluka",
+    "ref:LGD:subdistrict": "6521",
+    "type": "boundary",
+    "wikidata": "Q123257250"
+  }
+},
+{
+  "type": "relation",
+  "id": 10753376,
+  "tags": {
+    "admin_level": "6",
+    "boundary": "administrative",
+    "name": "Udhna Taluka",
+    "ref:LGD:subdistrict": "6522",
+    "type": "boundary",
+    "wikidata": "Q7877195"
+  }
+},
+{
+  "type": "relation",
+  "id": 10753377,
+  "tags": {
+    "admin_level": "6",
+    "boundary": "administrative",
+    "name": "Majura Taluka",
+    "type": "boundary"
+  }
+},
+{
+  "type": "relation",
+  "id": 10753378,
+  "tags": {
+    "admin_level": "6",
+    "boundary": "administrative",
+    "name": "Katargam Taluka",
+    "ref:LGD:subdistrict": "6519",
+    "type": "boundary",
+    "wikidata": "Q123257257"
+  }
+},
+{
+  "type": "relation",
+  "id": 10753379,
+  "tags": {
+    "admin_level": "6",
+    "boundary": "administrative",
+    "name": "Adajan Taluka",
+    "ref:LGD:subdistrict": "6518",
+    "type": "boundary",
+    "wikidata": "Q123257238"
+  }
+},
+{
+  "type": "relation",
+  "id": 1953566,
+  "tags": {
+    "admin_level": "5",
+    "boundary": "administrative",
+    "name": "Ahmedabad",
+    "name:cs": "Ahmadábád",
+    "name:ko": "아마다바드구",
+    "official_name": "Ahmedabad District",
+    "ref:LGD:district": "438",
+    "type": "boundary",
+    "wikidata": "Q401686",
+    "wikipedia": "en:Ahmedabad district"
+  }
+},
+{
+  "type": "relation",
+  "id": 9661738,
+  "tags": {
+    "admin_level": "6",
+    "boundary": "administrative",
+    "name": "Dhandhuka Taluka",
+    "ref:LGD:subdistrict": "3787",
+    "type": "boundary",
+    "wikidata": "Q16960489"
+  }
+},
+{
+  "type": "relation",
+  "id": 9661741,
+  "tags": {
+    "admin_level": "6",
+    "boundary": "administrative",
+    "name": "Bavla Taluka",
+    "ref:LGD:subdistrict": "3784",
+    "type": "boundary",
+    "wikidata": "Q4873727"
+  }
+},
+{
+  "type": "relation",
+  "id": 9661742,
+  "tags": {
+    "admin_level": "6",
+    "boundary": "administrative",
+    "name": "Dholka Taluka",
+    "ref:LGD:subdistrict": "3783",
+    "type": "boundary",
+    "wikidata": "Q5269712"
+  }
+},
+{
+  "type": "relation",
+  "id": 9661743,
+  "tags": {
+    "admin_level": "6",
+    "boundary": "administrative",
+    "name": "Daskroi Taluka",
+    "ref:LGD:subdistrict": "3782",
+    "type": "boundary",
+    "wikidata": "Q628030"
+  }
+},
+{
+  "type": "relation",
+  "id": 9661745,
+  "tags": {
+    "admin_level": "6",
+    "boundary": "administrative",
+    "name": "Sanand Taluka",
+    "ref:LGD:subdistrict": "3780",
+    "type": "boundary",
+    "wikidata": "Q12945220"
+  }
+},
+{
+  "type": "relation",
+  "id": 9661746,
+  "tags": {
+    "admin_level": "6",
+    "boundary": "administrative",
+    "name": "Viramgam Taluka",
+    "ref:LGD:subdistrict": "3779",
+    "type": "boundary",
+    "wikidata": "Q7933635"
+  }
+},
+{
+  "type": "relation",
+  "id": 9661747,
+  "tags": {
+    "admin_level": "6",
+    "boundary": "administrative",
+    "name": "Detroj Rampura Taluka",
+    "ref:LGD:subdistrict": "3778",
+    "type": "boundary",
+    "wikidata": "Q5266070"
+  }
+},
+{
+  "type": "relation",
+  "id": 9661748,
+  "tags": {
+    "admin_level": "6",
+    "boundary": "administrative",
+    "name": "Mandal Taluka",
+    "ref:LGD:subdistrict": "3777",
+    "type": "boundary",
+    "wikidata": "Q2768248"
+  }
+},
+{
+  "type": "relation",
+  "id": 9675781,
+  "tags": {
+    "admin_level": "6",
+    "boundary": "administrative",
+    "name": "Dholera Taluka",
+    "ref:LGD:subdistrict": "6167",
+    "type": "boundary",
+    "wikidata": "Q27210468",
+    "wikipedia": "en:Dholera taluka"
+  }
+},
+{
+  "type": "relation",
+  "id": 16736464,
+  "tags": {
+    "admin_level": "6",
+    "boundary": "administrative",
+    "name": "Maninagar Taluka",
+    "ref:LGD:subdistrict": "6515",
+    "type": "boundary",
+    "wikidata": "Q123257240"
+  }
+},
+{
+  "type": "relation",
+  "id": 16736465,
+  "tags": {
+    "admin_level": "6",
+    "boundary": "administrative",
+    "name": "Vatva Taluka",
+    "ref:LGD:subdistrict": "6516",
+    "type": "boundary",
+    "wikidata": "Q123257260"
+  }
+},
+{
+  "type": "relation",
+  "id": 16736466,
+  "tags": {
+    "admin_level": "6",
+    "boundary": "administrative",
+    "name": "Asarva Taluka",
+    "ref:LGD:subdistrict": "6512",
+    "type": "boundary",
+    "wikidata": "Q123257259"
+  }
+},
+{
+  "type": "relation",
+  "id": 16736467,
+  "tags": {
+    "admin_level": "6",
+    "boundary": "administrative",
+    "name": "Ghatlodiya Taluka",
+    "ref:LGD:subdistrict": "6513",
+    "type": "boundary",
+    "wikidata": "Q123257236"
+  }
+},
+{
+  "type": "relation",
+  "id": 16736468,
+  "tags": {
+    "admin_level": "6",
+    "boundary": "administrative",
+    "name": "SabarmatiTaluka",
+    "type": "boundary"
+  }
+},
+{
+  "type": "relation",
+  "id": 16736469,
+  "tags": {
+    "admin_level": "6",
+    "boundary": "administrative",
+    "name": "Vejalpur Taluka",
+    "ref:LGD:subdistrict": "6514",
+    "type": "boundary",
+    "wikidata": "Q123257241"
+  }
+}
+
+  ]
+}
