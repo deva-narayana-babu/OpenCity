@@ -1,0 +1,151 @@
+geo_level,geo_code,name,parent_level,parent_code,note
+aq_station,site_5664,"Science Center, Surat - SMC",surat_district,surat,"CPCB CAAQMS station listed under Gujarat / Surat; lat 21.170046, lon 72.795405."
+aq_station,site_6066,"Katargam, Surat - Nexteng Enviro",surat_district,surat,"CPCB CAAQMS station listed under Gujarat / Surat; lat 21.217779, lon 72.834787."
+aq_station,smc-sensor-0034,"SMC real-time air-quality sensor 0034 (shown as ""Science Center"" on SMC's results page)",smc_city,smc,
+court_establishment,gjsr01,DISTRICT COURT-SURAT,surat_district,surat,eCourts establishment code GJSR01
+court_establishment,gjsr02,CIVIL COURT-SURAT,surat_district,surat,eCourts establishment code GJSR02
+court_establishment,gjsr03,TALUKA COURT-OLPAD,surat_district,surat,eCourts establishment code GJSR03
+court_establishment,gjsr05,TALUKA COURT-MANGROL,surat_district,surat,eCourts establishment code GJSR05
+court_establishment,gjsr06,TALUKA COURT-MANDVI,surat_district,surat,eCourts establishment code GJSR06
+court_establishment,gjsr07,TALUKA COURT-BARDOLI,surat_district,surat,eCourts establishment code GJSR07
+court_establishment,gjsr08,TALUKA COURT-MAHUVA,surat_district,surat,eCourts establishment code GJSR08
+court_establishment,gjsr09,TALUKA COURT-PALSANA,surat_district,surat,eCourts establishment code GJSR09
+court_establishment,gjsr10,TALUKA COURT-UMARPADA,surat_district,surat,eCourts establishment code GJSR10
+court_establishment,gjsr12,TALUKA COURT-KATHOR,surat_district,surat,eCourts establishment code GJSR12
+court_establishment,gjsr15,SMALL CAUSE COURT-SURAT,surat_district,surat,eCourts establishment code GJSR15
+court_establishment,gjsr16,RAILWAY COURT-SURAT,surat_district,surat,eCourts establishment code GJSR16
+court_establishment,gjsr17,MUNICIPAL COURT-SURAT,surat_district,surat,eCourts establishment code GJSR17
+court_establishment,gjsr19,ADDL.DISTRICT COURT-BARDOLI,surat_district,surat,eCourts establishment code GJSR19
+creek,bhatena_khadi_limbayat,Bhatena Khadi (Limbayat Zone gauge),smc_city,smc,"SMC Khadi Water Level gauge on Bhatena Khadi, listed under ""Limbayat Zone"". Danger level is stored as flood.creek_danger_level_m."
+creek,bhedwad_khadi_udhana,Bhedwad Khadi (Udhana Zone gauge),smc_city,smc,"SMC Khadi Water Level gauge on Bhedwad Khadi, listed under ""Udhana Zone"". Danger level is stored as flood.creek_danger_level_m."
+creek,kakara_khadi_udhana,Kakara Khadi (Udhana Zone gauge),smc_city,smc,"SMC Khadi Water Level gauge on Kakara Khadi, listed under ""Udhana Zone"". Danger level is stored as flood.creek_danger_level_m."
+creek,mithi_khadi_limbayat,Mithi Khadi (Limbayat Zone gauge),smc_city,smc,"SMC Khadi Water Level gauge on Mithi Khadi, listed under ""Limbayat Zone"". Danger level is stored as flood.creek_danger_level_m."
+creek,simada_khadi_varachha,Simada Khadi (Varachha Zone gauge),smc_city,smc,"SMC Khadi Water Level gauge on Simada Khadi, listed under ""Varachha Zone"". Danger level is stored as flood.creek_danger_level_m."
+dam,doswada,Doswada dam,tapi_district,tapi,"WRD scheme id 37; Songadh taluka, Tapi district; gate type UG."
+dam,lakhigam,Lakhigam dam,surat_district,surat,"WRD scheme id 39; Mandvi taluka, Surat district; gate type UG."
+dam,sardar_sarovar,Sardar Sarovar dam (Narmada river),state,gujarat,Listed by the WRD report under Narmada district: outside Surat and Tapi districts. Stored as the state's largest reservoir for context.
+dam,ukai,Ukai dam (Tapi river),tapi_district,tapi,"Ukai dam and reservoir on the Tapi river, physically in Tapi district (Songadh taluka). Readings come from the SMC Rainfall Statistics page, which credits the Irrigation Department / Collector Office."
+dam,ver_ii,Ver-II dam,surat_district,surat,"WRD scheme id 38; Mandvi taluka, Surat district; gate type G."
+exam_centre,gseb-hsc-1801,BARDOLI (GSEB HSC centre 1801),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-hsc-1802,SURAT (GSEB HSC centre 1802),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-hsc-1803,KAMREJ (GSEB HSC centre 1803),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-hsc-1804,VARACHHA (GSEB HSC centre 1804),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-hsc-1805,KIM (GSEB HSC centre 1805),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-hsc-1806,SURAT - RANDER (GSEB HSC centre 1806),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-hsc-1807,NANPURA (SURAT) (GSEB HSC centre 1807),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-hsc-1808,UDHNA (GSEB HSC centre 1808),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-hsc-1809,MANDVI (SURAT) (GSEB HSC centre 1809),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-hsc-1810,VANKAL (GSEB HSC centre 1810),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-hsc-1811,AMROLI (GSEB HSC centre 1811),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-hsc-1812,KATARGAM (GSEB HSC centre 1812),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-hsc-1813,DAXIN VARACHHA (GSEB HSC centre 1813),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-hsc-1814,OLPAD (GSEB HSC centre 1814),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-hsc-1815,BHATAR (GSEB HSC centre 1815),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-hsc-1816,NANPURA BLIND (SURAT) (GSEB HSC centre 1816),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-hsc-1817,LIMBAYAT (GSEB HSC centre 1817),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-hsc-1818,SACHIN (GSEB HSC centre 1818),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-hsc-1819,GODSAMBA (GSEB HSC centre 1819),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-hsc-1820,KATHOR (GSEB HSC centre 1820),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-hsc-1821,MAHUVA (SURAT) (GSEB HSC centre 1821),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-hsc-1822,ANAVAL (GSEB HSC centre 1822),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-hsc-1823,PALSANA (GSEB HSC centre 1823),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-hsc-1824,UMARPADA (GSEB HSC centre 1824),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-hsc-1825,MANGROL (SURAT) (GSEB HSC centre 1825),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-hsc-1827,SARBHON (GSEB HSC centre 1827),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-hsc-1828,KARCHELIYA (GSEB HSC centre 1828),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6801,OLPAD (GSEB SSC centre 6801),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6802,BARDOLI (GSEB SSC centre 6802),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6803,KATHOR (GSEB SSC centre 6803),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6804,KOSAMBA (GSEB SSC centre 6804),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6805,MANDVI SURAT (GSEB SSC centre 6805),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6806,MAHUVA SURAT (GSEB SSC centre 6806),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6807,SAYAN (GSEB SSC centre 6807),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6808,SURAT NORTH (GSEB SSC centre 6808),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6809,SURAT BHAGAL (GSEB SSC centre 6809),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6810,SURAT RANDER (GSEB SSC centre 6810),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6811,SURAT NANPURA (GSEB SSC centre 6811),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6812,GANGADHARA (GSEB SSC centre 6812),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6813,MADHI (GSEB SSC centre 6813),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6814,SURAT VARACHHA (GSEB SSC centre 6814),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6815,UDHNA (GSEB SSC centre 6815),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6816,LAVACHHA (GSEB SSC centre 6816),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6817,VANKAL (GSEB SSC centre 6817),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6818,ANAVAL (GSEB SSC centre 6818),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6819,KIM (GSEB SSC centre 6819),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6820,DAMKA (GSEB SSC centre 6820),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6821,CHALTHAN (GSEB SSC centre 6821),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6822,PALSANA (GSEB SSC centre 6822),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6823,GODSAMBA (GSEB SSC centre 6823),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6824,AMROLI (GSEB SSC centre 6824),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6825,SACHIN (GSEB SSC centre 6825),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6826,KAMREJ (GSEB SSC centre 6826),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6827,KATARGAM (GSEB SSC centre 6827),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6829,KARCHELIYA (GSEB SSC centre 6829),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6830,VED ROAD (GSEB SSC centre 6830),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6832,ADAJAN (GSEB SSC centre 6832),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6833,ATHAVA SURAT (GSEB SSC centre 6833),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6834,KADOD (GSEB SSC centre 6834),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6835,L H ROAD (GSEB SSC centre 6835),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6836,PUNA GAM (GSEB SSC centre 6836),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6837,BHATAR (GSEB SSC centre 6837),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6838,DINDOLI (GSEB SSC centre 6838),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6839,UMARPADA (GSEB SSC centre 6839),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6840,ZANKHVAV (GSEB SSC centre 6840),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6841,SEGVACHHAMA (GSEB SSC centre 6841),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6842,SARBHON (GSEB SSC centre 6842),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6843,ARETH (GSEB SSC centre 6843),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6844,MANGROL (GSEB SSC centre 6844),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6845,GAMTALAV KHURD (GSEB SSC centre 6845),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6846,VALVADA (GSEB SSC centre 6846),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6847,PANDESARA (GSEB SSC centre 6847),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6848,LIMBAYAT (GSEB SSC centre 6848),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6849,ORNA (GSEB SSC centre 6849),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+exam_centre,gseb-ssc-6850,WANKANER (GSEB SSC centre 6850),surat_district,surat,"GSEB examination centre (kendra) in Surat district as listed in the GSEB result booklet; groups the schools examined there, not an administrative area."
+facility,smimer,SMIMER hospital (Surat Municipal Institute of Medical Education and Research),smc_city,smc,Medical college hospital run by Surat Municipal Corporation
+smc_city,smc,Surat Municipal Corporation area,,,
+smc_ward,1,Jahangirpura-Variyav-Chhaprabhatha-Kosad,smc_city,smc,"SMC election ward, numbered as on the 2026-31 corporator list. The 2021 general election used the same 30 ward numbers and names (2020 delimitation, after the 2020 city-limit extension)."
+smc_ward,10,Adajan-Pal-Ichchhapor,smc_city,smc,"SMC election ward, numbered as on the 2026-31 corporator list. The 2021 general election used the same 30 ward numbers and names (2020 delimitation, after the 2020 city-limit extension)."
+smc_ward,11,Adajan-Gorat,smc_city,smc,"SMC election ward, numbered as on the 2026-31 corporator list. The 2021 general election used the same 30 ward numbers and names (2020 delimitation, after the 2020 city-limit extension)."
+smc_ward,12,Nanavat-Saiyadpura-Kubernagar-Mahidharpura,smc_city,smc,"SMC election ward, numbered as on the 2026-31 corporator list. The 2021 general election used the same 30 ward numbers and names (2020 delimitation, after the 2020 city-limit extension)."
+smc_ward,13,Wadi Falia-Navapura-Begumpura-Salabatpura,smc_city,smc,"SMC election ward, numbered as on the 2026-31 corporator list. The 2021 general election used the same 30 ward numbers and names (2020 delimitation, after the 2020 city-limit extension)."
+smc_ward,14,Umarwada-Matawadi,smc_city,smc,"SMC election ward, numbered as on the 2026-31 corporator list. The 2021 general election used the same 30 ward numbers and names (2020 delimitation, after the 2020 city-limit extension)."
+smc_ward,15,Karanj-Magob,smc_city,smc,"SMC election ward, numbered as on the 2026-31 corporator list. The 2021 general election used the same 30 ward numbers and names (2020 delimitation, after the 2020 city-limit extension)."
+smc_ward,16,Puna(West),smc_city,smc,"SMC election ward, numbered as on the 2026-31 corporator list. The 2021 general election used the same 30 ward numbers and names (2020 delimitation, after the 2020 city-limit extension)."
+smc_ward,17,Puna(East),smc_city,smc,"SMC election ward, numbered as on the 2026-31 corporator list. The 2021 general election used the same 30 ward numbers and names (2020 delimitation, after the 2020 city-limit extension)."
+smc_ward,18,Limbayat-Parvat-Kumbhariya,smc_city,smc,"SMC election ward, numbered as on the 2026-31 corporator list. The 2021 general election used the same 30 ward numbers and names (2020 delimitation, after the 2020 city-limit extension)."
+smc_ward,19,Aanjana-Dumbhal,smc_city,smc,"SMC election ward, numbered as on the 2026-31 corporator list. The 2021 general election used the same 30 ward numbers and names (2020 delimitation, after the 2020 city-limit extension)."
+smc_ward,2,Amroli-Mota Varachha-Kathor,smc_city,smc,"SMC election ward, numbered as on the 2026-31 corporator list. The 2021 general election used the same 30 ward numbers and names (2020 delimitation, after the 2020 city-limit extension)."
+smc_ward,20,Khatodara-Majura-Sagrampura,smc_city,smc,"SMC election ward, numbered as on the 2026-31 corporator list. The 2021 general election used the same 30 ward numbers and names (2020 delimitation, after the 2020 city-limit extension)."
+smc_ward,21,Soni Falia-Nanpura-Athwa-Piplod,smc_city,smc,"SMC election ward, numbered as on the 2026-31 corporator list. The 2021 general election used the same 30 ward numbers and names (2020 delimitation, after the 2020 city-limit extension)."
+smc_ward,22,Bhatar-Vesu-Dumas,smc_city,smc,"SMC election ward, numbered as on the 2026-31 corporator list. The 2021 general election used the same 30 ward numbers and names (2020 delimitation, after the 2020 city-limit extension)."
+smc_ward,23,Bamroli-Udhna(North),smc_city,smc,"SMC election ward, numbered as on the 2026-31 corporator list. The 2021 general election used the same 30 ward numbers and names (2020 delimitation, after the 2020 city-limit extension)."
+smc_ward,24,Udhna(South),smc_city,smc,"SMC election ward, numbered as on the 2026-31 corporator list. The 2021 general election used the same 30 ward numbers and names (2020 delimitation, after the 2020 city-limit extension)."
+smc_ward,25,Limbayat-Udhna Yard,smc_city,smc,"SMC election ward, numbered as on the 2026-31 corporator list. The 2021 general election used the same 30 ward numbers and names (2020 delimitation, after the 2020 city-limit extension)."
+smc_ward,26,Godadara-Dindoli(North),smc_city,smc,"SMC election ward, numbered as on the 2026-31 corporator list. The 2021 general election used the same 30 ward numbers and names (2020 delimitation, after the 2020 city-limit extension)."
+smc_ward,27,Dindoli(South),smc_city,smc,"SMC election ward, numbered as on the 2026-31 corporator list. The 2021 general election used the same 30 ward numbers and names (2020 delimitation, after the 2020 city-limit extension)."
+smc_ward,28,Pandesara-Bhestan,smc_city,smc,"SMC election ward, numbered as on the 2026-31 corporator list. The 2021 general election used the same 30 ward numbers and names (2020 delimitation, after the 2020 city-limit extension)."
+smc_ward,29,Althan-Bamroli-Vadod,smc_city,smc,"SMC election ward, numbered as on the 2026-31 corporator list. The 2021 general election used the same 30 ward numbers and names (2020 delimitation, after the 2020 city-limit extension)."
+smc_ward,3,Varachha-Sarthana-Simada-Laskana,smc_city,smc,"SMC election ward, numbered as on the 2026-31 corporator list. The 2021 general election used the same 30 ward numbers and names (2020 delimitation, after the 2020 city-limit extension)."
+smc_ward,30,Kansad-Sachin-Unn-Aabhva,smc_city,smc,"SMC election ward, numbered as on the 2026-31 corporator list. The 2021 general election used the same 30 ward numbers and names (2020 delimitation, after the 2020 city-limit extension)."
+smc_ward,4,Kapodra,smc_city,smc,"SMC election ward, numbered as on the 2026-31 corporator list. The 2021 general election used the same 30 ward numbers and names (2020 delimitation, after the 2020 city-limit extension)."
+smc_ward,5,Fulpada-Ashwinikumar,smc_city,smc,"SMC election ward, numbered as on the 2026-31 corporator list. The 2021 general election used the same 30 ward numbers and names (2020 delimitation, after the 2020 city-limit extension)."
+smc_ward,6,Katargam,smc_city,smc,"SMC election ward, numbered as on the 2026-31 corporator list. The 2021 general election used the same 30 ward numbers and names (2020 delimitation, after the 2020 city-limit extension)."
+smc_ward,7,Katargam-Vedroad,smc_city,smc,"SMC election ward, numbered as on the 2026-31 corporator list. The 2021 general election used the same 30 ward numbers and names (2020 delimitation, after the 2020 city-limit extension)."
+smc_ward,8,Dabholi-Singanpor,smc_city,smc,"SMC election ward, numbered as on the 2026-31 corporator list. The 2021 general election used the same 30 ward numbers and names (2020 delimitation, after the 2020 city-limit extension)."
+smc_ward,9,Rander-Jahangirabad-Palanpur,smc_city,smc,"SMC election ward, numbered as on the 2026-31 corporator list. The 2021 general election used the same 30 ward numbers and names (2020 delimitation, after the 2020 city-limit extension)."
+smc_zone,central,Central Zone,smc_city,smc,
+smc_zone,east,"East Zone (Varachha), before its split into East-A and East-B",smc_city,smc,Added by smc_water_quality: surat.ZONES has no undivided East zone
+smc_zone,east_a,East Zone - A (Varachha-A),smc_city,smc,
+smc_zone,east_b,East Zone - B (Varachha-B),smc_city,smc,
+smc_zone,hq,Head Quarter,smc_city,smc,
+smc_zone,north,North Zone (Katargam),smc_city,smc,
+smc_zone,south,"South Zone (Udhna), before its split into South-A and South-B",smc_city,smc,
+smc_zone,south_a,South Zone - A (Udhna-A),smc_city,smc,
+smc_zone,south_b,South Zone - B (Kanakpur),smc_city,smc,
+smc_zone,south_east,South East Zone (Limbayat),smc_city,smc,
+smc_zone,south_west,South West Zone (Athwa),smc_city,smc,
+smc_zone,west,West Zone (Rander),smc_city,smc,
+state,gujarat,Gujarat,,,
+surat_district,surat,Surat district,state,gujarat,
+tapi_district,tapi,Tapi district,state,gujarat,"Some sources (Agmarknet market lists, WRD dam tables) file Tapi places under Surat."
+weir,surat_weir_causeway,"Weir-cum-causeway on the Tapi river, Surat",smc_city,smc,"The ""Weir-Cum-Causeway"" tab of the SMC Rainfall Statistics page. The page does not name its location; it is taken to be the Tapi weir-cum-causeway between Rander and Singanpor in Surat city (identification from general knowledge, not stated on the page). SMC states the causeway overflows at 6.0 m."
