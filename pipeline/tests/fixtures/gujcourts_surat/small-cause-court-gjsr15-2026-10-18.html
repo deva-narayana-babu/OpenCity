@@ -1,0 +1,128 @@
+<html>
+	<head>
+		<title>Home</title>
+		<meta name="viewport" content="width=device-width">
+		<link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/jc_style.css">
+	<script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
+	<script>
+
+
+    function reloadpage(id) {
+
+
+    if (id == 1) {
+        var estcode = $("#estlist").val();
+        $.ajax({
+            url:  "reloadframependency.php",
+            type: "POST",
+            async: false,
+            data: ({
+                estcode: estcode
+
+            }),
+            success: function(result) {
+                $("#pendency").html(result);
+            },
+            error: function(xhr, ajaxopt, error) {
+
+            }
+
+        });
+    } else if (id == 2) {
+        var estcode = $("#estlist1").val();
+        $.ajax({
+            url: "reloadframeidp.php",
+            type: "POST",
+            async: false,
+            data: ({
+                estcode: estcode
+
+            }),
+            success: function(result) {
+                $("#idp").html(result);
+            },
+            error: function(xhr, ajaxopt, error) {
+
+            }
+
+        });
+    }
+}</script>
+	</head>
+	<body>
+<div id="idp" class="home">
+  <div class='header'>
+VIRTUAL JUSTICE CLOCK  FOR DISTRICT JUDICIARY OF GUJARAT
+   </div>   <div class='report_title'>
+   INSTITUTION,DISPOSAL &  CASE CLEARANCE RATE 
+   <select id="estlist1" name="estlist1" class="jc_select form-control"   onchange="reloadpage(2)" >  
+		   <option value='ALL'>ALL ESTABLISHMENTS </option>";
+          <option value='GJSR15' selected='selected'>SMALL CAUSE COURT-SURAT</option><option value='GJSR10' >TALUKA COURT-UMARPADA</option><option value='GJSR12' >TALUKA COURT-KATHOR</option><option value='GJSR01' >DISTRICT COURT-SURAT</option><option value='GJSR02' >CIVIL COURT-SURAT</option><option value='GJSR03' >TALUKA COURT-OLPAD</option><option value='GJSR05' >TALUKA COURT-MANGROL</option><option value='GJSR06' >TALUKA COURT-MANDVI</option><option value='GJSR07' >TALUKA COURT-BARDOLI</option><option value='GJSR08' >TALUKA COURT-MAHUVA</option><option value='GJSR09' >TALUKA COURT-PALSANA</option><option value='GJSR17' >MUNICIPAL COURT-SURAT</option><option value='GJSR16' >RAILWAY COURT-SURAT</option><option value='GJSR19' >ADDL.DISTRICT COURT-BARDOLI</option>                         
+								   </select>
+   </div>
+   <div class='row table_content'>
+    <table class='tbl_ccr' border='1' style='border-collapse: collapse;'>
+		<thead class='tbl_headingcc'>
+		<tr><th class='magenta' >DURATION</th><th class='red' >INSTITUTION</th><th class='green' >DISPOSAL</th><th class='orange' >CCR</th></tr>
+		    <tbody>
+			<tr><td class='tbl_headingccr'>Today</td><td class='tbl_dataccr'>1</td><td class='tbl_dataccr'>0</td></td><td class='tbl_dataccr'>--</td></tr>
+			<tr><td class='tbl_headingccr'>Last Day</td><td class='tbl_dataccr'>2</td><td class='tbl_dataccr'>7</td></td><td class='tbl_dataccr'>350%</td></tr>
+			<tr><td class='tbl_headingccr'>Last Week</td><td class='tbl_dataccr'>12</td><td class='tbl_dataccr'>39</td><td class='tbl_dataccr'>325%</td></tr>
+			<tr><td class='tbl_headingccr'>Last Month</td><td class='tbl_dataccr'>134</td><td class='tbl_dataccr'>199</td><td class='tbl_dataccr'>149%</td></tr>
+			<tr><td class='tbl_headingccr'>This Year</td><td class='tbl_dataccr'>1135</td><td class='tbl_dataccr'>1356</td><td class='tbl_dataccr'>119%</td></tr>
+			<tr><td class='tbl_headingccr'>Last Year</td><td class='tbl_dataccr'>1401</td><td class='tbl_dataccr'>3028</td><td class='tbl_dataccr'>216%</td></tr>
+			
+		</tbody>
+	</table>
+  
+   </div>
+   <div class='row'>
+<div id='clock' class='col-2 clock1'><p id="date">17/10/2026</p><p id="time"></p></div>
+<div class='adv_scroll1'>
+<div class='adv_scrolldi'>
+     ANYONE AND EVERYONE CAN GET UPDATES OF CASES BY USING "EMAIL MY CASE STATUS" SERVICE.   ANYONE AND EVERYONE CAN GET UPDATES OF CASES BY USING "EMAIL MY CASE STATUS" SERVICE.
+</div>
+</div>
+</div>
+<script>
+const weekday = ["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"];
+ function currentTime() {
+  let date = new Date(); 
+  let hh = date.getHours();
+  //alert(hh);
+  let mm = date.getMinutes();
+  let ss = date.getSeconds();
+  let day = weekday[date.getDay()];
+  let session = "AM";
+  let dd=date.getDate();
+  let m1= (parseInt(date.getMonth())+1);
+  let yy=date.getFullYear(); 
+  if(hh >= 12){
+     
+     session = "PM";
+  }
+  if(hh == 0){
+      hh = 12;
+  }
+  if(hh > 12){
+      hh = hh - 12;
+      
+   }
+  
+   hh = (hh < 10) ? "0" + hh : hh;
+   mm = (mm < 10) ? "0" + mm : mm;
+   ss = (ss < 10) ? "0" + ss : ss;
+    
+   dd = (dd < 10) ? "0" + dd : dd;
+   m1 = (m1 < 10) ? "0" + m1 : m1;
+   yy = (yy < 10) ? "0" + yy : yy;
+   var x1= day+","+dd + "/" + m1+ "/" +yy; 
+   let time = hh + ":" + mm + " "  + session;
+ 
+  $("#clock").html('<p id="date">'+x1+'</p><p id="time">'+time+'</p>'); 
+  let t = setTimeout(function(){ currentTime() }, 60000);
+}
+currentTime();</script></div>
+</body>
+</html>

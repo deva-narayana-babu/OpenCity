@@ -60,6 +60,9 @@ Optional hooks:
    - Don't add request headers that pretend to be a browser, and never try to get around captchas, logins or blocks.
    - If a source needs an API key, read it from an environment variable, and make `fetch()` log and return nothing when the key is missing.
 10. **Tests.** Add `pipeline/tests/test_<id>.py` (stdlib `unittest`). It should parse the frozen snapshot in `reference/` (or a small fixture in `pipeline/tests/fixtures/<id>/`) and assert counts and a few exact values read off the document.
+11. **Keep it simple.**
+    - Prefer string methods and the `parse` helpers over regular expressions. If a regex is genuinely needed, keep it short and put a one-line comment above it with an example of what it matches.
+    - Don't add command-line options; the CLI is only `refresh [source ...]` and `status`.
 
 ## Conventions learned while building the first adapters
 

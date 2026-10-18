@@ -99,4 +99,4 @@ The tests use no network. Framework tests cover parsing helpers, archive normali
 
 ## What goes in git
 
-`data/export/` (CSV) is meant to be committed. The database, the raw archive and the logs are git-ignored: they're large, binary or regenerable. A new teammate runs `scripts/refresh.sh` to build their own copy.
+`data/export/` (CSV) and `data/opencity.db` are committed. The database is about 13 MB; stop committing it if it grows past about 20 MB. The raw archive (`data/raw/`) and the logs are git-ignored: the archive is large, and some raw documents (the SMC water-quality PDFs) list household addresses, so it must never be published.

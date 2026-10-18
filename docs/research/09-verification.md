@@ -1,5 +1,7 @@
 # Verification
 
+**Correction (18 Oct 2026):** recounting the frozen 30-day Agmarknet series (28 Aug to 26 Sep 2026) and counting only days with actual price rows, Surat APMC reported on 23 of 30 days and Ahmedabad APMC on 21 of 30. The earlier '27 of 30' for Ahmedabad wrongly counted 'NIL Transaction - No Arrivals' entries as reports, so Ahmedabad's main market does not report more reliably than Surat's. Ahmedabad's remaining food-price advantage is that 'Ahmedabad City' is its own ration-shop (PDS) district. This only strengthens Surat's overall lead; the scores below are left as originally published.
+
 An independent verifier tried to refute the claims that most decide the Surat vs Ahmedabad comparison.
 Its verdicts:
 - **confirmed:** the claim holds.

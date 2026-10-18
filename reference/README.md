@@ -2,7 +2,7 @@
 
 Local copies of the government documents, datasets and page snapshots gathered during the Surat vs Ahmedabad research (24-28 Sep 2026). The findings they support are written up in [docs/research/](../docs/research/README.md), [docs/city-selection.md](../docs/city-selection.md) and [docs/roadmap.md](../docs/roadmap.md).
 
-161 items, 211.1 MB. Every file is listed in [manifest.csv](manifest.csv), which gives its source URL, retrieval date, size, sha256, licence note and the research finding it supports.
+159 items, 209.7 MB. Every file is listed in [manifest.csv](manifest.csv), which gives its source URL, retrieval date, size, sha256, licence note and the research finding it supports.
 
 ## Folders
 
@@ -12,9 +12,9 @@ Local copies of the government documents, datasets and page snapshots gathered d
 | [education/](education/README.md) | Education | 16 | 16.4 MB | [02-education.md](../docs/research/02-education.md) |
 | [food-prices/](food-prices/README.md) | Food prices and food security | 8 | 3.4 MB | [03-food-prices.md](../docs/research/03-food-prices.md) |
 | [health-environment/](health-environment/README.md) | Health, sanitation and environment | 28 | 25.4 MB | [04-health-environment.md](../docs/research/04-health-environment.md) |
-| [governance/](governance/README.md) | Civic governance, open data, safety, courts, transport | 21 | 10.8 MB | [05-governance.md](../docs/research/05-governance.md) |
-| [district-modules/](district-modules/README.md) | Census, dams and rainfall, power, housing, maps, leadership | 29 | 48.7 MB | [06-district-modules.md](../docs/research/06-district-modules.md) |
-| [rti/](rti/README.md) | RTI ecosystem | 42 | 15.2 MB | [07-rti.md](../docs/research/07-rti.md) |
+| [governance/](governance/README.md) | Civic governance, open data, safety, courts, transport | 21 | 10.7 MB | [05-governance.md](../docs/research/05-governance.md) |
+| [district-modules/](district-modules/README.md) | Census, dams and rainfall, power, housing, maps, leadership | 28 | 47.5 MB | [06-district-modules.md](../docs/research/06-district-modules.md) |
+| [rti/](rti/README.md) | RTI ecosystem | 41 | 15.1 MB | [07-rti.md](../docs/research/07-rti.md) |
 
 ## What is and isn't in here
 
@@ -46,7 +46,12 @@ Some documents were left out only because of copyright (news, rating agencies, c
 
 ## Licence and disclaimer
 
-The documents belong to their publishers. They are reproduced unchanged for research and reference under the open-data and public-document terms noted per file, and each one's original URL is in the manifest. OpenCity is a student project, not affiliated with any government body. If you are a publisher and want a file removed, open an issue.
+The documents belong to their publishers. They are reproduced for research and reference with the source and licence status noted per file in the manifest. They are unchanged, except that expired session tokens were blanked in two page snapshots (noted in their licence_note).
+
+**The repository's MIT licence covers only the project's own code and docs, not the files in this folder.** Each file stays under its publisher's terms. Three files carry their own open licences:
+- `rti/sns-report-card-information-commissions-2024-25.pdf`: CC BY-NC-SA 4.0 (Satark Nagrik Sangathan); non-commercial use, share-alike.
+- `health-environment/nfhs5-mirror-district-indicators-2019-21.csv`: CC BY 4.0 (pratapvardhan/NFHS-5).
+- `district-modules/osm-*.json`: ODbL 1.0, © OpenStreetMap contributors. OpenCity is a student project, not affiliated with any government body. If you are a publisher and want a file removed, open an issue.
 
 ## Adding a document
 

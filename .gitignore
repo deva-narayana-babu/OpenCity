@@ -1,5 +1,4 @@
-# pipeline runtime data (see pipeline/README.md): commit data/export/, not these
-data/*.db
+# pipeline runtime data (see pipeline/README.md): data/export/ and data/opencity.db are committed, these are not
 data/*.db-wal
 data/*.db-shm
 data/raw/

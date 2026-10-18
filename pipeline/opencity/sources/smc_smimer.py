@@ -100,12 +100,15 @@ SOURCE = Source(
     ),
 )
 
-# section label in the heading -> section key
+# table heading, e.g. matches 'Blood Bank Statistics from January 2026 to December 2026' (at the end of the text)
 _HEADING = re.compile(r'(Milk Bank|Blood Bank|Eye Bank|I\.C\.U\.) Statistics from ([A-Za-z]+) (\d{4}) '
                       r'to ([A-Za-z]+) (\d{4})\s*$')
+# section label in the heading -> section key
 _SECTION = {'Milk Bank': 'milk', 'Blood Bank': 'blood', 'Eye Bank': 'eye', 'I.C.U.': 'icu'}
 
 # (row group, row label) -> (metric, dims) ; None = known row deliberately not emitted
+# Patterns are searched in the lower-cased cells, e.g. r'^grand total$' matches the label 'Grand Total' and
+# r'in camp' matches 'In Camp (Voluntary)'; a None label pattern matches any label in that group.
 _ROWS = {
     'milk': [
         (r'amount of milk collection', None, ('smimer.milk_collected_ml', {})),
@@ -142,12 +145,14 @@ _ROWS = {
     ],
 }
 
+# ICU column header (lower-cased) -> unit slug, e.g. r'^n(i)?cu\b' matches 'ncu (nicu + inicu)' and 'nicu'
 _ICU_UNITS = [
     (r'^micu$', 'micu'), (r'^iccu$', 'iccu'), (r'^sicu$', 'sicu'), (r'^picu$', 'picu'),
     (r'^n(i)?cu\b', 'ncu'), (r'^ricu$', 'ricu'), (r'^obs\.? ?icu$', 'obs_icu'),
 ]
 _MONTH_NAMES = {'january', 'february', 'march', 'april', 'may', 'june', 'july', 'august', 'september',
                 'october', 'november', 'december'}
+# derived ICU summary rows, e.g. matches 'Total', 'OCCU %', 'Occu. %', 'pt./Month', 'Avg/Day'
 _ICU_DERIVED = re.compile(r'^(total|occu\.? ?%|pt\./month|pt\./day|avg/month|avg/day)$', re.I)
 
 
@@ -203,6 +208,7 @@ def _parse_monthly_columns(table, section, months, add):
 
 
 def _parse_icu(table, months, period, add):
+    # header row: first cell 'Month' and a 'MICU' column, e.g. ['Month', 'MICU', 'ICCU', ...]
     hi = next((i for i, r in enumerate(table.rows) if r and r[0].strip().lower() == 'month'
                and any(re.search(r'micu', c, re.I) for c in r)), -1)
     if hi < 0:

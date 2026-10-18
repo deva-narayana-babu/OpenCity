@@ -50,6 +50,7 @@ from ..parse import clean, html_tables, links, month_period, num, pdf_text
 from ..surat import SMC, zone_code, zone_geo
 
 URL = 'https://www.suratmunicipal.gov.in/Departments/HydraulicWaterQuality'
+# monthly PDF link, e.g. matches '.../Hydraulic/WaterQuality/2026/08.pdf' -> ('2026', '08')
 PDF_RE = re.compile(r'/Hydraulic/WaterQuality/(\d{4})/(\d{1,2})\.pdf$', re.I)
 FIRST_MONTH = (2009, 5)    # Oct 2008 - Apr 2009 PDFs use a legacy Gujarati font (digits not decodable)
 RECHECK_MONTHS = 3         # the newest months are re-requested (conditional GET) in case SMC replaces them
@@ -94,6 +95,7 @@ SOURCE = Source(
 _COLS = ('wq.tap_samples_collected', 'wq.tap_samples_fit', 'wq.tap_samples_unfit')
 # heading of the unfit-sample address list ("અનફીટ સેમ્પલની વિગત", garbled in many ways): parse stops here
 _DETAILS = re.compile(r'અન.{0,30}ગત')
+# a Gujarati-digit year (first digits ૧/૨ then ૦/૯), e.g. matches '૨૦૨૬' in 'માસ :- ઓગ ટ - ૨૦૨૬'
 _GU_YEAR = re.compile(r'([૧૨][૦૯][૦-૯]{2})')
 _GU_DIGITS = str.maketrans('૦૧૨૩૪૫૬૭૮૯', '0123456789')
 
@@ -104,12 +106,13 @@ def _zone(label: str) -> str:
     Some years substitute whole letters (વ->લ/ળ, સ->વ/શ), so West and Central are matched by shape:
     West = <letter>ે + સ્ર્/સ્ટ/ટ (વેસ્ટ), Central = <letter>ેન... or સે(ટ્)લ (સેન્ટ્રલ).
     validate() then requires each zone exactly once and the rows to add up, which catches a wrong match."""
-    s = re.sub(r'[^\u0A80-\u0AFF\-]+', '', label)     # keep Gujarati letters and '-' (drops stray \x11, quotes)
-    if re.fullmatch(r'[A-Za-z \-]+', label.strip()):        # in case a month is ever published in English
+    # drop everything except Gujarati letters and '-', e.g. '\x11ુ લ' -> 'ુલ', 'સાઉથ વે ટ' -> 'સાઉથવેટ'
+    s = re.sub(r'[^\u0A80-\u0AFF\-]+', '', label)
+    if re.fullmatch(r'[A-Za-z \-]+', label.strip()):        # an English label, e.g. 'North Zone' or 'Total'
         return 'total' if label.strip().lower() == 'total' else zone_code(label)
     if re.fullmatch(r'(ક?ુ|ક)[લિર઱]', s):                 # કુલ (total); May 2009 prints 'કલ'
         return 'total'
-    west = r'.ે(સ્ર્|સ્ટ|સ્ર|ટ)'
+    west = r'.ે(સ્ર્|સ્ટ|સ્ર|ટ)'                         # e.g. matches 'વેટ', 'લેસ્ર્', 'ળેસ્ટ'
     if 'ાઉથ' in s:                                         # સાઉથ / વાઉથ / શાઉથ (south ...)
         rest = s.split('ાઉથ', 1)[1].lstrip('-')
         if not rest:
@@ -148,6 +151,7 @@ def _month_of(raw: Raw) -> tuple[int, int]:
     raise ValueError(f'cannot tell the month of {raw.url!r}: expected .../WaterQuality/YYYY/MM.pdf')
 
 
+# a whitespace-delimited number (Gujarati or ASCII digits, commas) or a lone '-', e.g. '૧૯૩૭', '1,016', '-'
 _TOKEN = re.compile(r'(?<!\S)([૦-૯0-9][૦-૯0-9,]*|-)(?!\S)')
 
 
@@ -176,6 +180,7 @@ def summary_rows(text: str) -> tuple[list[tuple[str, str, list]], int | None]:
     the adjacent short row only if, by character column, its numbers fill exactly the missing columns
     (column centres come from the complete rows); otherwise parsing fails. validate() then checks the sums."""
     lines = text.splitlines()
+    # the header line holding the word ઝોન (zone) on its own, e.g. '   ઝોન    લેવાયેલા નમુનાઓ ...'
     head = next((i for i, l in enumerate(lines) if re.search(r'(^|\s)ઝોન(\s|$)', l)), None)
     if head is None:
         raise ValueError('summary table header (ઝોન) not found')
@@ -222,6 +227,7 @@ def parse_index(raw: Raw) -> Result:
         if t.rows and [c.lower() for c in t.rows[0][:3]] == ['stage', 'type of test', 'frequency']:
             for r in t.rows[1:]:
                 stage, test, freq = (clean(c) for c in r[:3])
+                # slug, e.g. 'Consumer end (during supply)--Chemical Test' -> 'consumer-end-during-supply-chemical-test'
                 key = re.sub(r'[^a-z0-9]+', '-', f'{stage}--{test}'.lower()).strip('-')
                 res.records.append(Record('wq_sampling_test', key,
                                           {'stage': stage, 'test': test, 'frequency': freq, 'standard': 'IS:10500'}))
@@ -240,6 +246,7 @@ def parse_index(raw: Raw) -> Result:
     return res
 
 
+# a d/m/yyyy date with '/', '-' or '.' separators, e.g. matches '03-07-2026', '15/07/2026', '3 . 7 . 2026'
 _DATE = re.compile(r'(?<![0-9])([0-9]{1,2})\s*[/\-.]\s*([0-9]{1,2})\s*[/\-.]\s*([0-9]{4})(?![0-9])')
 
 
@@ -265,6 +272,7 @@ def parse_pdf(raw: Raw) -> Result:
     5 dates the URL month is used. The heading year must match."""
     url_month = _month_of(raw)
     text = pdf_text(raw.body, layout=True)
+    # any Gujarati digit, e.g. '૧'
     if not re.search(r'[૦-૯]', text):
         raise ValueError('no Gujarati digits in the PDF text (legacy non-Unicode font?)')
     rows, printed_year = summary_rows(text)

@@ -86,7 +86,9 @@ SOURCE = Source(
 
 CATEGORIES = {'Good': (0, 50), 'Satisfactory': (51, 100), 'Moderate': (101, 200), 'Poor': (201, 300),
               'Very Poor': (301, 400), 'Severe': (401, 500)}
+# one city row after clean(), e.g. '247 Surat Moderate 129 PM10, PM2.5 2/2' (pollutant may be blank)
 _ROW = re.compile(r'^(\d+) (.+?) (Good|Satisfactory|Moderate|Very Poor|Poor|Severe) (\d+)(?: (.*?))? (\d+)/(\d+)$')
+# the page title, e.g. 'Air Quality Index on Oct 17, 2026 @ 4 PM' (also 'Sep. 24' or '4:00 PM')
 _TITLE = re.compile(r'Air Quality Index on\s+([A-Za-z]+)\.?\s+(\d{1,2}),\s*(\d{4})\s*@\s*(\d{1,2})(?::(\d{2}))?\s*([AP]M)',
                     re.I)
 MIN_CITY_ROWS = 100           # ~240 cities in 2026
@@ -134,6 +136,7 @@ def _bulletin_time(text: str) -> tuple[str, str]:
 
 def _join_block(lines: list[str]) -> str:
     """Read a wrapped row: group words into columns by overlapping spans, then read columns left to right."""
+    # each whitespace-free word with its column span, e.g. 'Aurangabad'
     words = sorted(((m.start(), m.end(), i, m.group()) for i, ln in enumerate(lines)
                     for m in re.finditer(r'\S+', ln)), key=lambda w: (w[0], w[2]))
     cols: list[list] = []
@@ -173,10 +176,12 @@ def _city_rows(table_text: str) -> dict[str, tuple]:
 
 
 def _absent_cities(text: str) -> set[str]:
+    # the list after '* Cities absent in AQI Bulletin due to insufficient data:' up to 'Notes:'
     m = re.search(r'Cities absent in AQI Bulletin[^:]*:(.*?)(?:Notes:|$)', text, re.S | re.I)
     if not m:
         return set()
     body = ' '.join(m.group(1).split())
+    # split on the list numbers, e.g. '1) Agartala, 2) Ankleshwar' -> Agartala | Ankleshwar
     return {clean(n).strip(' ,') for n in re.split(r'\d+\)', body) if clean(n).strip(' ,')}
 
 
@@ -187,7 +192,7 @@ def _parse_bulletin(body: bytes) -> Result:
 def bulletin_result(text: str) -> Result:
     """The Surat observations from the bulletin's text (pdftotext -layout)."""
     day, as_of = _bulletin_time(text)
-    cut = re.search(r'Cities absent in AQI Bulletin', text, re.I)
+    cut = re.search(r'Cities absent in AQI Bulletin', text, re.I)      # plain text, any case
     rows = _city_rows(text[:cut.start()] if cut else text)
     if len(rows) < MIN_CITY_ROWS:
         raise ValidationError(f'only {len(rows)} city rows read from the bulletin; layout may have changed')

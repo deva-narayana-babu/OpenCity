@@ -134,9 +134,13 @@ DISTRICT_COLS = ('wrd.design_gross_storage_mcm', 'wrd.design_live_storage_mcm', 
                  'wrd.live_storage_mcm', 'wrd.gross_storage_pct', 'wrd.live_storage_pct')
 MIN_DETAIL_ROWS = 150      # 206 schemes in 2026; far fewer means the layout changed
 
+# one whitespace-free word, e.g. '7414.2' or 'Songadh'
 _WORD = re.compile(r'\S+')
+# a whole numeric cell, e.g. '7414.2', '-29.93' or '83.32%'
 _NUMERIC = re.compile(r'^-?[\d.]+%?$')
-_ROW_START = re.compile(r'^\s*\d+\s+\d+\s+\d+\s+[A-Za-z]')     # Sr | Scheme Id | Location Id | District
+# Sr | Scheme Id | Location Id | District, e.g. ' 7        36     7            Tapi'
+_ROW_START = re.compile(r'^\s*\d+\s+\d+\s+\d+\s+[A-Za-z]')
+# one captured number, e.g. '9460.00' or '-29.93'
 _NUM = r'(-?[\d.]+)'
 
 
@@ -169,6 +173,7 @@ def fetch(ctx):
 # ---------- parsing ----------
 
 def _report_date(text: str) -> str:
+    # the page stamp, e.g. 'Date :- 17-10-2026'
     dates = set(re.findall(r'Date\s*:-\s*(\d{1,2}-\d{1,2}-\d{4})', text))
     if len(dates) != 1:
         raise ValidationError(f'expected one "Date :-" stamp on every page, found {sorted(dates) or "none"}')
@@ -215,6 +220,7 @@ def _parse_row(line: str, cont: list[str]) -> dict | None:
                if toks[k][2] in REGIONS and toks[k + 1][2] in GATE_TYPES), None)
     if ri is None:
         return None
+    # cells are 2+ spaces apart, e.g. 'Tapi      Songadh                 Ukai' -> Tapi | Songadh | Ukai
     parts = re.split(r'\s{2,}', line[toks[2][1]:toks[ri][0]].strip())
     row = {'sr': toks[0][2], 'scheme_id': toks[1][2], 'parts': parts, 'district': parts[0],
            'region': toks[ri][2], 'gate': toks[ri + 1][2]}
@@ -228,6 +234,7 @@ def _parse_row(line: str, cont: list[str]) -> dict | None:
 
 
 def _warning(cell: str) -> str:
+    # drop the space a wrapped cell gets, e.g. 'WARNI NG' -> 'WARNING', 'HIGH ALERT' -> 'HIGHALERT'
     key = re.sub(r'\s+', '', cell).upper()
     if key not in WARNINGS:
         raise ValueError(f'unknown warning level {cell!r}')
@@ -244,6 +251,7 @@ def _dam_geo(row: dict) -> Geo:
     parent = TARGET_DISTRICTS[district]
     code, label = KNOWN_DAMS.get(row['scheme_id'], (None, None))
     if code is None:
+        # slug of the name, e.g. 'Ver-II' -> 'ver_ii'
         code = re.sub(r'[^a-z0-9]+', '_', name.lower()).strip('_')
         label = f'{name} dam'
     note = None if code == 'ukai' else (
@@ -255,10 +263,12 @@ def _sardar_sarovar(pages: list[str], day: str, res: Result) -> None:
     geo = ('dam', 'sardar_sarovar')
     # page 1 block
     p1 = pages[0]
+    # everything after the heading 'Sardar Sarovar(Narmada Dam)'
     m = re.search(r'Sardar Sarovar\s*\(Narmada Dam\)(.*)', p1, re.S | re.I)
     if not m:
         raise ValidationError('Sardar Sarovar block not found on page 1')
     block = m.group(1)
+    # e.g. 'FRL :138.68' and 'Percentage Storage : 99.66%'
     frl = re.search(r'FRL\s*:\s*' + _NUM, block)
     pct = re.search(r'Percentage Storage\s*:\s*' + _NUM + '%', block)
     vals = next((ln.split() for ln in block.split('\n')
@@ -268,6 +278,7 @@ def _sardar_sarovar(pages: list[str], day: str, res: Result) -> None:
     level, gross = vals[0], vals[2]      # Present Water Level (m), [Average In Flow], Gross Storage (MCM)
     # page 2 districtwise row
     p2 = next((p for p in pages if 'Districtwise Storage' in p), '')
+    # e.g. '  SARDAR SAROVAR   9460.00   5760.00   9427.79   5727.79   99.66%   99.44%'
     d = re.search(r'^\s*SARDAR SAROVAR\s+' + r'\s+'.join([_NUM] * 4) + r'\s+' + _NUM + r'%\s+' + _NUM + '%',
                   p2, re.M)
     # page 3 major-schemes row: "... 98.77% HIGH ALERT   41296.00   619   11712.38"
@@ -295,12 +306,15 @@ def _districtwise(pages: list[str], day: str, res: Result) -> None:
     p2 = next((p for p in pages if 'Districtwise Storage' in p), None)
     if p2 is None:
         raise ValidationError('"Districtwise Storage" page not found')
+    # four MCM values and two percentages, e.g. '36.14   35.78   31.73   31.37   87.80%   87.67%'
     six = r'\s+'.join([_NUM] * 4) + r'\s+' + _NUM + r'%\s+' + _NUM + '%'
     for district, geo in DISTRICT_ROWS.items():
+        # e.g. '   13      Surat   36.14   35.78   31.73   31.37   87.80%   87.67%'
         m = re.search(r'^\s*\d+\s+' + district + r'\s+' + six + r'\s*$', p2, re.M)
         if not m:
             raise ValidationError(f'{district} row missing from the districtwise table')
         res.observations += [_obs(metric, geo, day, m.group(k + 1)) for k, metric in enumerate(DISTRICT_COLS)]
+    # e.g. 'Grand Total :   25257.55   20353.03   20136.36   15269.85   79.72%   75.02%'
     m = re.search(r'Grand Total\s*:\s*' + six, p2)
     if not m:
         raise ValidationError('Grand Total row missing from the districtwise table')
@@ -318,6 +332,7 @@ def parse(raw: Raw) -> Result:
 
     n_rows = 0
     for line, cont in _detail_rows(pages):
+        # a Surat/Tapi statement row, e.g. ' 8        39     8           Surat        Mandvi ...'
         target = re.match(r'^\s*\d+\s+\d+\s+\d+\s+(Surat|Tapi)\s', line)
         try:
             row = _parse_row(line, cont)

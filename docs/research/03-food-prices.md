@@ -1,5 +1,7 @@
 # Food prices and food security
 
+**Correction (18 Oct 2026):** recounting the frozen 30-day Agmarknet series (28 Aug to 26 Sep 2026) and counting only days with actual price rows, Surat APMC reported on 23 of 30 days and Ahmedabad APMC on 21 of 30. The earlier '27 of 30' for Ahmedabad wrongly counted 'NIL Transaction - No Arrivals' entries as reports, so Ahmedabad's main market does not report more reliably than Surat's. Ahmedabad's remaining food-price advantage is that 'Ahmedabad City' is its own ration-shop (PDS) district. This only strengthens Surat's overall lead; the scores below are left as originally published. Also, as of 18 Oct 2026 every Department of Consumer Affairs price report needs a solved captcha, so the DoCA retail-price source is disabled in the pipeline; reports have to be saved by hand.
+
 Full findings for this dimension, covering both cities.
 
 **Ease scale (0-5):**
@@ -25,7 +27,7 @@ Full findings for this dimension, covering both cities.
 
 | Metric | Surat | Ahmedabad | Edge |
 |---|---|---|---|
-| Main city APMC daily prices (Agmarknet) | Surat APMC: reported on 23 of 30 days, 40 commodities. The Old Sardar Market sub-yard reported nothing in 30 days. | Ahmedabad APMC: 27 of 30 days, 43 commodities, plus Vasana (Chimanbhai Patel) onion/potato yard on 27 days | Ahmedabad |
+| Main city APMC daily prices (Agmarknet) | Surat APMC: reported on 23 of 30 days, 40 commodities. The Old Sardar Market sub-yard reported nothing in 30 days. | Ahmedabad APMC: 21 of 30 days (corrected from 27), 43 commodities, plus Vasana (Chimanbhai Patel) onion/potato yard on 27 days | Ahmedabad |
 | District mandi coverage / geography match | 21 of 33 listed markets reported, but about 12 of those are really in Tapi district (legacy mapping), which inflates the count and needs filtering | 7 of 21 listed markets reported. Viramgam, Mandal and others are rural, but the city yards are clearly labelled | Ahmedabad |
 | DoCA daily retail price centre | Yes (reporting centre) | Yes (reporting centre) | Tie |
 | Labour Bureau CPI-IW centre | Yes | Yes | Tie |

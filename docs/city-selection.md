@@ -1,5 +1,7 @@
 # City selection: Surat vs Ahmedabad
 
+**Correction (18 Oct 2026):** recounting the frozen 30-day Agmarknet series (28 Aug to 26 Sep 2026) and counting only days with actual price rows, Surat APMC reported on 23 of 30 days and Ahmedabad APMC on 21 of 30. The earlier '27 of 30' for Ahmedabad wrongly counted 'NIL Transaction - No Arrivals' entries as reports, so Ahmedabad's main market does not report more reliably than Surat's. Ahmedabad's remaining food-price advantage is that 'Ahmedabad City' is its own ration-shop (PDS) district. This only strengthens Surat's overall lead; the scores below are left as originally published.
+
 This research asked which city is easier to build a forthepeople.in-style dashboard and RTI helper for. It was done on 24-28 Sep 2026: sources were fetched live, and the claims that decide the pick were re-checked by an independent verifier.
 
 ## Starting point
@@ -15,7 +17,7 @@ Weighted score, 0-10: **Surat 6.6 vs Ahmedabad 5.6**
 |---|---|---|---|---|
 | budget | 0.2 | 7.5 | 5.5 | Surat publishes budget vs actuals weekly by zone (last updated 27/09/2026) as HTML, plus a text balance sheet for FY26. Ahmedabad has the longer budget archive (from 2005-06), but its FY26 balance sheet is a 49-page scan. Both are on CityFinance up to 2023-24 (AMC under the slug 'amdavad'). |
 | education | 0.15 | 5 | 7 | The AMC School Board publishes enrolment by zone and class (172,576 students) and 4,653 teachers, as of 31-07-2025, in HTML that can be scraped. The Surat board site renders by JavaScript and holds no data; Surat only has the Suman High School PDFs. National sources are the same for both. |
-| food_prices | 0.15 | 6 | 7 | Both appear in the Agmarknet JSON feed and the Consumer Affairs (DoCA) price data. Ahmedabad APMC reports more reliably; Surat APMC returned 0 rows on 25-09-2026. Ahmedabad City is its own ration-shop (PDS/IMPDS) district, while Surat's Agmarknet list includes markets in Tapi district. |
+| food_prices | 0.15 | 6 | 7 | Both appear in the Agmarknet JSON feed and the Consumer Affairs (DoCA) price data. Over 30 days Surat APMC had price rows on 23 days and Ahmedabad APMC on 21 (corrected; see note at top). Ahmedabad City is its own ration-shop (PDS/IMPDS) district, while Surat's Agmarknet list includes markets in Tapi district. |
 | health_env | 0.15 | 6.5 | 4.5 | The verifier found Surat data the first pass missed: monthly waste tonnage up to Jul 2026 and monthly disease cases and deaths for 1995-2022, both in HTML. AMC has neither, only a 2018-20 air-quality PDF and figures quoted in the press. NFHS-5 and Swachh Survekshan cover both equally. |
 | governance | 0.1 | 6 | 5.5 | Surat's corporator list is confirmed as the 2026-31 term, in English HTML. AMC's Statistical Outline stops at 2006-07. Ahmedabad keeps two edges: a 48-ward GeoJSON on datameet, and councillor party and phone details. Smart City portals, NCRB, GTFS and grievance data are equal. |
 | rti | 0.15 | 7.5 | 4.5 | SMC has a PIO and appellate-officer list from Dec 2025, annual RTI returns from 2005-07 to 2025-26, the quarterly Patrak-7, a status tracker, 104 disclosures refreshed in 2026 and a link to the state portal. AMC's RTI statistics end in 2010-11, its PIO list dates from 2011, and it still hosts the superseded 2005 rules. |
@@ -34,7 +36,7 @@ Weighted score, 0-10: **Surat 6.6 vs Ahmedabad 5.6**
 ### Where Ahmedabad is genuinely better
 
 - Education favours Ahmedabad. The AMC School Board publishes enrolment by zone and class (172,576 students) and 4,653 teachers, as of 31-07-2025, in scrapeable HTML. Surat's board site holds no data, so a Surat schools tile stays empty until an RTI reply arrives.
-- Food prices favour Ahmedabad. Its APMC reports to Agmarknet more reliably, and 'Ahmedabad City' is its own ration-shop (PDS and IMPDS) district aligned to AMC zones. Surat's city PDS totals must be summed from zones 901-910, and its Agmarknet list includes markets in Tapi district.
+- Food prices favour Ahmedabad only on ration shops: 'Ahmedabad City' is its own ration-shop (PDS and IMPDS) district aligned to AMC zones. Surat's city PDS totals must be summed from zones 901-910, and its Agmarknet list includes markets in Tapi district.
 - Maps favour Ahmedabad. datameet has a 48-ward GeoJSON that matches the current council, and AMC's 2026-31 councillor PDF lists party and phone. Surat has no openly licensed ward polygons.
 - Long-run budget trends are easier for Ahmedabad. AMC's budget archive runs from 2005-06 to 2026-27 with some English copies, and CityFinance covers AMC up to 2023-24 as well (slug 'amdavad').
 - RTI story: AMC's stale disclosures would make a compelling 'we had to file RTI' case. Ahmedabad also has a consolidated Collectorate RTI contact list, filing at civic centres, the MAGP helpline, and the Information Commission (GIC) nearby in Gandhinagar.
@@ -200,7 +202,7 @@ Each template corresponds to a gap in the dashboard. Before any template is used
 - The claim that SMC and AMC are on onlinerti.gujarat.gov.in rests only on a May 2026 Counterview report and SMC's link to the portal. No one has logged in to check the list of authorities. The portal's FAQ also wrongly says second appeals go to the Central Information Commission.
 - SMC's head-office address differs between sources (Muglisara vs Tapipura, and 'Shri Tapi Bhawan'). The PIO names in the 09-12-2025 list come out garbled because of the legacy font. Every template's addressee must be confirmed from a decoded copy of that list.
 - It is not confirmed whether Surat Nagar Prathmik Shikshan Samiti and APMC Surat have their own PIOs or whether requests go through SMC and the state marketing board.
-- Surat APMC's reliability is unclear: one 30-day scan found reports on 23 of 30 days, but the verifier's check on 25-09-2026 returned 0 rows. The data.gov.in mandi and air-quality APIs timed out from this environment.
+- Resolved: over 28 Aug to 26 Sep 2026, Surat APMC had price rows on 23 of 30 days (25-09-2026 was one of the 7 gaps) and Ahmedabad APMC on 21 of 30. The data.gov.in mandi and air-quality APIs timed out from this environment.
 - The rows of SMC's Revenue-Capital Budget Summary load through a background request whose endpoint has not been identified. Scraping it may need a headless browser.
 - SMC presents Ukai dam as city data, but the state water department's PDF lists it under Tapi district (Songadh). The dashboard must label its geography.
 - Surat ward polygons exist only in a third-party bharatlas viewer, with licence and origin unchecked. The boundary between DGVCL and Torrent Power (TPL-D(S)) inside SMC limits has not been verified.

@@ -43,6 +43,7 @@ from ..surat import SMC
 CAAQMS_URL = 'https://www.suratmunicipal.gov.in/Departments/CAAQMS'
 RESULTS_URL = 'https://www.suratmunicipal.gov.in/Departments/AirQualityResults'
 LIVE_URL = 'https://www.suratmunicipal.gov.in/Home/GetAirQualityInfoSci'
+# yearly result PDF link, e.g. matches '.../AQMCell/Results/Varachha/2021.pdf' -> ('Varachha', '2021')
 RESULT_PDF_RE = re.compile(r'/AQMCell/Results/([^/]+)/(\d{4})\.pdf$', re.I)
 IST = timezone(timedelta(hours=5, minutes=30))
 
@@ -54,7 +55,8 @@ SOURCE = Source(
     module='environment',
     cadence='daily',
     interval_hours=6,               # snapshot of the latest real-time reading 4 times a day
-    geo_note='Monitoring stations (geo level aq_station) inside the SMC area',
+    geo_note='Readings: one SMC sensor station inside the SMC area (geo level aq_station). Station records also '
+             'list GPCB manual stations in Surat district outside SMC (Chalthan and Baleshwar, Palsana taluka).',
     licence_note='Surat Municipal Corporation web pages and the JSON feed behind its results page; public information',
     notes='Readings come from the JSON the results page loads; CO, AQI and unit-less fields are not stored. '
           'Yearly result PDFs are listed as document records only.',
@@ -97,9 +99,11 @@ def fetch(ctx):
 # ---------- helpers ----------
 
 def _slug(s: str) -> str:
+    # runs of anything but a-z/0-9 become '-', e.g. 'Rang Upvan, Nanpura' -> 'rang-upvan-nanpura'
     return re.sub(r'[^a-z0-9]+', '-', s.lower()).strip('-')
 
 
+# degrees-minutes-seconds pair, e.g. matches '21°10\'00.7"N 72°46\'54.2"E'
 _DMS = re.compile(r'(\d+)\s*°\s*(\d+)\s*[\'′]\s*([\d.]+)\s*["″]?\s*([NS])\s*,?\s*'
                   r'(\d+)\s*°\s*(\d+)\s*[\'′]\s*([\d.]+)\s*["″]?\s*([EW])')
 
@@ -114,6 +118,7 @@ def dms_to_decimal(text: str) -> tuple[float, float]:
 
 
 def _latlon_plain(text: str) -> tuple[float, float]:
+    # e.g. matches 'Latitude:21.20335 Longitude:72.846603'
     m = re.search(r'Latitude\s*:\s*([\d.]+)\s*Longitude\s*:\s*([\d.]+)', text, re.I)
     if not m:
         raise ValueError(f'unparsed coordinates {text!r}')
@@ -121,6 +126,7 @@ def _latlon_plain(text: str) -> tuple[float, float]:
 
 
 def _ms_date(s) -> datetime:
+    # .NET JSON date, e.g. matches '/Date(1790620200000)/'
     m = re.search(r'/Date\((-?\d+)\)/', str(s))
     if not m:
         raise ValueError(f'unparsed .NET date {s!r}')
@@ -187,9 +193,11 @@ def parse_live(raw: Raw) -> Result:
     if j.get('status') != 200 or not isinstance(d, dict) or not d:
         return Result()                     # no reading published right now
     stn = str(d.get('stncode') or '').strip()
+    # a short station code, e.g. '0034'
     if not re.fullmatch(r'[A-Za-z0-9_-]{1,20}', stn):
         raise ValueError(f'unexpected station code {stn!r}')
     day = _ms_date(d['dtl_date'])
+    # HH:MM with optional seconds, e.g. matches '20:24:23' -> ('20', '24')
     hh, mm = re.fullmatch(r'\s*(\d{1,2}):(\d{2})(?::\d{2})?\s*', str(d['testing_time'])).groups()
     at = datetime(day.year, day.month, day.day, int(hh), int(mm)).isoformat(timespec='minutes')
     geo = live_station_geo(stn)
