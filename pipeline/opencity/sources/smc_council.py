@@ -29,6 +29,7 @@ from __future__ import annotations
 import difflib
 import re
 from datetime import datetime
+from html.parser import HTMLParser
 
 from ..model import FetchError, Geo, Metric, Obs, Raw, Record, Result, Source, ValidationError
 from ..parse import clean, html_tables, num, parse_date
@@ -177,7 +178,7 @@ def _doc_kind(raw: Raw) -> str:
         return 'corporators'
     if re.search(r'Statement\s+Showing\s+Situation\s+of\s+Seats', t, re.I):
         return 'wardwise_seats_voters'
-    if re.search(r'<h2[^>]*>\s*Mayor\s*</h2>', t, re.I):
+    if '<h2>Mayor</h2>' in t or 'class="panel-heading">Mayor</div>' in t:   # old and Oct-2026 layouts
         return 'office_bearers'
     raise ValueError(f'unrecognised SMC council document ({raw.url}, meta={raw.meta}); page layout may have changed')
 
@@ -275,35 +276,76 @@ def _official_email(s: str) -> str | None:
     return None
 
 
+class _OfficeBearerPage(HTMLParser):
+    """Collects [(designation, [(name, [lines])])] from the office-bearers page. Handles both layouts SMC has used:
+      until Sep 2026: <h2>Mayor</h2> <h3>Name</h3> <p>Ward: ...</p>
+      from Oct 2026:  <div class="panel-heading">Mayor</div> <div class="h3 mar-b20">Name</div> <p>Ward: ...</p>"""
+
+    def __init__(self):
+        super().__init__(convert_charrefs=True)
+        self.sections: list[tuple[str, list]] = []
+        self._kind = None          # what is being captured: 'heading', 'name' or 'line'
+        self._end_tag = None
+        self._buf: list[str] = []
+
+    def handle_starttag(self, tag, attrs):
+        if self._kind:
+            self._buf.append(' ')
+            return
+        classes = (dict(attrs).get('class') or '').split()
+        if tag == 'h2' or (tag == 'div' and 'panel-heading' in classes):
+            self._kind, self._end_tag, self._buf = 'heading', tag, []
+        elif tag == 'h3' or (tag == 'div' and 'h3' in classes):
+            self._kind, self._end_tag, self._buf = 'name', tag, []
+        elif tag == 'p' and self.sections and self.sections[-1][1]:
+            self._kind, self._end_tag, self._buf = 'line', tag, []
+
+    def handle_endtag(self, tag):
+        if not self._kind:
+            return
+        if tag != self._end_tag:
+            self._buf.append(' ')
+            return
+        text = ''.join(self._buf)
+        if self._kind == 'heading':
+            self.sections.append((clean(text), []))
+        elif self._kind == 'name' and self.sections:
+            self.sections[-1][1].append((text, []))
+        elif self._kind == 'line':
+            self.sections[-1][1][-1][1].append(clean(text))
+        self._kind = None
+
+    def handle_data(self, data):
+        if self._kind:
+            self._buf.append(data)
+
+
 def _parse_office_bearers(raw: Raw) -> Result:
     res = Result(complete_record_types=('office_bearer',))
     text = raw.text
     start = text.find('contentblock')
     body = text[start:] if start >= 0 else text
-    end = re.search(r'(?i)<footer\b', body)
-    if end:
-        body = body[:end.start()]
-    parts = re.split(r'(?is)<h2[^>]*>(.*?)</h2>', body)
-    # parts = [before, h2_1, section_1, h2_2, section_2, ...]
-    for i in range(1, len(parts) - 1, 2):
-        designation = clean(re.sub(r'<[^>]+>', ' ', parts[i]))
-        section = parts[i + 1]
-        people = re.split(r'(?is)<h3[^>]*>(.*?)</h3>', section)
+    end = body.lower().find('<footer')
+    if end >= 0:
+        body = body[:end]
+    page = _OfficeBearerPage()
+    page.feed(body)
+    page.close()
+    for designation, people in page.sections:
         holders = []
-        for j in range(1, len(people) - 1, 2):
-            honorific, name = _split_honorific(re.sub(r'<[^>]+>', ' ', people[j]))
+        for raw_name, lines in people:
+            honorific, name = _split_honorific(raw_name)
             if not name:
                 continue
             attrs = {'designation': designation, 'name': name}
             if honorific:
                 attrs['honorific'] = honorific
             # whitelist: only 'Ward' and 'Email' are read; address/mobile lines are skipped on purpose
-            for pm in re.finditer(r'(?is)<p[^>]*>(.*?)</p>', people[j + 1]):
-                line = clean(re.sub(r'<[^>]+>', ' ', pm.group(1)))
-                lm = re.match(r'([A-Za-z .\-]+?)\s*:\s*(.*)$', line)
-                if not lm:
+            for line in lines:
+                label, sep, value = line.partition(':')
+                if not sep:
                     continue
-                label, value = lm.group(1).strip().lower(), lm.group(2).strip()
+                label, value = label.strip().lower(), value.strip()
                 if label == 'ward' and value:
                     attrs['ward_name'] = value
                     n = ward_no_for_name(value)

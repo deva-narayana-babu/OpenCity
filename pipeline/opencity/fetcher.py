@@ -26,6 +26,23 @@ from .model import FetchError
 log = logging.getLogger(__name__)
 
 
+# Query parameters whose values are credentials (matched on the end of the name, so 'filters[state.keyword]' is not one).
+SECRET_SUFFIXES = ('key', 'token', 'secret', 'password')
+
+
+def redact(url: str) -> str:
+    """Blank credential-like query parameters before a URL is stored or logged, e.g.
+      '...?api-key=abc123&format=json' -> '...?api-key=REDACTED&format=json'.
+    URLs without such parameters are returned unchanged."""
+    parts = urllib.parse.urlsplit(url)
+    pairs = urllib.parse.parse_qsl(parts.query, keep_blank_values=True)
+    secret = [k.lower().endswith(SECRET_SUFFIXES) for k, _ in pairs]
+    if not any(secret):
+        return url
+    pairs = [(k, 'REDACTED' if is_secret else v) for (k, v), is_secret in zip(pairs, secret)]
+    return urllib.parse.urlunsplit(parts._replace(query=urllib.parse.urlencode(pairs)))
+
+
 @dataclass
 class Response:
     status: int
@@ -95,16 +112,16 @@ class Fetcher:
                 if e.code >= 500 and attempt <= self.retries:
                     self._backoff(attempt, f'HTTP {e.code}', url)
                     continue
-                raise FetchError(f'HTTP {e.code} for {url}', http_status=e.code) from None
+                raise FetchError(f'HTTP {e.code} for {redact(url)}', http_status=e.code) from None
             except (urllib.error.URLError, socket.timeout, TimeoutError, ConnectionError, ssl.SSLError) as e:
                 if attempt <= self.retries:
                     self._backoff(attempt, repr(e), url)
                     continue
-                raise FetchError(f'network error for {url}: {e!r}') from None
+                raise FetchError(f'network error for {redact(url)}: {e!r}') from None
 
     def _backoff(self, attempt: int, why: str, url: str) -> None:
         delay = min(60, 5 * 2 ** (attempt - 1))
-        log.warning('retry %d for %s after %s (sleep %ds)', attempt, url, why, delay)
+        log.warning('retry %d for %s after %s (sleep %ds)', attempt, redact(url), why, delay)
         time.sleep(delay)
 
 

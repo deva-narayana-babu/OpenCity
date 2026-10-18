@@ -242,5 +242,32 @@ class TestDispatch(unittest.TestCase):
             smc_council.parse(_raw(OB.read_bytes(), meta={'doc': 'corporators'}))
 
 
+class TestOfficeBearersOctober2026Layout(unittest.TestCase):
+    """SMC moved roles from <h2>/<h3> to <div class="panel-heading">/<div class="h3"> in October 2026.
+    The fixture is the archived copy, with addresses and mobile numbers already blanked."""
+
+    @classmethod
+    def setUpClass(cls):
+        from tests import FIXTURES
+        cls.raw = raw_from_file(FIXTURES / 'smc_council/office-bearers-2026-10-18.html', meta={'doc': 'office_bearers'})
+        cls.res = smc_council.parse(cls.raw)
+
+    def test_same_four_roles_as_old_layout(self):
+        self.assertEqual([r.record_key for r in self.res.records],
+                         ['mayor', 'deputy-mayor', 'standing-committee-chairman', 'leader-ruling-party'])
+        smc_council.validate(self.res, self.raw)
+
+    def test_values(self):
+        mayor = self.res.records[0].attrs
+        self.assertEqual(mayor, {'designation': 'Mayor', 'name': 'Mayaben Dharmendrabhai Mavani', 'honorific': 'Smt.',
+                                 'ward_name': 'Umarwada-Matawadi', 'ward_no': '14',
+                                 'email': 'mayor@suratmunicipal.org'})
+        self.assertEqual(self.res.records[3].attrs['name'], 'Alpa Jiteshbhai Mehta')
+
+    def test_detected_without_meta(self):
+        res = smc_council.parse(_raw(self.raw.body))
+        self.assertEqual(len(res.records), 4)
+
+
 if __name__ == '__main__':
     unittest.main()

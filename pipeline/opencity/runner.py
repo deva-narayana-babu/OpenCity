@@ -14,7 +14,7 @@ from pathlib import Path
 from typing import Iterable
 
 from . import archive, config, db
-from .fetcher import Fetcher
+from .fetcher import Fetcher, redact
 from .model import FetchError, Raw, Result, ValidationError, canonical_json
 from .registry import Adapter
 
@@ -83,6 +83,7 @@ class Context:
         full = url + (('&' if '?' in url else '?') + urllib.parse.urlencode(params) if params else '')
         body_key = (jsonlib.dumps(json, sort_keys=True).encode() if json is not None else
                     urllib.parse.urlencode(form).encode() if form is not None else None)
+        full_real, full = full, redact(full)       # credentials are sent, never stored or logged
         rkey = request_key(method, full, body_key)
         prev = db.last_good_fetch(self.conn, rkey)
         if skip_if_seen and not self.force:
@@ -97,7 +98,7 @@ class Context:
         self.conn.commit()
         try:
             resp = self.fetcher.request(
-                method, full, json=json, form=form, headers=headers,
+                method, full_real, json=json, form=form, headers=headers,
                 etag=prev['etag'] if (prev and conditional and not self.force) else None,
                 last_modified=prev['last_modified'] if (prev and conditional and not self.force) else None)
         except FetchError as e:

@@ -276,6 +276,37 @@ class TestRunnerFeatures(unittest.TestCase):
         self.assertEqual((h['errors_last_run'], h['last_error'], h['last_status']), (0, None, 'ok'))
 
 
+class TestSecretsNeverStored(unittest.TestCase):
+    def test_redact(self):
+        from opencity.fetcher import redact
+        self.assertEqual(redact('https://a.test/r?api-key=abc123&format=json'),
+                         'https://a.test/r?api-key=REDACTED&format=json')
+        self.assertEqual(redact('https://a.test/r?filters%5Bstate.keyword%5D=Gujarat&limit=10'),
+                         'https://a.test/r?filters%5Bstate.keyword%5D=Gujarat&limit=10')   # unchanged
+        self.assertEqual(redact('https://a.test/x.pdf'), 'https://a.test/x.pdf')
+
+    def test_key_is_sent_but_not_stored(self):
+        with tempfile.TemporaryDirectory() as d:
+            conn = db.connect(Path(d) / 't.db')
+            seen = []
+
+            class F:
+                def request(self, method, url, **kw):
+                    seen.append(url)
+                    return Response(200, b'<p>1</p>', url, {})
+
+            def fetch(ctx):
+                yield ctx.get('http://example.test/page', params={'api-key': 'SECRET123', 'format': 'json'})
+            ad = fake_adapter()
+            ad = Adapter(ad.source, types.SimpleNamespace(SOURCE=ad.source, fetch=fetch, parse=ad.module.parse))
+            runner.refresh(conn, [ad], data_dir=Path(d), fetcher=F())
+            self.assertIn('SECRET123', seen[0])
+            stored = ' '.join(str(v) for row in conn.execute('SELECT * FROM fetch') for v in row)
+            self.assertNotIn('SECRET123', stored)
+            self.assertIn('api-key=REDACTED', stored)
+            conn.close()
+
+
 class TestRegistry(unittest.TestCase):
     def test_all_adapters_load_and_declare_metrics(self):
         adapters = discover()

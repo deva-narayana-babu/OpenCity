@@ -1,6 +1,21 @@
 """Agmarknet daily arrivals and prices for the APMC markets of Surat district.
 
-Endpoint (undocumented; the one agmarknet.gov.in's own report page calls):
+Since 18 Oct 2026 the Agmarknet report endpoint below answers every request with HTTP 400
+"Captcha key and captcha value are required", so it is no longer called. fetch() now reads the
+official open-data copy of the same prices instead:
+    GET https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070
+        ?api-key=<DATA_GOV_IN_API_KEY>&format=json&limit=1000&offset=0&filters[state.keyword]=Gujarat
+("Current daily price of various commodities from various markets (Mandi)"). It needs a free API
+key from data.gov.in in the DATA_GOV_IN_API_KEY environment variable; without it the source is
+disabled. The key is sent but never stored or logged (the framework redacts it from URLs).
+That resource has prices (Rs/quintal) but no arrivals, and no "NIL Transaction" entries.
+Its record layout below follows the data.gov.in documentation; it has not been checked against a
+live response yet (the public sample key was rate-limited), so check the first real run.
+    records[] {state, district, market, commodity, variety, grade, arrival_date "dd/mm/yyyy",
+               min_price, max_price, modal_price}   (older responses spell keys like "Min_x0020_Price")
+
+The old endpoint, kept here because parse() still reads its archived responses and the frozen
+copies in reference/ (the one agmarknet.gov.in's own report page calls):
     POST https://api.agmarknet.gov.in/v1/prices-and-arrivals/market-report/daily
     body {"date": "YYYY-MM-DD", "marketIds": [...], "stateIds": [11], "includeExcel": false}
 Checked on 2026-10-04: it answers our plain OpenCityBot User-Agent without Origin/Referer
@@ -42,13 +57,14 @@ import re
 from datetime import datetime, timedelta
 
 from ..model import Geo, Metric, Obs, Raw, Result, Source, ValidationError
-from ..parse import clean, num
+from ..parse import clean, num, parse_date
 
-URL = 'https://api.agmarknet.gov.in/v1/prices-and-arrivals/market-report/daily'
+URL = 'https://api.agmarknet.gov.in/v1/prices-and-arrivals/market-report/daily'   # captcha since Oct 2026
 PAGE = 'https://agmarknet.gov.in/'
+OGD_URL = 'https://api.data.gov.in/resource/9ef84268-d588-465a-a308-a864a43d0070'
+OGD_PAGE_SIZE = 1000
+API_KEY = os.environ.get('DATA_GOV_IN_API_KEY', '')
 GUJARAT_STATE_ID = 11
-LOOKBACK_DAYS = 10          # late uploads: every run re-queries today and the 9 days before
-MAX_LOOKBACK_DAYS = 400     # AGMARKNET_LOOKBACK_DAYS may be raised for a one-off backfill
 
 _INSIDE = 'Inside SMC limits.'
 _OUTSIDE = 'Taluka market outside SMC limits.'
@@ -117,18 +133,18 @@ SOURCE = Source(
              'surat_district). Tapi-district markets that Agmarknet files under Surat (Vyara, Songadh, '
              'Uchhal, Nizar, Valod, Kukarmunda and sub-yards) are excluded. Only Surat APMC (64, Sardar '
              'Market, Dumbhal) is inside SMC limits.',
-    licence_note='Government of India data published on agmarknet.gov.in; public information',
-    notes='Uses the JSON endpoint behind the agmarknet.gov.in daily market report '
-          f'(POST {URL}), one request per date for today and the previous {LOOKBACK_DAYS - 1} days '
-          '(override with AGMARKNET_LOOKBACK_DAYS for a backfill; older dates are fetched once). '
-          'Works with the plain OpenCityBot User-Agent and no Origin/Referer (checked 2026-10-04). '
-          'If it ever starts refusing, the official alternative is the data.gov.in OGD resource '
-          '9ef84268-d588-465a-a308-a864a43d0070 (needs an API key). "NIL Transaction" days are '
-          'stored as agm.market_reported not_reported with the reason; empty uploads store nothing.',
+    licence_note='Government of India data (Agmarknet, published on data.gov.in under the Government Open Data '
+                 'License - India); public information',
+    notes='Reads the data.gov.in open-data copy of the Agmarknet daily prices (Gujarat, filtered to Surat '
+          'district here). Needs DATA_GOV_IN_API_KEY (free from data.gov.in); disabled without it. The old '
+          f'Agmarknet endpoint ({URL}) has required a captcha since 18 Oct 2026 and is not used; parse() still '
+          'reads its archived responses, which also carry arrivals and "NIL Transaction" entries.',
+    enabled=bool(API_KEY),
     metrics=(
         Metric(M_ARRIVALS, 'Commodity arrivals', 'tonnes',
                'Quantity of the commodity (dims commodity/variety/grade) arriving at the market that day, '
-               'Agmarknet column "Arrivals" in "Metric Tonnes". Published 0 -> not_reported.'),
+               'Agmarknet column "Arrivals" in "Metric Tonnes". Published 0 -> not_reported. Only in responses '
+               'from the old Agmarknet endpoint; the data.gov.in copy has no arrivals.'),
         Metric(M_MIN, 'Minimum price', 'Rs/quintal',
                'Lowest price of the day for the commodity line, Agmarknet "Minimum Price" (Rs./Quintal). '
                'Published 0 -> not_reported.'),
@@ -142,7 +158,8 @@ SOURCE = Source(
                'One per market and day. reported: value = number of commodity/variety/grade price lines '
                'in that day\'s report. not_reported: the market filed a "NIL Transaction" entry; '
                'value_text gives Agmarknet\'s reason verbatim (e.g. "NIL Transaction - No Arrivals", '
-               '"NIL Transaction - Weekend Holiday"). Days with nothing uploaded have no observation.'),
+               '"NIL Transaction - Weekend Holiday"; old endpoint only). Days with nothing uploaded have no '
+               'observation.'),
     ),
 )
 
@@ -151,24 +168,28 @@ _PRICE_UNITS = {'rs./quintal', 'rs/quintal', 'rs. /quintal'}
 _TITLE_DATE = re.compile(r'Report on:\s*(\d{1,2}-[A-Za-z]{3}-\d{4})')
 
 
-def _lookback_days() -> int:
-    try:
-        n = int(os.environ.get('AGMARKNET_LOOKBACK_DAYS', LOOKBACK_DAYS))
-    except ValueError:
-        n = LOOKBACK_DAYS
-    return max(1, min(MAX_LOOKBACK_DAYS, n))
+def _market_key(name) -> str:
+    """'Bardoli(Kadod) APMC' and 'Bardoli(Kadod)' -> 'bardoli(kadod)' (data.gov.in drops the ' APMC')."""
+    return clean(name).lower().replace(' apmc', '').replace(' ', '')
 
 
-def request_body(day: str) -> dict:
-    return {'date': day, 'marketIds': sorted(SURAT_MARKETS), 'stateIds': [GUJARAT_STATE_ID], 'includeExcel': False}
+_SURAT_BY_NAME = {_market_key(name): mid for mid, (name, _) in SURAT_MARKETS.items()}
+_TAPI_NAMES = {_market_key(name) for name in TAPI_MARKETS.values()}
 
 
 def fetch(ctx):
-    today = ctx.now.date()
-    for i in range(_lookback_days()):
-        day = (today - timedelta(days=i)).isoformat()
-        # the last LOOKBACK_DAYS dates are re-queried every run (late uploads); older ones only once
-        yield ctx.post(URL, json=request_body(day), meta={'date': day}, skip_if_seen=i >= LOOKBACK_DAYS)
+    if not API_KEY:
+        ctx.log.warning('DATA_GOV_IN_API_KEY is not set; Agmarknet prices skipped')
+        return
+    offset = 0
+    while True:
+        raw = ctx.get(OGD_URL, params={'api-key': API_KEY, 'format': 'json', 'limit': OGD_PAGE_SIZE,
+                                       'offset': offset, 'filters[state.keyword]': 'Gujarat'})
+        yield raw
+        doc = json.loads(raw.body)
+        offset += OGD_PAGE_SIZE
+        if not doc.get('records') or offset >= int(doc.get('total') or 0):
+            break
 
 
 def report_date(doc: dict) -> str:
@@ -194,6 +215,8 @@ def parse(raw: Raw) -> Result:
         doc = json.loads(raw.body)
     except ValueError as e:
         raise ValidationError(f'response is not JSON: {e}') from None
+    if isinstance(doc, dict) and 'records' in doc:
+        return _parse_ogd(doc)
     if not isinstance(doc, dict) or doc.get('success') is not True:
         raise ValidationError(f'Agmarknet did not return success: {str(doc)[:300]}')
     day = report_date(doc)
@@ -243,11 +266,41 @@ def parse(raw: Raw) -> Result:
     return res
 
 
+def _parse_ogd(doc: dict) -> Result:
+    """data.gov.in records: one price line per market, commodity, variety, grade and arrival date."""
+    res = Result(geos=list(MARKET_GEOS))
+    lines: dict[tuple, int] = {}
+    seen: dict[tuple, tuple] = {}
+    for rec in doc['records']:
+        r = {k.lower().replace('_x0020_', '_'): v for k, v in rec.items()}
+        if clean(r.get('state')).lower() != 'gujarat' or clean(r.get('district')).lower() != 'surat':
+            continue
+        name = _market_key(r.get('market'))
+        if name in _TAPI_NAMES:
+            continue
+        if name not in _SURAT_BY_NAME:
+            raise ValidationError(f'unknown Surat-district market {r.get("market")!r}; add it to SURAT_MARKETS')
+        code = str(_SURAT_BY_NAME[name])
+        day = parse_date(clean(r.get('arrival_date'))).isoformat()
+        dims = {'commodity': clean(r.get('commodity')), 'variety': clean(r.get('variety')), 'grade': clean(r.get('grade'))}
+        prices = (r.get('min_price'), r.get('max_price'), r.get('modal_price'))
+        key = (code, day, tuple(dims.values()))
+        if key in seen:
+            if seen[key] != prices:
+                raise ValidationError(f'conflicting rows for {key}: {seen[key]} vs {prices}')
+            continue                     # an exact repeat of a row already read
+        seen[key] = prices
+        for metric, cell in zip((M_MIN, M_MAX, M_MODAL), prices):
+            res.observations.append(Obs(metric, 'apmc_market', code, day, day, dims=dims, **_cell(cell)))
+        lines[(code, day)] = lines.get((code, day), 0) + 1
+    for (code, day), n in sorted(lines.items()):
+        res.observations.append(Obs(M_MARKET, 'apmc_market', code, day, day, value=n))
+    return res
+
+
 def validate(result: Result, raw: Raw | None) -> None:
     surat_codes = {str(m) for m in SURAT_MARKETS}
     days = {o.period_start for o in result.observations}
-    if len(days) > 1:
-        raise ValidationError(f'one daily report produced several dates: {sorted(days)}')
     for d in days:
         if d < '2010-01-01':
             raise ValidationError(f'implausible report date {d}')
@@ -261,8 +314,9 @@ def validate(result: Result, raw: Raw | None) -> None:
             raise ValidationError(f'observation outside the Surat-district markets: {o.geo_level}:{o.geo_code}')
         if o.metric_id == M_MARKET:
             continue
+        if o.metric_id == M_MODAL:
+            lines[(o.geo_code, o.period_start)] = lines.get((o.geo_code, o.period_start), 0) + 1
         if o.metric_id == M_ARRIVALS:
-            lines[o.geo_code] = lines.get(o.geo_code, 0) + 1
             if o.value is not None and not 0 < o.value < 20000:
                 raise ValidationError(f'implausible arrivals {o.value} t ({o.geo_code} {o.dims})')
         elif o.value is not None:
@@ -271,8 +325,9 @@ def validate(result: Result, raw: Raw | None) -> None:
             prices.setdefault((o.geo_code, tuple(sorted(o.dims.items()))), {})[o.metric_id] = o.value
 
     for o in result.observations:
-        if o.metric_id == M_MARKET and o.status == 'reported' and o.value != lines.get(o.geo_code):
-            raise ValidationError(f'market {o.geo_code}: {o.value} lines counted but {lines.get(o.geo_code)} parsed')
+        n = lines.get((o.geo_code, o.period_start))
+        if o.metric_id == M_MARKET and o.status == 'reported' and o.value != n:
+            raise ValidationError(f'market {o.geo_code} {o.period_start}: {o.value} lines counted but {n} parsed')
 
     # publishers occasionally slip (modal outside min..max); many such lines means columns got mixed up
     full = [p for p in prices.values() if len(p) == 3]

@@ -184,28 +184,115 @@ class TestAgmarknetSurat(unittest.TestCase):
         with self.assertRaises(ValidationError):
             agm.parse(raw_doc(doc))
 
-    def test_fetch_requests_last_ten_days_for_surat_district_only(self):
+    def test_old_endpoint_is_no_longer_called_without_a_key(self):
         calls = []
 
         class Ctx:
-            now = datetime(2026, 10, 4, 9, 0)
+            log = __import__('logging').getLogger('test')
 
-            def post(self, url, *, json=None, meta=None, skip_if_seen=False, headers=None, form=None):
-                calls.append((url, json, meta, skip_if_seen, headers))
+            def get(self, *a, **k):
+                calls.append(a)
 
-        list(agm.fetch(Ctx()))
-        self.assertEqual(len(calls), 10)
-        self.assertEqual([c[2]['date'] for c in calls][:2], ['2026-10-04', '2026-10-03'])
-        self.assertEqual(calls[-1][2]['date'], '2026-09-25')
-        for url, body, meta, skip, headers in calls:
-            self.assertEqual(url, agm.URL)
-            self.assertEqual(body['date'], meta['date'])
-            self.assertEqual(body['stateIds'], [11])
-            self.assertFalse(set(body['marketIds']) & set(agm.TAPI_MARKETS))
-            self.assertEqual(len(body['marketIds']), 21)
-            self.assertFalse(skip)
-            self.assertIsNone(headers)              # no Origin/Referer or browser headers
+            def post(self, *a, **k):
+                calls.append(a)
 
+        old = agm.API_KEY
+        try:
+            agm.API_KEY = ''
+            self.assertEqual(list(agm.fetch(Ctx())), [])
+        finally:
+            agm.API_KEY = old
+        self.assertEqual(calls, [])
+
+
+class TestDataGovIn(unittest.TestCase):
+    """The data.gov.in copy of the prices. SAMPLE follows the documented record layout; it is synthetic
+    (no live response has been seen yet), so replace it with a real saved response when one is available."""
+
+    SAMPLE = {
+        'total': 5, 'count': 5,
+        'records': [
+            {'state': 'Gujarat', 'district': 'Surat', 'market': 'Surat', 'commodity': 'Onion', 'variety': 'Red',
+             'grade': 'FAQ', 'arrival_date': '17/10/2026', 'min_price': '1200', 'max_price': '2000',
+             'modal_price': '1600'},
+            {'state': 'Gujarat', 'district': 'Surat', 'market': 'Bardoli(Kadod)', 'commodity': 'Bhindi(Ladies Finger)',
+             'variety': 'Other', 'grade': 'Local', 'arrival_date': '17/10/2026', 'min_price': '2100',
+             'max_price': '4200', 'modal_price': '0'},
+            {'state': 'Gujarat', 'district': 'Surat', 'market': 'Vyra', 'commodity': 'Onion', 'variety': 'Red',
+             'grade': 'FAQ', 'arrival_date': '17/10/2026', 'min_price': '1000', 'max_price': '1500',
+             'modal_price': '1200'},
+            {'state': 'Gujarat', 'district': 'Ahmedabad', 'market': 'Ahmedabad', 'commodity': 'Onion',
+             'variety': 'Red', 'grade': 'FAQ', 'arrival_date': '17/10/2026', 'min_price': '1300',
+             'max_price': '2100', 'modal_price': '1700'},
+            {'State': 'Gujarat', 'District': 'Surat', 'Market': 'Surat', 'Commodity': 'Potato', 'Variety': 'Other',
+             'Grade': 'FAQ', 'Arrival_Date': '16/10/2026', 'Min_x0020_Price': '900', 'Max_x0020_Price': '1300',
+             'Modal_x0020_Price': '1100'},
+        ],
+    }
+
+    def parse(self, doc=None):
+        raw = raw_doc(doc or self.SAMPLE)
+        raw.retrieved_at = '2026-10-18T10:00:00+05:30'
+        res = agm.parse(raw)
+        agm.validate(res, raw)
+        return res
+
+    def test_surat_rows_only_and_values(self):
+        res = self.parse()
+        by = {(o.metric_id, o.geo_code, o.period_start, o.dims.get('commodity')): o for o in res.observations}
+        self.assertEqual(by[(agm.M_MODAL, '64', '2026-10-17', 'Onion')].value, 1600)
+        self.assertEqual(by[(agm.M_MIN, '2623', '2026-10-17', 'Bhindi(Ladies Finger)')].value, 2100)
+        self.assertEqual(by[(agm.M_MODAL, '2623', '2026-10-17', 'Bhindi(Ladies Finger)')].status, 'not_reported')
+        self.assertEqual(by[(agm.M_MAX, '64', '2026-10-16', 'Potato')].value, 1300)       # "_x0020_" key spelling
+        codes = {o.geo_code for o in res.observations}
+        self.assertEqual(codes, {'64', '2623'})          # Tapi (Vyra) and Ahmedabad rows are dropped
+        self.assertFalse(any(o.metric_id == agm.M_ARRIVALS for o in res.observations))
+
+    def test_price_lines_counted_per_market_and_day(self):
+        res = self.parse()
+        counts = {(o.geo_code, o.period_start): o.value for o in res.observations if o.metric_id == agm.M_MARKET}
+        self.assertEqual(counts, {('64', '2026-10-16'): 1, ('64', '2026-10-17'): 1, ('2623', '2026-10-17'): 1})
+
+    def test_unknown_market_and_conflicting_repeats_rejected(self):
+        doc = copy.deepcopy(self.SAMPLE)
+        doc['records'][0]['market'] = 'Nowhere'
+        with self.assertRaises(ValidationError):
+            self.parse(doc)
+        doc = copy.deepcopy(self.SAMPLE)
+        doc['records'].append(dict(doc['records'][0], modal_price='1700'))
+        with self.assertRaises(ValidationError):
+            self.parse(doc)
+        doc = copy.deepcopy(self.SAMPLE)
+        doc['records'].append(dict(doc['records'][0]))          # an exact repeat is read once
+        self.assertEqual(len(self.parse(doc).observations), len(self.parse().observations))
+
+    def test_fetch_uses_the_official_api_with_plain_get(self):
+        calls = []
+        sample = self.SAMPLE
+
+        class Ctx:
+            log = __import__('logging').getLogger('test')
+
+            def get(self, url, params=None, headers=None, **k):
+                calls.append((url, params, headers))
+                return raw_doc(sample)
+
+            def post(self, *a, **k):
+                raise AssertionError('the captcha-protected endpoint must not be called')
+
+        old = agm.API_KEY
+        try:
+            agm.API_KEY = 'TESTKEY'
+            docs = list(agm.fetch(Ctx()))
+        finally:
+            agm.API_KEY = old
+        self.assertEqual(len(docs), 1)                   # total 5 fits in one page
+        url, params, headers = calls[0]
+        self.assertEqual(url, agm.OGD_URL)
+        self.assertEqual(params['api-key'], 'TESTKEY')
+        self.assertEqual(params['filters[state.keyword]'], 'Gujarat')
+        self.assertEqual((params['format'], params['offset']), ('json', 0))
+        self.assertIsNone(headers)                       # no browser or Origin/Referer headers
 
 if __name__ == '__main__':
     unittest.main()
