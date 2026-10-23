@@ -74,3 +74,18 @@ Full findings for this dimension, covering both cities.
 |---|---|---|---|
 | The Agmarknet JSON backend is live. Ahmedabad APMC reports more consistently than Surat APMC, and Agmarknet's 'Surat' list includes Tapi-district markets. | confirmed | A POST for 25 Sep 2026 over all 54 Surat and Ahmedabad market IDs succeeded. Ahmedabad APMC returned 36 rows, Vasana 5, plus Viramgam, Mandal and Sanad. Surat APMC returned 0 rows. The Surat list returned Songadh, Songadh (Badarpada) and Songadh (Umrada), which are in Tapi district. |  |
 | IMPDS lists 'AHMEDABAD CITY' separately from rural 'AHMADABAD', while 'SURAT' is combined. Sep 2026 portability: Surat 7,313, Ahmedabad City 5,139. | confirmed | The IMPDS Gujarat table (September 2026) saved from impds.nic.in earlier this session shows AHMADABAD total 412, AHMEDABAD CITY 5139 and SURAT 7313. It was not re-fetched live because of the call budget. |  |
+
+## Saved copies
+
+8 source documents behind this page are saved in [reference/](../../reference/README.md), unchanged from the date they were downloaded. Their source URLs, checksums and licence notes are in [reference/manifest.csv](../../reference/manifest.csv).
+
+| File | What it is | City | Period |
+|---|---|---|---|
+| [food-prices/gujarat-doamrf-apmc-information-2026-09-27.html](../../reference/food-prices/gujarat-doamrf-apmc-information-2026-09-27.html) | List of APMCs in Gujarat with address, category, commodities and secretary contact details | Gujarat | snapshot 2026-09-27 |
+| [food-prices/gujarat-fcscad-pds-social-audit-surat-zones-2026-09-27.html](../../reference/food-prices/gujarat-fcscad-pds-social-audit-surat-zones-2026-09-27.html) | iPDS Social Audit page for Surat district: taluka and city PDS zone codes (901-910) | Surat | snapshot 2026-09-27 |
+| [food-prices/india-agmarknet-daily-2026-08-28-to-2026-09-26/](../../reference/food-prices/india-agmarknet-daily-2026-08-28-to-2026-09-26/) | Daily market-wise commodity arrivals and prices, Surat and Ahmedabad district APMCs (60 daily JSON responses + market-ids.json) | Both | 2026-08-28 to 2026-09-26 |
+| [food-prices/india-agmarknet-market-district-state-2026-09-27.json](../../reference/food-prices/india-agmarknet-market-district-state-2026-09-27.json) | Agmarknet market-to-district-to-state mapping (all APMC markets) | India | snapshot 2026-09-27 |
+| [food-prices/india-agmarknet-market-master-with-category-2026-09-27.json](../../reference/food-prices/india-agmarknet-market-master-with-category-2026-09-27.json) | Agmarknet market master with address and principal/sub-yard category (all states) | India | snapshot 2026-09-27 |
+| [food-prices/india-doca-price-reporting-centres-2026-09-27.html](../../reference/food-prices/india-doca-price-reporting-centres-2026-09-27.html) | List of price reporting centres (zone-wise), incl. Ahmedabad and Surat | India | snapshot 2026-09-27 |
+| [food-prices/india-impds-gujarat-district-portability-2026-09.html](../../reference/food-prices/india-impds-gujarat-district-portability-2026-09.html) | IMPDS Gujarat district-wise ONORC portability transactions table (September 2026) | Gujarat | September 2026 (snapshot 2026-09-27) |
+| [food-prices/india-labour-bureau-cpi-iw-centre-index-2026-09-28.html](../../reference/food-prices/india-labour-bureau-cpi-iw-centre-index-2026-09-28.html) | CPI-IW centre-wise general index page (index table incl. Ahmedabad and Surat centres, links to monthly PDFs up to Mar 2023) | India | snapshot 2026-09-28 |

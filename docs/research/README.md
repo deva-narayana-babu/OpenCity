@@ -3,6 +3,8 @@
 The complete findings behind [../city-selection.md](../city-selection.md) and [../roadmap.md](../roadmap.md).
 Researched 24-28 Sep 2026.
 
+The source documents themselves are saved in [reference/](../../reference/README.md); each page below ends with a "Saved copies" table linking to the ones it relies on.
+
 ## How the research was done
 
 - **Research:** each dimension was researched for both cities from live sources.

@@ -44,6 +44,8 @@ Weighted score, 0-10: **Surat 6.6 vs Ahmedabad 5.6**
 
 ## MVP data sources for Surat
 
+Saved copies of these pages and documents, as downloaded during the research, are in [reference/](../reference/README.md).
+
 "Verified" means the URL was fetched during the research and re-checked on 28-09-2026.
 
 | Module | Metric | Source | Format | Refresh | Verified |

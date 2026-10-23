@@ -78,3 +78,28 @@ Full findings for this dimension, covering both cities.
 | AMC FY2025-26 balance sheet (ViewFile?TYPE=FileRepository,2689) is a scanned 49-page PDF with almost no text layer. | confirmed | Re-downloaded with legacy TLS: HTTP 200, 14,079,038 bytes, 49 pages, producer iLovePDF. pdftotext gives 123 characters, and pdfimages shows full-page JPEGs (1654x2326 at 200 ppi). It needs OCR. |  |
 | AMC budget books run from 2005-06 to 2026-27, the longest series. Ahmedabad edge. | confirmed | Live /SP/Budget (legacy TLS, 200) lists year labels from 2005-06 through 2026-27. The local 2026-27 Budget A PDF is 334 pages. |  |
 | SMC green bond offer document dated 18 Sep 2025 is hosted on the SMC site (verified_live=false). | confirmed | A HEAD request to /Content/Documents/Departments/Accounts/SMCBond/GreenBond/Surat_Municipal_Corporation_Offer_Document_dated_September_18_2025.pdf returned HTTP 200, application/pdf, 14.2 MB. Its content was not parsed. |  |
+
+## Saved copies
+
+18 source documents behind this page are saved in [reference/](../../reference/README.md), unchanged from the date they were downloaded. Their source URLs, checksums and licence notes are in [reference/manifest.csv](../../reference/manifest.csv).
+
+| File | What it is | City | Period |
+|---|---|---|---|
+| [budget/amc-balance-sheet-2025-26.pdf](../../reference/budget/amc-balance-sheet-2025-26.pdf) | Final balance sheet as on 31-03-2026 (scanned images, 49 pages) | Ahmedabad | FY2025-26 |
+| [budget/amc-balance-sheet-audit-report-2023-24.pdf](../../reference/budget/amc-balance-sheet-audit-report-2023-24.pdf) | Balance sheet 2023-24 audit report (review of standalone financial statements) | Ahmedabad | FY2023-24 |
+| [budget/amc-balance-sheet-index-2026-09-27.html](../../reference/budget/amc-balance-sheet-index-2026-09-27.html) | AMC Balance Sheet page: index of balance sheets 2005-06 to 2025-26 and audit reports | Ahmedabad | snapshot 2026-09-27 |
+| [budget/amc-budget-2023-24-english.pdf](../../reference/budget/amc-budget-2023-24-english.pdf) | Final budget 2023-24 (English edition) with sanction resolution | Ahmedabad | FY2023-24 |
+| [budget/amc-budget-a-2025-26.pdf](../../reference/budget/amc-budget-a-2025-26.pdf) | Budget 2025-26 'A' (Gujarati) | Ahmedabad | FY2025-26 |
+| [budget/amc-budget-a-2026-27.pdf](../../reference/budget/amc-budget-a-2026-27.pdf) | Budget 2026-27 'A' (Gujarati) with standing committee resolutions and MC's note | Ahmedabad | FY2026-27 |
+| [budget/amc-budget-index-2026-09-28.html](../../reference/budget/amc-budget-index-2026-09-28.html) | AMC Budget page: index of budget reports 2005-06 to 2026-27 | Ahmedabad | snapshot 2026-09-28 |
+| [budget/amc-finance-department-about-2026-09-27.html](../../reference/budget/amc-finance-department-about-2026-09-27.html) | About AMC Finance Department: branches and list of finance officers | Ahmedabad | snapshot 2026-09-27 |
+| [budget/india-mohua-cityfinance-ulb-list-2026-09-27.json](../../reference/budget/india-mohua-cityfinance-ulb-list-2026-09-27.json) | CityFinance ULB master list API response: codes, slugs, area and population of every ULB (SMC GJ003 'surat', AMC GJ167 'amdavad') | India | snapshot 2026-09-27 |
+| [budget/smc-balance-sheet-2025-26.pdf](../../reference/budget/smc-balance-sheet-2025-26.pdf) | Balance sheet FY2025-26 | Surat | FY2025-26 |
+| [budget/smc-balance-sheet-index-2026-09-28.html](../../reference/budget/smc-balance-sheet-index-2026-09-28.html) | Balance sheet index page (FY2005-06 to FY2025-26) | Surat | snapshot 2026-09-28 |
+| [budget/smc-budget-book-general-board-2026-27.pdf](../../reference/budget/smc-budget-book-general-board-2026-27.pdf) | Budget Book (General Board) 2026-27, 778 pages | Surat | FY2026-27 |
+| [budget/smc-budget-centre-codes-2026-09-27.html](../../reference/budget/smc-budget-centre-codes-2026-09-27.html) | List of budget centres (BCNT codes and names) | Surat | snapshot 2026-09-27 |
+| [budget/smc-budget-index-2026-09-27.html](../../reference/budget/smc-budget-index-2026-09-27.html) | Budget page: budget books 2021-22 to 2026-27 and outcome budgets | Surat | snapshot 2026-09-27 |
+| [budget/smc-outcome-based-budget-2023-24.pdf](../../reference/budget/smc-outcome-based-budget-2023-24.pdf) | Outcome Based Budget 2023-24 | Surat | FY2023-24 |
+| [budget/smc-property-tax-recovery-stats-2006-07-to-2009-10.html](../../reference/budget/smc-property-tax-recovery-stats-2006-07-to-2009-10.html) | Property tax demand and recovery statistics 2006-07 to 2009-10 | Surat | FY2006-07 to FY2009-10 |
+| [budget/smc-revenue-capital-budget-summary-2026-09-28.html](../../reference/budget/smc-revenue-capital-budget-summary-2026-09-28.html) | Revenue-Capital Budget Summary page (zone selector, column headers, weekly update date) | Surat | snapshot 2026-09-28 |
+| [education/amc-school-board-budget-2026-27.pdf](../../reference/education/amc-school-board-budget-2026-27.pdf) | AMC School Board budget book 2026-27 with establishment schedule (Gujarati) | Ahmedabad | FY2026-27 |
