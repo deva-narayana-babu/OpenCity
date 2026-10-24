@@ -38,6 +38,9 @@ def main(argv: list[str] | None = None) -> int:
         print(f'unknown source(s): {", ".join(unknown)}\nknown: {", ".join(adapters)}')
         return 2
     conn = db.connect()
+    for ad in adapters.values():          # list every adapter in status and data/export/, even ones that never ran
+        db.register_source(conn, ad.source)
+    conn.commit()
 
     if command == 'refresh':
         chosen = [adapters[n] for n in names] if names else list(adapters.values())
@@ -46,9 +49,6 @@ def main(argv: list[str] | None = None) -> int:
         _print_table([{'source': k, 'result': v} for k, v in outcome.items()])
         return 1 if any(v.startswith('error') for v in outcome.values()) else 0
 
-    for ad in adapters.values():          # status: list every adapter, even ones that never ran
-        db.register_source(conn, ad.source)
-    conn.commit()
     _print_table([dict(r) for r in conn.execute(
         'SELECT source_id, cadence, last_success, last_status, n_observations AS obs, '
         'n_current_records AS records, latest_period, errors_last_run AS errors, '

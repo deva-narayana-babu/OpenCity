@@ -29,7 +29,7 @@ class Source:
     name: str
     publisher: str
     url: str                # human-facing page for the dataset
-    module: str             # dashboard module: finance, health, environment, water, council, rti, food, education, transport, housing
+    module: str             # dashboard module, e.g. finance, health, water, weather, council, courts, police (see catalog/sources.csv)
     cadence: str            # daily | weekly | monthly | quarterly | annual | static | 2-hourly
     interval_hours: float   # minimum hours between refreshes when running with --due
     metrics: tuple[Metric, ...] = ()

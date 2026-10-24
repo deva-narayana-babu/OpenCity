@@ -15,6 +15,12 @@ GUJARAT = Geo('state', 'gujarat', 'Gujarat')
 
 STANDARD_GEOS = [GUJARAT, SURAT_DISTRICT, TAPI_DISTRICT, SMC]
 
+# The one note for every surat_taluka geo, whichever source writes it. Source-specific caveats go in the
+# adapter's docstring, so the note does not change with the order the sources run in.
+TALUKA_NOTE = ('Surat district taluka. Each source uses the talukas of its own year: Census 2011, GSDMA rainfall and '
+               'Soil Health Card keep the city as one surat_city taluka, while surat.nic.in now lists six city talukas '
+               '(abrama, adajan, katargam, majura, puna, udhna). Do not add the two kinds together.')
+
 # canonical code -> display name (zones as listed on SMC's budget-summary page, 2026)
 ZONES = {
     'hq': 'Head Quarter',
@@ -53,7 +59,7 @@ def zone_code(name: str) -> str:
         return 'south_a'
     if south:
         return 'south'
-    if east and 'b' in words:
+    if (east and 'b' in words) or 'sarthana' in words:      # tenders say 'New East (Sarthana) Zone'; the East-B office is at Sarthana
         return 'east_b'
     if east and 'a' in words:
         return 'east_a'

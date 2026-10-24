@@ -1,0 +1,19 @@
+{
+"mattertype": "\"MAGISTRIAL#CASES\"~\"CIV#SUITS\"~\"SESSIONS#CASES\"~\"MISC.#CRIM#APLN\"~\"MISC#CIV#CASES\"~\"MRG#PET\"~\"MACP\"~\"LABUR#MAIN\"~\"MISC.#CIV#APPLN\"~\"CRIM#APPEAL\"~\"CIVIL#APPEAL\"~\"EXE#PET\"~\"JUVENILE#CASES\"~\"INDUS#MAIN\"~\"MISC.#EXE.\"~\"BAIL#APLN\"~\"CRIM#REVN\"~\"MISC.#CIV#APPEAL\"~\"INDUS#MISC\"~\"LAND#REFNC\"~\"CIVIL#REV.\"~\"ELCTN#PET\"",
+"cases_count": "88211~13788~8167~7752~3359~3019~2924~2847~2548~2316~1453~1050~889~427~396~386~384~207~160~65~4~2",
+"year": "2026~2025~2024~2023~2022~2021~2020~2019~2018~2017~2016~2015~2014~2013~2012~2011~2010~2009~2008~2007~2006~2005~2004~2003~2002~2001~2000~1999~1998~1997~1996~1995~1994~1993~1991~1990~1988~1987~1984",
+"year_count": "39539~29744~20272~14736~9866~7261~3352~4768~3166~2134~1098~919~693~566~505~408~370~208~192~172~90~79~58~48~29~28~13~7~9~11~2~2~2~2~1~1~1~1~1",
+"purpose_name": "\"Process#Issue\"~\"Witness#Exmn.\"~\"Appln.#Hearing\"~\"Final#Arguments\"~\"WS\"~\"Steps\"~\"Charge/Plea\"~\"313#Cr.PC\"~\"Judgment\"~\"Await#Record\"~\"Issues\"~\"Orders\"~\"Compliance\"~\"Attachment\"~\"Arg.#On#Charge\"~\"Committal\"~\"Sec.#89\"~\"Appearance#\"~\"Suppl.##Copy\"~\"Pre-trial#Stmt.\"~\"Adm.#Appeal\"~\"Report\"~\"Accused#Appear\"~\"Notice/Summons\"~\"Evidence\"~\"ADR#Rpt.\"",
+"purpose_count": "70020~45947~5795~4688~2959~2222~2172~1854~1200~791~516~392~388~385~248~172~151~103~92~83~77~36~27~19~16~1",
+"delayName": "\"Non#Avail.#coun\"~\"Absc./Appear\"~\"Witness\"~\"Stayed#\"~\"Await#Docum\"~\"Unattended\"~\"Offshoots\"~\"LRs\"~\"Misc#Appln\"~\"witness#>#20\"~\"HC#Stayed\"~\"decree\"~\"Record#Unavailable\"~\"DC#Stayed\"~\"SC#Stayed\"",
+"delay_count": "6866010~3795237~2775739~2464061~1594400~850731~536710~161933~142353~90914~73256~34156~27757~6948~1580",
+"insyear": "2026~2025~2024~2023~2022~2021~2020~2019~2018",
+"ins_count": "669372~441467~241644~199795~136693~178526~61898~109028~103858",
+"disp_count": "671316~442577~247490~213898~160729~163195~35906~103593~114844",
+"agewise_count": "69283~35008~17127~14518~4123~284~11",
+"mattertype_count": "123698~4364~10846~1446",
+"stagewise_count": "70338~3438~60147~6046",
+"purposename": "\"Appearance/Service#Related\"~\"Compliance/Steps/stay\"~\"Evidence/Argument/Judgement\"~\"Pleadings/Issues/Charge\"",
+"caseChartcount": "<table id='tblCaseCharttype' class='table table-bordered bg-light' style='width:100%'>\n\t\t\t\t\t\t\t\t\t<thead>\n\t\t\t\t\t\t\t\t\t<tr>\n\t\t\t\t\t\t\t\t\t<th>Particulars</th>\t\t\t\t\t\t\t \n\t\t\t\t\t\t\t\t\t<th>Total</th>\n\t\t\t\t\t\t\t\t\t</tr>\n\t\t\t\t\t\t\t\t\t</thead>\n\t\t\t\t\t\t\t\t\t<tbody><tr><td>Original</td><td>1,23,698 </td></tr>\t\t<tr><td>Appeal</td><td>4,364 </td></tr>\t\t<tr><td>Application</td><td>10,846 </td></tr>\t\t<tr><td>Execution</td><td>1,446 </td></tr>\t\t</tbody><tfoot> <tr> <th style='text-align:right'>Total:</th> <th>1,40,354</th> </tr> </tfoot></table>",
+"app_token": null
+}

@@ -1,0 +1,677 @@
+<!-- Trimmed copy of https://njdg.ecourts.gov.in/njdg_v3/?p=home/index&state_code=24~17&dist_code=14&app_token= fetched 2026-10-24 02:02 IST: page head, scripts, modals and other tabs removed, indentation stripped. -->
+<html>
+<body>
+<script type="text/javascript">
+$(document).ready(function(){
+charts('16683','54388','71071','32002','108352','140354','','','','','','','','','','');
+preTrialLitigationChart('0','1327','1327','739');
+pendingAgewiseBarChart('Less than one year','15319~6449~3778~4128~2328','53964~28559~13349~10390~2092','lessthan1','"(49%)"~"(25%)"~"(12%)"~"(10%)"~"(3%)"');
+});
+</script>
+<main class="col-md-12 ms-sm-auto col-lg-12 dashboard">
+<div class=" container-fluid py-2 p-0" id="main-content">
+<div class='row'>
+<div class='col'>
+<ul class="nav nav-pills border-bottom pb-2" id="pills-tab" role="tablist">
+<li class="nav-item " role="presentation">
+<button class="nav-link active" id="alerts-tab" data-bs-toggle="pill" data-bs-target="#pills-alerts" type="button" role="tab" aria-controls="pills-alerts" aria-selected="true"><img class="" src="images/alarm_32.svg" alt="" aria-hidden="true"> Alerts</button>
+</li>
+<li class="nav-item" role="presentation">
+<button class="nav-link" id="penDash1-tab" data-bs-toggle="pill" data-bs-target="#pills-penDash1" type="button" role="tab" aria-controls="pills-penDash1" aria-selected="false" onclick="fetchPendDashboard('2','pending');"><img class="" src="images/pending_32.svg" alt="" aria-hidden="true"> Pending Dashboard </button>
+</li>
+<li class="nav-item" role="presentation">
+<button class="nav-link" id="penDash1-tab" data-bs-toggle="pill" data-bs-target="#pills-penDash1" type="button" role="tab" aria-controls="pills-penDash1" aria-selected="false" onclick="fetchPendDashboard('2','disposed');"><img class="" src="images/trash_32.svg" alt="" aria-hidden="true"> Disposed Dashboard </button>
+</li>
+<li class="nav-item" role="presentation">
+<button class="nav-link" id="delayDash-tab" data-bs-toggle="pill" data-bs-target="#pills-delayDash" type="button" role="tab" aria-controls="pills-delayDash" aria-selected="false" onclick="delay_dashboard('2');"><img class="" src="images/due_32.svg" alt="" aria-hidden="true"> Delay Reason</button>
+</li>
+<li class="nav-item" role="presentation">
+<button class="nav-link" id="infomgmt-tab" data-bs-toggle="pill" data-bs-target="#pills-infomgmt"  type="button" role="tab" aria-controls="pills-infomgmt" aria-selected="false" onclick="infomgnt_dashboard();"><img class="" src="images/info_32.svg" alt="" aria-hidden="true"> Information Management </button>
+</li>
+<li class="nav-item " id="set_year_li" role="presentation" style="display:none">
+<!--<option value="2018">2018</option><option value="2019">2019</option><option value="2020">2020</option><option value="2021">2021</option><option value="2022" selected="">2022</option>-->
+<select id="sel_year" name="sel_year" onchange="" class="form-select form-select-sm " style="width: 100px !important;">
+<option value="2018" >2018</option><option value="2019" >2019</option><option value="2020" >2020</option><option value="2021" >2021</option><option value="2022" >2022</option><option value="2023" >2023</option><option value="2024" >2024</option><option value="2025" >2025</option><option value="2026" selected >2026</option>				  </select>
+</li>
+<!--li class="nav-item " id="set_stateDist_li" role="presentation" -->
+<div class='stateDistDiv ' style='width:auto !important;' id='statediv'>
+<select class='form-select me-2 w-50' id='state_code' name='state_code' onchange="get_district('home/fetchDist',this.value);"><option value=''>Select State</option>
+<option value="35~28" >Andaman and Nicobar</option><option value="28~2" >Andhra Pradesh</option><option value="12~36" >Arunachal Pradesh</option><option value="18~6" >Assam</option><option value="10~8" >Bihar</option><option value="4~27" >Chandigarh</option><option value="22~18" >Chhattisgarh</option><option value="7~26" >Delhi</option><option value="30~30" >Goa</option><option value="24~17" selected>Gujarat</option><option value="6~14" >Haryana</option><option value="2~5" >Himachal Pradesh</option><option value="1~12" >Jammu and Kashmir</option><option value="20~7" >Jharkhand</option><option value="29~3" >Karnataka</option><option value="32~4" >Kerala</option><option value="37~33" >Ladakh</option><option value="31~37" >Lakshadweep</option><option value="23~23" >Madhya Pradesh</option><option value="27~1" >Maharashtra</option><option value="14~25" >Manipur</option><option value="17~21" >Meghalaya</option><option value="15~19" >Mizoram</option><option value="13~34" >Nagaland</option><option value="21~11" >Odisha</option><option value="34~35" >Puducherry</option><option value="3~22" >Punjab</option><option value="8~9" >Rajasthan</option><option value="11~24" >Sikkim</option><option value="33~10" >Tamil Nadu</option><option value="36~29" >Telangana</option><option value="38~38" >The Dadra And Nagar Haveli And Daman And Diu</option><option value="16~20" >Tripura</option><option value="9~13" >Uttar Pradesh</option><option value="5~15" >Uttarakhand</option><option value="19~16" >West Bengal</option>		</select>
+<select class='form-select w-50' id='dist_code' name='dist_code' onchange=""><option value=''>Select District</option>
+<option value="11" >GANDHINAGAR</option><option value="13" >Ahmedabad</option><option value="14" selected>SURAT</option><option value="15" >Mahesana</option><option value="16" >RAJKOT</option><option value="17" >Amreli</option><option value="18" >Anand</option><option value="19" >Banaskanth at Palanpur</option><option value="20" >Bharuch</option><option value="21" >Bhavnagar</option><option value="22" >Dahod</option><option value="23" >Jamnagar</option><option value="24" >Junagadh</option><option value="25" >Kheda at Nadiad</option><option value="26" >kachchh at Bhuj</option><option value="27" >Panchmahal at Godhra</option><option value="28" >Patan</option><option value="29" >Sabarkantha at Himmatnagar</option><option value="30" >Surendranagar</option><option value="31" >Vadodara</option><option value="32" >Navsari</option><option value="33" >Narmada</option><option value="34" >Tapi</option><option value="35" >Valsad</option><option value="36" >Porbandar</option><option value="37" >Gir Somnath at Veraval</option><option value="38" >Aravalli at Modasa</option><option value="39" >MORBI</option><option value="40" >Devbhumi Dwarka at Khambhaliya</option><option value="41" >Chhota Udepur</option><option value="42" >Mahisagar at Lunawada</option><option value="43" >BOTAD</option><option value="87" >Dangs</option><option value="125" >VAV THARAD</option>		</select>
+<button type="button" class="btn btn-navy-rounded btn-secondary btn-sm " onclick="get_distData('home/index',this.value);"> Go </button>
+</div>
+<button type="button" class="btn btn-secondary btn-sm me-1 position-absolute" style='right: 20px;' id="toggleLayout" aria-label="toggle Dashboard Layout" ><i class="fa fa-arrows-alt"></i></button>
+<div class="container-fluid"><div class="text-center"><span class="badge rounded-pill bg-secondary border breadcrumb-badge text-center" id="case_type_breadcrumb" style="display:none; font-size: 1.1rem;">
+Appeal (C)<a href="#" aria-label="close button" onclick=""><i class="fa fa-times text-white"></i></a></span></div></div>
+<!--<button id="refresh_pend" class="d-none btn btn-secondary me-2 btn-sm position-absolute end-0 " onclick="refreshDashboard('2');" aria-label="refresh Dashboard"><i class="fas fa-sync-alt"></i></button>-->
+</ul>
+<div class="tab-content" id="pills-tabContent">
+<div class="tab-pane fade show active" id="pills-alerts" role="tabpanel" aria-labelledby="alerts-tab">
+<div class='container-fluid p-0'>
+<div class="row mt-2">
+<div class="col-md-3" data-aos="fade-up" data-aos-duration="100">
+<div class="card h-100">
+<div class="card-header">
+<h4 class="card-title mb-0 d-inline">Civil Cases</h4><span class="float-end h6 m-0 fw-bold">32,002</span>
+</div>
+<div class="card-body" id='chart3'>
+</div>
+</div>
+</div>
+<div class="col-md-3" data-aos="fade-up" data-aos-duration="500">
+<div class="card h-100">
+<div class="card-header">
+<h4 class="card-title mb-0 d-inline">Criminal Cases</h4><span class="float-end h6 m-0 fw-bold ">1,08,352</span>
+</div>
+<div class="card-body" id='chart4'>
+</div>
+</div>
+</div>
+<div class="col-md-3" data-aos="fade-up" data-aos-duration="700">
+<div class="card h-100">
+<div class="card-header">
+<h4 class="card-title mb-0 d-inline">Total Cases</h4><span class="float-end h6 m-0 fw-bold">1,40,354</span>
+</div>
+<div class="card-body" id='chart5'>
+</div>
+</div>
+</div>
+<div class="col-md-3" data-aos="fade-up" data-aos-duration="1000">
+<div class="card" style="height:100%">
+<div class="card-header">
+<h4 class="card-title mb-0 d-inline">Pre-Litigation	/ Pre-Trial	</h4><span class="float-end h6 m-0 fw-bold">1,327</span>
+</div>
+<div class="card-body" id='chartPreLit' >
+</div>
+</div>
+</div>
+<!--	<div class="col" data-aos="fade-up" data-aos-duration="1200">
+<div class="card">
+<div class="card-header">
+<h4 class="card-title mb-0 d-inline">Undated Cases</h4>
+</div>
+<div class="card-body" id='chartUndated' >
+</div>
+</div>
+</div>-->
+</div>
+<div class="row mt-2 d-none">
+<div class="col-xl-7">
+<div class="card h-100">
+<div class="card-header">
+<h4 class="card-title mb-0">Alerts</h4>
+</div>
+<div class="card-body" id=''>
+<!--<table id="alertDashboard" class="table table-bordered" style="width:100%">
+<thead>
+<tr>
+<th>Particulars</th>
+<th>Civil</th>
+<th>Criminal</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cases Disposed In Last Month(more than 10 years old)</td>
+<td><a href="#" onclick="javascript:getAlertData('disposed','2')" aria-label="" data-bs-toggle="modal" data-bs-target="#modal_state_data"></a></td>
+<td><a href="#" onclick="javascript:getAlertData('disposed','3')" aria-label="" data-bs-toggle="modal" data-bs-target="#modal_state_data"></a></td>
+<td><a href="#" onclick="javascript:getAlertData('disposed','1')" aria-label="" data-bs-toggle="modal" data-bs-target="#modal_state_data"></a></td>
+</tr>
+<tr>
+<td>Cases Listed Today</td>
+<td><a href="#" onclick="javascript:getAlertData('listed','2')" data-bs-toggle="modal" data-bs-target="#modal_state_data">	=====</a></td>
+<td><a href="#" onclick="javascript:getAlertData('listed','3')" data-bs-toggle="modal" data-bs-target="#modal_state_data"></a></td>
+<td><a href="#" onclick="javascript:getAlertData('listed','1')" data-bs-toggle="modal" data-bs-target="#modal_state_data"></a></td>
+</tr>
+<tr>
+<td>Undated Cases</td>
+<td><a href="#" onclick="javascript:getAlertData('undated','2')" data-bs-toggle="modal" data-bs-target="#modal_state_data">	</a></td>
+<td><a href="#" onclick="javascript:getAlertData('undated','3')" data-bs-toggle="modal" data-bs-target="#modal_state_data"></a></td>
+<td><a href="#" onclick="javascript:getAlertData('undated','1')" data-bs-toggle="modal" data-bs-target="#modal_state_data"></a></td>
+</tr>
+<tr>
+<td>Cases Pending Registration	</td>
+<td><a href="#" onclick="javascript:getAlertData('pending','2')" data-bs-toggle="modal" data-bs-target="#modal_state_data"> 95655</a></td>
+<td><a href="#" onclick="javascript:getAlertData('pending','3')" data-bs-toggle="modal" data-bs-target="#modal_state_data" >804982</a></td>
+<td><a href="#" onclick="javascript:getAlertData('pending','1')" data-bs-toggle="modal" data-bs-target="#modal_state_data">900637</a></td>
+</tr>
+<tr>
+<td>Excessive Dated Cases (More than 3 Months)</td>
+<td><a href="#" onclick="javascript:getAlertData('excessive','2')" data-bs-toggle="modal" data-bs-target="#modal_state_data">1</a></td>
+<td><a href="#" onclick="javascript:getAlertData('excessive','3')" data-bs-toggle="modal" data-bs-target="#modal_state_data">1</a></td>
+<td><a href="#" onclick="javascript:getAlertData('excessive','1')" data-bs-toggle="modal" data-bs-target="#modal_state_data">2</a></td>
+</tr>
+<tr>
+<td>Pre-Litigation</td>
+<td><a href="#" onclick="javascript:getAlertData('prelitigation','2')" data-bs-toggle="modal" data-bs-target="#modal_state_data">0</a></td>
+<td><a href="#" onclick="javascript:getAlertData('prelitigation','3')" data-bs-toggle="modal" data-bs-target="#modal_state_data">0</a></td>
+<td><a href="#" onclick="javascript:getAlertData('prelitigation','1')" data-bs-toggle="modal" data-bs-target="#modal_state_data"></a></td>
+</tr>
+<tr>
+<td>Pre-Trial</td>
+<td><a href="#" onclick="javascript:getAlertData('pretrial','2')" data-bs-toggle="modal" data-bs-target="#modal_state_data">0</a></td>
+<td><a href="#" onclick="javascript:getAlertData('pretrial','3')" data-bs-toggle="modal" data-bs-target="#modal_state_data">1327</a></td>
+<td><a href="#" onclick="javascript:getAlertData('pretrial','1')" data-bs-toggle="modal" data-bs-target="#modal_state_data">0</a></td>
+</tr>
+</tbody>
+</table>-->
+</div>
+</div>
+</div>
+<div class="col-xl-5">
+<div class="card h-100">
+<div class="card-header">
+<h4 class="card-title mb-0 d-inline">Other Alerts</h4>
+</div>
+<div class="card-body" id=''>
+<table id="" class="table table-bordered table-hover bg-light" style="width:100%;height: 295px;">
+<thead>
+<tr>
+<th>Particulars</th>
+<th>Civil</th>
+<th>Criminal</th>
+<th>Total</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cases Instituted in Last Month</td>
+<td><a href="#" onclick="fetchStateData('ins',2);" data-bs-toggle="modal" data-bs-target="#modal_state_data">1248</a></td>
+<td><a href="#" onclick="fetchStateData('ins',3);" data-bs-toggle="modal" data-bs-target="#modal_state_data">183355</a></td>
+<td><a href="#" onclick="fetchStateData('ins',1);" data-bs-toggle="modal" data-bs-target="#modal_state_data">184603</a></td>
+</tr>
+<tr>
+<td>Cases Disposed in Last Month</td>
+<td><a href="#" onclick="fetchStateData('disp',2);" data-bs-toggle="modal" data-bs-target="#modal_state_data">1565</a></td>
+<td><a href="#" onclick="fetchStateData('disp',3);" data-bs-toggle="modal" data-bs-target="#modal_state_data">195082</a></td>
+<td><a href="#" onclick="fetchStateData('disp',1);" data-bs-toggle="modal" data-bs-target="#modal_state_data">196647</a></td>
+</tr>
+<tr>
+<td>Filed Cases By Senior Citizen</td>
+<td><a href="#" onclick="fetchStateData('citizen',2);" data-bs-toggle="modal" data-bs-target="#modal_state_data">5851</a></td>
+<td><a href="#" onclick="fetchStateData('citizen',3);" data-bs-toggle="modal" data-bs-target="#modal_state_data">3530</a></td>
+<td><a href="#" onclick="fetchStateData('citizen',1);" data-bs-toggle="modal" data-bs-target="#modal_state_data">9381</a></td>
+</tr>
+<tr>
+<td>Filed Cases By Woman</td>
+<td><a href="#" onclick="fetchStateData('women',2);" data-bs-toggle="modal" data-bs-target="#modal_state_data">4070</a></td>
+<td><a href="#" onclick="fetchStateData('women',3);" data-bs-toggle="modal" data-bs-target="#modal_state_data">5274</a></td>
+<td><a href="#" onclick="fetchStateData('women',1);" data-bs-toggle="modal" data-bs-target="#modal_state_data">9344</a></td>
+</tr>
+<tr>
+<td>Delay Reason</td>
+<td><a href="#" onclick="fetchStateData('delay',2);" aria-label="" data-bs-toggle="modal" data-bs-target="#modal_state_data"></a></td>
+<td><a href="#" onclick="fetchStateData('delay',3);" aria-label="" data-bs-toggle="modal" data-bs-target="#modal_state_data"></a></td>
+<td><a href="#" onclick="fetchStateData('delay',1);" aria-label="" data-bs-toggle="modal" data-bs-target="#modal_state_data"></a></td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="row mt-2 p-2 countsrow">
+<div class="col-xl-4">
+<div class="card h-100">
+<div class="card-body" id='age_wise_pen_div'>
+<div class='container d-none'>
+<div class='row'>
+<div class='col text-center bg-light'>
+<h6 style='color:#bc453d'>Court Complex</h6>
+<span class='h2'> </span>
+</div>
+</div>
+<div class='row my-2'>
+<div class='col text-center bg-light'>
+<h6 style='color:#5157ab'>Court Establishment</h6>
+<span class='h2'> </span>
+</div>
+</div>
+<div class='row my-2'>
+<div class='col text-center bg-light'>
+<h6 style='color:#0888a5'>No of Courts / Judges</h6>
+<span class='h2'> /</span>
+</div>
+</div>
+<div class='row my-2'>
+<div class='col text-center bg-light'>
+<h6 style='color:#06a883'>Data Not transferred</h6>
+<span class='h2'></span>
+</div>
+</div>
+<div class='row'>
+<div class='col text-center bg-light'>
+<h6 style='color:#e39f2d'>Orders Not Uploaded</h6>
+<span class='h2'></span>
+</div>
+</div>
+</div>
+<div classs="container">
+<div class="row">
+<div class="col">
+<div class="card-header text-center h6" id=''>
+<span style='font-weight: bold;'>Age wise pending cases</span>
+<div class="dropstart float-end ellipsis-vIcon">
+<button class='btn btn-secondary float-end btn-sm' id='agewisependTblbtn1' aria-label="click to view data in tabular form"><i class='fas fa-table'></i></button>
+<button class='btn btn-primary float-end btn-sm' id='agewisependchartbtn1' aria-label="click to view data in graphical form"><i class="fas fa-chart-pie"></i></button>
+</div>	</div>
+<div class="card-body" style="" id='agewisePendchart'>
+</div>
+<div class="card-body" style="" id='agewisePendTbl'>
+<table width="100%" cellpadding="0" align="center" class="text-center table table-bordered table-hover">
+<tbody>
+<!--<tr class="bg-light1">
+<td colspan="2"><h6 class="pt-1 fw-bold" style="color:#87191e;">Age wise pending cases</h6></td><td colspan="1"> <button class='btn btn-secondary float-end btn-sm' id='agewisependTblbtn1' aria-label="click to view data in tabular form"><i class='fas fa-table'></i></button>
+<button class='btn btn-primary float-end btn-sm' id='agewisependchartbtn1' aria-label="click to view data in graphical form"><i class="fas fa-chart-pie"></i></button></td>
+</tr>-->
+<tr class="fw-bold">
+<td style="background: #fafafa;">Civil</td>
+<td style="background: #fafafa;">Criminal</td>
+<td style="background: #fafafa;">Total</td>
+</tr>
+<tr class="border-top">
+<td colspan="3"><h6 class="pt-1 fw-bold" >Less than one year</h6></td>
+</tr>
+<tr>
+<td><span class="h4"><a href="#" onclick="fetchYearData('tot0_1',2);" aria-label="15,319" data-bs-toggle="modal" data-bs-target="#modal_year_data">15,319</span>
+<td><span class="h4"><a href="#" onclick="fetchYearData('tot0_1',3);" aria-label="53,964" data-bs-toggle="modal" data-bs-target="#modal_year_data">53,964</span></td>
+<td><span class="h4"><a href="#" onclick="fetchYearData('tot0_1',1);" aria-label="69,283 (49%)" data-bs-toggle="modal" data-bs-target="#modal_year_data">69,283 (49%)</span></td>
+</tr>
+<tr class="border-top">
+<td colspan="3"><h6 class="pt-1 fw-bold" >1 to 3 Years</h6></td>
+</tr>
+<tr>
+<td><span class="h4"><a href="#" onclick="fetchYearData('tot1_3',2);" aria-label="6,449" data-bs-toggle="modal" data-bs-target="#modal_year_data">6,449</span>
+<td><span class="h4"><a href="#" onclick="fetchYearData('tot1_3',3);" aria-label="28,559" data-bs-toggle="modal" data-bs-target="#modal_year_data">28,559</span></td>
+<td><span class="h4"><a href="#" onclick="fetchYearData('tot1_3',1);" aria-label="35,008 (25%)" data-bs-toggle="modal" data-bs-target="#modal_year_data">35,008 (25%)</span></td>
+</tr>
+<tr class="border-top">
+<td colspan="3"><h6 class="pt-1 fw-bold" >3 to 5 Years</h6></td>
+</tr>
+<tr>
+<td><span class="h4"><a href="#" onclick="fetchYearData('tot3_5',2);" aria-label="3,778" data-bs-toggle="modal" data-bs-target="#modal_year_data">3,778</span>
+<td><span class="h4"><a href="#" onclick="fetchYearData('tot3_5',3);" aria-label="13,349" data-bs-toggle="modal" data-bs-target="#modal_year_data">13,349</span></td>
+<td><span class="h4"><a href="#" onclick="fetchYearData('tot3_5',1);" aria-label="17,127 (12%)" data-bs-toggle="modal" data-bs-target="#modal_year_data">17,127 (12%)</span></td>
+</tr>
+<tr class="border-top">
+<td colspan="3"><h6 class="pt-1 fw-bold" >5 to 10 Years</h6></td>
+</tr>
+<tr>
+<td><span class="h4"><a href="#" onclick="fetchYearData('tot5_10',2);" aria-label="4,128" data-bs-toggle="modal" data-bs-target="#modal_year_data">4,128</span>
+<td><span class="h4"><a href="#" onclick="fetchYearData('tot5_10',3);" aria-label="10,390" data-bs-toggle="modal" data-bs-target="#modal_year_data">10,390</span></td>
+<td><span class="h4"><a href="#" onclick="fetchYearData('tot5_10',1);" aria-label="14,518 (10%)" data-bs-toggle="modal" data-bs-target="#modal_year_data">14,518 (10%)</span></td>
+</tr>
+<tr class="border-top">
+<td colspan="3"><h6 class="pt-1 fw-bold" >Above 10 Years</h6></td>
+</tr>
+<tr>
+<td><span class="h4"><a href="#" onclick="fetchYearData('above_10',2);" aria-label="2,328" data-bs-toggle="modal" data-bs-target="#modal_year_data">2,328</span>
+<td><span class="h4"><a href="#" onclick="fetchYearData('above_10',3);" aria-label="2,092" data-bs-toggle="modal" data-bs-target="#modal_year_data">2,092</span></td>
+<td><span class="h4"><a href="#" onclick="fetchYearData('above_10',1);" aria-label="4,420 (3%)" data-bs-toggle="modal" data-bs-target="#modal_year_data">4,420 (3%)</span></td>
+</tr>
+</tbody></table>
+</div>
+</div>
+</div></div>
+</div>
+</div>
+</div>
+<div class="col-xl-8">
+<div class='row'>
+<div class='col'>
+<div class='col'>
+<div class="card mb-2">
+<div class="card-header text-center h6" id=''>
+<span style='font-weight: bold;'>Instituted in last month</span>
+</div>
+<div class="card-body" id=''>
+<table width='100%' cellpadding='0' align='center' class='text-center'>
+<tr>
+<td colspan='3'>
+<div class="progress d-none" style="height:10px;">
+<div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width:132%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span class="progressText">132% of Total Pending Cases</span> </div>
+</div>
+</td>
+</tr>
+<tr>
+<td><span class='h4'><a href="#" onclick="fetchStateData('ins',2);" data-bs-toggle="modal" data-bs-target="#modal_state_data">1,248</span></td>
+<td><span class='h4'><a href="#" onclick="fetchStateData('ins',3);" data-bs-toggle="modal" data-bs-target="#modal_state_data">1,83,355</span></td>
+<td><span class='h4'><a href="#" onclick="fetchStateData('ins',1);" data-bs-toggle="modal" data-bs-target="#modal_state_data">1,84,603</span></td>
+</tr>
+<tr>
+<td>Civil</td>
+<td>Criminal</td>
+<td>Total</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class="card h-100">
+<div class="card-header text-center h6" id=''>
+<span style='font-weight: bold;'>Disposal in last month</span>
+</div>
+<div class="card-body" id=''>
+<table width='100%' cellpadding='0' align='center' class='text-center'>
+<tr>
+<td><span class='h4'><a href="#" onclick="fetchStateData('disp',2);" data-bs-toggle="modal" data-bs-target="#modal_state_data">1,565</a></span></td>
+<td><span class='h4'><a href="#" onclick="fetchStateData('disp',3);" data-bs-toggle="modal" data-bs-target="#modal_state_data">1,95,082</span></td>
+<td><span class='h4'><a href="#" onclick="fetchStateData('disp',1);" data-bs-toggle="modal" data-bs-target="#modal_state_data">1,96,647</a></span></td>
+</tr>
+<tr>
+<td>Civil</td>
+<td>Criminal</td>
+<td>Total</td>
+</tr>
+<tr class='border-top'>
+<td colspan='3' class="my-3"><h6 class='py-2 fw-bold mt-4' style=''>Contested</h6></td>
+</tr>
+<tr>
+<td colspan='3'>
+<div class="progress" style="height:10px;">
+<div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" style="width:2%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span class="progressText">2% of Disposal in last month</span></div>
+</div>
+</td>
+</tr>
+<tr>
+<td><span class='h4'>161</span></td>
+<td><span class='h4'>2,829</span></td>
+<td><span class='h4'> 2,990</span></td>
+</tr>
+<tr>
+<td>Civil</td>
+<td>Criminal</td>
+<td>Total</td>
+</tr>
+<tr  class='border-top'>
+<td colspan='3' class="my-3"><h6 class='py-2 fw-bold mt-4' style=''>Uncontested</h6></td>
+</tr>
+<tr>
+<td colspan='3'>
+<div class="progress" style="height:10px;">
+<div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: 98%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span class="progressText">98% of Disposal in last month </span></div>
+</div>
+</td>
+</tr>
+<tr>
+<td><span class='h4'>1,404</span></td>
+<td><span class='h4'>1,92,253</span></td>
+<td><span class='h4'>1,93,657</span></td>
+</tr>
+<tr>
+<td>Civil</td>
+<td>Criminal</td>
+<td>Total</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class='col'>
+<div class='row  mb-2 d-none'>
+<div class='col'>
+<div class="card h-100">
+<div class="card-header text-center h6" id=''>
+<span style='font-weight: bold;'>Instituted in last month</span>
+</div>
+<div class="card-body" id=''>
+<table width='100%' cellpadding='0' align='center' class='text-center'>
+<tr>
+<td colspan='3'>
+<div class="progress" style="height:10px;">
+<div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width:132%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span class="progressText">132%</span> </div>
+</div>
+</td>
+</tr>
+<tr>
+<td><span class='h4'><a href="#" onclick="fetchStateData('ins',2);" data-bs-toggle="modal" data-bs-target="#modal_state_data">1,248</span></td>
+<td><span class='h4'><a href="#" onclick="fetchStateData('ins',3);" data-bs-toggle="modal" data-bs-target="#modal_state_data">1,83,355</span></td>
+<td><span class='h4'><a href="#" onclick="fetchStateData('ins',1);" data-bs-toggle="modal" data-bs-target="#modal_state_data">1,84,603</span></td>
+</tr>
+<tr>
+<td>Civil</td>
+<td>Criminal</td>
+<td>Total</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col'>
+<div class="card h-100">
+<div class="card-header text-center h6" id=''>
+<span style='font-weight: bold;'>Cases Listed Today</span>
+</div>
+<div class="card-body" id=''>
+<table width='100%' cellpadding='0' align='center' class='text-center'>
+<tr>
+<td colspan='3'>
+<div class="progress" style="height:10px;">
+<div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: 5%; background-color: #4ca2c7!important;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span class="progressText">5% of Total Pending Cases</span></div>
+</div>
+</td>
+</tr>
+<tr>
+<td><span class='h4'><a href="#" onclick="javascript:getAlertData('listed','2')" data-bs-toggle="modal" data-bs-target="#modal_state_data">1,759</span></td>
+<td><span class='h4'><a href="#" onclick="javascript:getAlertData('listed','3')" data-bs-toggle="modal" data-bs-target="#modal_state_data">4,593</span></td>
+<td><span class='h4'><a href="#" onclick="javascript:getAlertData('listed','1')" data-bs-toggle="modal" data-bs-target="#modal_state_data">6,352</span></td>
+</tr>
+<tr>
+<td>Civil</td>
+<td>Criminal</td>
+<td>Total</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class="card">
+<div class="card-header text-center h6" id=''>
+<span style='font-weight: bold;'>Undated</span>
+</div>
+<div class="card-body" id=''>
+<table width='100%' cellpadding='0' align='center' class='text-center'>
+<tr>
+<td colspan='3'>
+<div class="progress" style="height:10px;">
+<div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span class="progressText">0% of Total Pending Cases </span></div>
+</div>
+</td>
+</tr>
+<tr>
+<td><span class='h4'><a href="#" aria-label="View Civil Count Details" onclick="javascript:getAlertData('undated','2')" data-bs-toggle="modal" data-bs-target="#modal_state_data">7<span class="visually-hidden">Civil Count</span></a></span></td>
+<td><span class='h4'><a href="#" aria-label="View Criminal Count Details" onclick="javascript:getAlertData('undated','3')" data-bs-toggle="modal" data-bs-target="#modal_state_data">28<span class="visually-hidden">Criminal Count</span></a></span></td>
+<td><span class='h4'><a href="#" aria-label="View Count Details" onclick="javascript:getAlertData('undated','1')" data-bs-toggle="modal" data-bs-target="#modal_state_data">35<span class="visually-hidden">Total Count</span></a></span></td>
+</tr>
+<tr>
+<td>Civil</td>
+<td>Criminal</td>
+<td>Total</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="card">
+<div class="card-header text-center h6" id=''>
+<span style='font-weight: bold;'>Excessive Dated Cases</span>
+</div>
+<div class="card-body" id=''>
+<table width='100%' cellpadding='0' align='center' class='text-center'>
+<tr>
+<td colspan='3'>
+<div class="progress" style="height:10px;">
+<div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width:0%;background-color: #e36d61!important;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span class="progressText">0% of Total Pending Cases</span> </div>
+</div>
+</td>
+</tr>
+<tr>
+<td><span class='h4'><a href="#" onclick="javascript:getAlertData('excessive','2')" data-bs-toggle="modal" data-bs-target="#modal_state_data">1</a></span></td>
+<td><span class='h4'><a href="#" onclick="javascript:getAlertData('excessive','3')" data-bs-toggle="modal" data-bs-target="#modal_state_data">1</span></td>
+<td><span class='h4'><a href="#" onclick="javascript:getAlertData('excessive','1')" data-bs-toggle="modal" data-bs-target="#modal_state_data">2</a></span></td>
+</tr>
+<tr>
+<td>Civil</td>
+<td>Criminal</td>
+<td>Total</td>
+</tr>
+</table>
+</div>
+</div>
+<div class="card">
+<div class="card-header text-center h6" id=''>
+<span style='font-weight: bold;'>Cases Filed By Woman    </span>
+</div>
+<div class="card-body" id=''>
+<table width='100%' cellpadding='0' align='center' class='text-center'>
+<tr>
+<td colspan='3'>
+<div class="progress" style="height:10px;">
+<div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: 7%;    background-color: #5157ab!important;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span class="progressText"> 7% of Total Pending Cases</span> </div>
+</div>
+</td>
+</tr>
+<tr>
+<td><span class='h4'><a href="#" onclick="fetchStateData('women',2);" data-bs-toggle="modal" data-bs-target="#modal_state_data">4,070</a></span></td>
+<td><span class='h4'><a href="#" onclick="fetchStateData('women',3);" data-bs-toggle="modal" data-bs-target="#modal_state_data">5,274</a></span></td>
+<td><span class='h4'><a href="#" onclick="fetchStateData('women',1);" data-bs-toggle="modal" data-bs-target="#modal_state_data">9,344</a></span></td>
+</tr>
+<tr>
+<td>Civil</td>
+<td>Criminal</td>
+<td>Total</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col'>
+<div class="card d-none">
+<div class="card-header text-center h6" id=''>
+<span style='font-weight: bold;'>Excessive Dated Cases</span>
+</div>
+<div class="card-body" id=''>
+<table width='100%' cellpadding='0' align='center' class='text-center'>
+<tr>
+<td colspan='3'>
+<div class="progress" style="height:10px;">
+<div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width:0%;background-color: #e36d61!important;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span class="progressText">0%</span> </div>
+</div>
+</td>
+</tr>
+<tr>
+<td><span class='h4'><a href="#" onclick="javascript:getAlertData('excessive','2')" data-bs-toggle="modal" data-bs-target="#modal_state_data">1</a></span></td>
+<td><span class='h4'><a href="#" onclick="javascript:getAlertData('excessive','3')" data-bs-toggle="modal" data-bs-target="#modal_state_data">1</span></td>
+<td><span class='h4'><a href="#" onclick="javascript:getAlertData('excessive','1')" data-bs-toggle="modal" data-bs-target="#modal_state_data">2</a></span></td>
+</tr>
+<tr>
+<td>Civil</td>
+<td>Criminal</td>
+<td>Total</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class='col'>
+<div class="card d-none">
+<div class="card-header text-center h6" id=''>
+<span style='font-weight: bold;'>Undated</span>
+</div>
+<div class="card-body" id=''>
+<table width='100%' cellpadding='0' align='center' class='text-center'>
+<tr>
+<td colspan='3'>
+<div class="progress" style="height:10px;">
+<div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: 0%;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span class="progressText">0% </span></div>
+</div>
+</td>
+</tr>
+<tr>
+<td><span class='h4'><a href="#" onclick="javascript:getAlertData('undated','2')" data-bs-toggle="modal" data-bs-target="#modal_state_data"><span class="visually-hidden">Civil Count</span></a></span></td>
+<td><span class='h4'><a href="#" onclick="javascript:getAlertData('undated','3')" data-bs-toggle="modal" data-bs-target="#modal_state_data"><span class="visually-hidden">Criminal Count</span></a></span></td>
+<td><span class='h4'><a href="#" onclick="javascript:getAlertData('undated','1')" data-bs-toggle="modal" data-bs-target="#modal_state_data"><span class="visually-hidden">Total Count</span></a></span></td>
+</tr>
+<tr>
+<td>Civil</td>
+<td>Criminal</td>
+<td>Total</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+<div class='row'>
+<div class='col hideonMob'>
+<div class="card h-100 d-none">
+<div class="card-header text-center h6" id=''>
+<span style='font-weight: bold;'>Cases Filed By Woman	</span>
+</div>
+<div class="card-body" id=''>
+<table width='100%' cellpadding='0' align='center' class='text-center'>
+<tr>
+<td colspan='3'>
+<div class="progress" style="height:10px;">
+<div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: 7%;    background-color: #5157ab!important;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span class="progressText"> 7%</span> </div>
+</div>
+</td>
+</tr>
+<tr>
+<td><span class='h4'><a href="#" onclick="fetchStateData('women',2);" data-bs-toggle="modal" data-bs-target="#modal_state_data">4,070</a></span></td>
+<td><span class='h4'><a href="#" onclick="fetchStateData('women',3);" data-bs-toggle="modal" data-bs-target="#modal_state_data">5,274</a></span></td>
+<td><span class='h4'><a href="#" onclick="fetchStateData('women',1);" data-bs-toggle="modal" data-bs-target="#modal_state_data">9,344</a></span></td>
+</tr>
+<tr>
+<td>Civil</td>
+<td>Criminal</td>
+<td>Total</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+<div class='col'>
+<div class="card h-100">
+<div class="card-header text-center h6" id=''>
+<span style='font-weight: bold;'>Cases Filed By Senior Citizen	</span>
+</div>
+<div class="card-body" id=''>
+<table width='100%' cellpadding='0' align='center' class='text-center'>
+<tr>
+<td colspan='3'>
+<div class="progress" style="height:10px;">
+<div class="progress-bar progress-bar-striped bg-success progress-bar-animated" role="progressbar" style="width: 7%;    background-color: #e39f2d!important;" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"><span class="progressText"> 7% of Total Pending Cases</span>  </div>
+</div>
+</td>
+</tr>
+<tr>
+<td><span class='h4'><a href="#" onclick="fetchStateData('citizen',2);" data-bs-toggle="modal" data-bs-target="#modal_state_data">5,851</a></span></td>
+<td><span class='h4'><a href="#" onclick="fetchStateData('citizen',3);" data-bs-toggle="modal" data-bs-target="#modal_state_data">3,530</a></span></td>
+<td><span class='h4'><a href="#" onclick="fetchStateData('citizen',1);" data-bs-toggle="modal" data-bs-target="#modal_state_data">9,381</a></span></td>
+</tr>
+<tr>
+<td>Civil</td>
+<td>Criminal</td>
+<td>Total</td>
+</tr>
+</table>
+</div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="row mt-2 d-flex align-items-stretch">
+</div>
+</div>
+<p class="m-0 pt-md-4"> This site is designed, hosted and maintained by <a href="http://www.nic.in/" target="_blank" onclick="return confirm('You are being redirected to an external website.');" class="text-info1" title="National Informatics Centre (NIC) External website that opens a new window" aria-label="National Informatics Centre (NIC) opens a new window" rel="noopener noreferrer">National Informatics Centre (NIC) </a> Ministry of Electronics &amp; Information Technology, Government of India.</p>
+<p class="pt-md-4">Last Updated :<strong> 23-10-2026</strong></p>
+</div>
+</body></html>

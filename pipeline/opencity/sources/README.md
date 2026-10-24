@@ -73,9 +73,12 @@ Optional hooks:
   - `dam`, `weir`, `creek`
   - `apmc_market`, `reporting_centre`, `aq_station`
   - `facility` (e.g. SMIMER hospital)
-  - `court_establishment`
+  - `court_establishment`, `exam_centre`
+  - `surat_taluka` (a taluka slug, e.g. `bardoli`, `surat_city`; always with `note=surat.TALUKA_NOTE`)
+  - `ncrb_metro_city` (NCRB's "Surat" metropolitan city, which is wider than SMC)
 
   Add a new level only when none of these fits, and document it in your module docstring.
+- **Taluka names:** keep `surat_taluka` names identical to `surat_talukas.NAMES`. Census 2011, GSDMA and Soil Health Card keep the city as one `surat_city` taluka, while surat.nic.in lists six city talukas; never add the two kinds together.
 - **Ward names:** use `smc_council.WARDS_2026` for `smc_ward` geos so names don't flip between adapters, because `geo.name` is overwritten by whichever adapter writes last.
 - **Agmarknet:** its market lists file Tapi-district markets under "Surat". Reuse `agmarknet_surat.TAPI_MARKETS` for the exclusion list.
 - **SMC "Last Updated" is not a data date.** On some SMC pages it is just the server render time. Only use it as `publisher_as_of` after checking that it changes with the data.

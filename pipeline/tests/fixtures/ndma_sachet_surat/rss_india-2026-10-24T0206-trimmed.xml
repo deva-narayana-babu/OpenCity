@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<?xml-stylesheet title="XSL_formatting" type="text/xsl" href="feed.xsl"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>All India: CAP Disaster Alert Feeds</title>
+    <description>CAP Integrated Alert System Warning Updates</description>
+    <language>en</language>
+    <link>https://sachet.ndma.gov.in/cap_public_website/rss/rss_india.xml</link>
+    <atom:link href="https://sachet.ndma.gov.in/cap_public_website/rss/rss_india.xml" rel="self" type="application/rss+xml"/>
+    <copyright>public domain</copyright>
+    <pubDate>Fri, 16 Oct 2026 09:04:39 GMT</pubDate>
+    <item>
+      <title>Moderate Rain with thunderstorm is likely to occur at isolated places over Ariyalur, Chennai, Coimbatore, Cuddalore, Dindigul, Kallakurichi, Kancheepuram, Madurai, Mayiladuthurai, Nagapattinam, Pudukkottai, Thanjavur, Thiruvallur, Thiruvarur, Tiruvannamalai, Vellore, Viluppuram, Karaikal in next 3 hours.</title>
+      <description/>
+      <category>Met</category>
+      <link>https://sachet.ndma.gov.in/cap_public_website/FetchXMLFile?identifier=1792783457574041</link>
+      <author>controlroom@ndma.gov.in (IMD Chennai)</author>
+      <guid isPermaLink="false">1792783457574041</guid>
+      <pubDate>Fri, 23 Oct 2026 19:27:01 GMT</pubDate>
+    </item>
+    <item>
+      <title>അടുത്ത 3 മണിക്കൂറിൽ മലപ്പുറം, കോഴിക്കോട്, കണ്ണൂർ, കാസർഗോഡ് ജില്ലകളിൽ ഇടിമിന്നലോട് കൂടിയ ഇടത്തരം മഴയ്ക്കും 40-50 kmph വരെ വേഗതയിൽ ശക്തമായ കാറ്റിനും സാധ്യത. 23.10.2026; 10.20 PM ; IMD - KSDMA</title>
+      <description/>
+      <category>Met</category>
+      <link>https://sachet.ndma.gov.in/cap_public_website/FetchXMLFile?identifier=1792774397538006</link>
+      <author>controlroom@ndma.gov.in (IMD Thiruvananthapuram)</author>
+      <guid isPermaLink="false">1792774397538006</guid>
+      <pubDate>Fri, 23 Oct 2026 16:56:01 GMT</pubDate>
+    </item>
+    <item>
+      <title>पुढील ३ तासांत आपल्या जिल्ह्यात काही ठिकाणी विजांच्या कडकडाटासह वादळ, मध्यम स्वरूपाचा पाऊस आणि ४०-५० किमी प्रति तास वेगाने वारे वाहण्याची शक्यता आहे. नागरिकांनी सतर्क रहावे, मंत्रालय. मुंबई</title>
+      <description/>
+      <category>Met</category>
+      <link>https://sachet.ndma.gov.in/cap_public_website/FetchXMLFile?identifier=1792759763404029</link>
+      <author>controlroom@ndma.gov.in (IMD Mumbai)</author>
+      <guid isPermaLink="false">1792759763404029</guid>
+      <pubDate>Fri, 23 Oct 2026 13:22:48 GMT</pubDate>
+    </item>
+    <item>
+      <title>River Gandak at Dumariaghat in Gopalganj district of Bihar continues to flow in above normal flood situation at 6:00 am today.</title>
+      <description/>
+      <category>Met</category>
+      <link>https://sachet.ndma.gov.in/cap_public_website/FetchXMLFile?identifier=1792730555445016</link>
+      <author>controlroom@ndma.gov.in (CWC)</author>
+      <guid isPermaLink="false">1792730555445016</guid>
+      <pubDate>Fri, 23 Oct 2026 04:42:37 GMT</pubDate>
+    </item>
+  </channel>
+</rss>
