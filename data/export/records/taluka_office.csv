@@ -1,0 +1,18 @@
+record_key,email,office_address,phone,surat_city,taluka,valid_from,source_id,source_url
+abrama,,"A/2, Jilla Seva Sadan-2, Chorasi Mamlatdar Office, Athwalines Surat",,True,Abrama (Surat City),2026-10-24T22:44:29+05:30,surat_talukas,https://surat.nic.in/taluka/
+adajan,,"Old Collector Office, Nanpura, Surat",0261-2471416,True,Adajan (Surat City),2026-10-24T22:44:29+05:30,surat_talukas,https://surat.nic.in/taluka/
+ambika,,"Mamlatdar Office, Ambika",,False,Ambika,2026-10-24T22:44:29+05:30,surat_talukas,https://surat.nic.in/taluka/
+areth,mam-areth@gujarat.gov.in,"Mamlatdar Office, Areth",02623-261023,False,Areth,2026-10-24T22:44:29+05:30,surat_talukas,https://surat.nic.in/taluka/
+bardoli,mam-bardoli@gujarat.gov.in,"Mamlatdar Office, Bardoli",02622-220024,False,Bardoli,2026-10-24T22:44:29+05:30,surat_talukas,https://surat.nic.in/taluka/
+chorasi,mam-choryasi@gujarat.gov.in,"A/2, Jilla Seva Sadan-2, Chorasi Mamlatdar Office, Athwalines Surat",0261-2663800,False,Chorasi,2026-10-24T22:44:29+05:30,surat_talukas,https://surat.nic.in/taluka/
+kamrej,mam-bardoli@gujarat.gov.in,"Mamlatdar Office, Bardoli",02621-252078,False,Kamrej,2026-10-24T22:44:29+05:30,surat_talukas,https://surat.nic.in/taluka/
+katargam,,"Old Collector Office, Nanpura, Surat",0261-2474343,True,Katargam (Surat City),2026-10-24T22:44:29+05:30,surat_talukas,https://surat.nic.in/taluka/
+mahuva,mam-mahuva@gujarat.gov.in,"Mamlatdar Office, Mahuva",02625-255721,False,Mahuva,2026-10-24T22:44:29+05:30,surat_talukas,https://surat.nic.in/taluka/
+majura,,"Mamlatdar Office of SuratCity Taluka, Athwalines, Opp: District Court, Surat",0261-2650335,True,Majura (Surat City),2026-10-24T22:44:29+05:30,surat_talukas,https://surat.nic.in/taluka/
+mandvi,mam-mandvi@gujarat.gov.in,"Mamlatdar Office, Mandvi",02623-221023,False,Mandvi,2026-10-24T22:44:29+05:30,surat_talukas,https://surat.nic.in/taluka/
+mangrol,mam-mangrol@gujarat.gov.in,"Mamlatdar Office, Mangrol",02629-220227,False,Mangrol,2026-10-24T22:44:29+05:30,surat_talukas,https://surat.nic.in/taluka/
+olpad,mam-olpad@gujarat.gov.in,"Mamlatdar Office, Olpad",02621-221245,False,Olpad,2026-10-24T22:44:29+05:30,surat_talukas,https://surat.nic.in/taluka/
+palsana,mam-palsana@gujarat.gov.in,"Mamlatdar Office, Palsana",02622-264228,False,Palsana,2026-10-24T22:44:29+05:30,surat_talukas,https://surat.nic.in/taluka/
+puna,,"Old Collector Office, Nanpura, Surat",0261-2465118,True,Puna (Surat City),2026-10-24T22:44:29+05:30,surat_talukas,https://surat.nic.in/taluka/
+udhna,,"Mamlatdar Office of SuratCity Taluka, Athwalines, Opp: District Court, Surat",0261-2650335,True,Udhna (Surat City),2026-10-24T22:44:29+05:30,surat_talukas,https://surat.nic.in/taluka/
+umarpada,mam-umarpada@gujarat.gov.in,"Mamlatdar Office, Mangrol",02629-253399,False,Umarpada,2026-10-24T22:44:29+05:30,surat_talukas,https://surat.nic.in/taluka/

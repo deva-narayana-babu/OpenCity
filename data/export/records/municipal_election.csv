@@ -1,0 +1,12 @@
+record_key,election_year,poll_date,first_board_meeting,valid_from,source_id,source_url
+1969,1969,1969-06-08,,2026-10-24T22:44:28+05:30,smc_past_elections,https://www.suratmunicipal.gov.in/Departments/ElectionCensus/ElectionCensusPastMunicipalElections
+1975,1975,1975-11-23,,2026-10-24T22:44:28+05:30,smc_past_elections,https://www.suratmunicipal.gov.in/Departments/ElectionCensus/ElectionCensusPastMunicipalElections
+1981,1981,1981-01-25,,2026-10-24T22:44:28+05:30,smc_past_elections,https://www.suratmunicipal.gov.in/Departments/ElectionCensus/ElectionCensusPastMunicipalElections
+1987,1987,1987-01-25,,2026-10-24T22:44:28+05:30,smc_past_elections,https://www.suratmunicipal.gov.in/Departments/ElectionCensus/ElectionCensusPastMunicipalElections
+1995,1995,1995-06-12,,2026-10-24T22:44:28+05:30,smc_past_elections,https://www.suratmunicipal.gov.in/Departments/ElectionCensus/ElectionCensusPastMunicipalElections
+2000,2000,2000-09-17,,2026-10-24T22:44:28+05:30,smc_past_elections,https://www.suratmunicipal.gov.in/Departments/ElectionCensus/ElectionCensusPastMunicipalElections
+2005,2005,2005-12-11,,2026-10-24T22:44:28+05:30,smc_past_elections,https://www.suratmunicipal.gov.in/Departments/ElectionCensus/ElectionCensusPastMunicipalElections
+2008,2008,2008-02-17,,2026-10-24T22:44:28+05:30,smc_past_elections,https://www.suratmunicipal.gov.in/Departments/ElectionCensus/ElectionCensusPastMunicipalElections
+2010,2010,2010-10-10,2010-12-15,2026-10-24T22:44:28+05:30,smc_past_elections,https://www.suratmunicipal.gov.in/Departments/ElectionCensus/ElectionCensusPastMunicipalElections
+2015,2015,2015-11-22,2015-12-14,2026-10-24T22:44:28+05:30,smc_past_elections,https://www.suratmunicipal.gov.in/Departments/ElectionCensus/ElectionCensusPastMunicipalElections
+2020,2020,2021-02-21,2020-03-12,2026-10-24T22:44:28+05:30,smc_past_elections,https://www.suratmunicipal.gov.in/Departments/ElectionCensus/ElectionCensusPastMunicipalElections

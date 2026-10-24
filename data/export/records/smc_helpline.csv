@@ -1,0 +1,31 @@
+record_key,hours,line,numbers,section,service,toll_free,zone_code,valid_from,source_id,source_url
+ambulance-shabvahini-contact-number,,Contact Number,"['102', '2414139']",other,Ambulance / Shabvahini,False,,2026-10-24T22:00:38+05:30,smc_helplines,https://www.suratmunicipal.gov.in/Home/EmergencyContactNo
+ambulance-shabvahini-control-room,,Control Room,['2414195-96'],other,Ambulance / Shabvahini,False,,2026-10-24T22:00:38+05:30,smc_helplines,https://www.suratmunicipal.gov.in/Home/EmergencyContactNo
+central-zone-contact-number,,Contact Number,"['2420547', '2427726', '2423751 to 56 (Ext - 205, 421, 422, 423)']",zone,Central Zone,False,central,2026-10-24T22:00:38+05:30,smc_helplines,https://www.suratmunicipal.gov.in/Home/EmergencyContactNo
+central-zone-control-room,,Control Room,"['2420547', '9724346019-20']",zone,Central Zone,False,central,2026-10-24T22:00:38+05:30,smc_helplines,https://www.suratmunicipal.gov.in/Home/EmergencyContactNo
+complaint-registration-via-whatsapp-whatsapp-number,,WhatsApp Number,['6359930020'],other,Complaint Registration via WhatsApp,False,,2026-10-24T22:00:38+05:30,smc_helplines,https://www.suratmunicipal.gov.in/Home/EmergencyContactNo
+east-zone-contact-number,,Contact Number,"['2547750', '2548365']",zone,East Zone,False,,2026-10-24T22:00:38+05:30,smc_helplines,https://www.suratmunicipal.gov.in/Home/EmergencyContactNo
+east-zone-control-room,,Control Room,"['2551363', '9724346030-33']",zone,East Zone,False,,2026-10-24T22:00:38+05:30,smc_helplines,https://www.suratmunicipal.gov.in/Home/EmergencyContactNo
+fire-contact-number,,Contact Number,"['101', '2414139']",other,Fire,False,,2026-10-24T22:00:38+05:30,smc_helplines,https://www.suratmunicipal.gov.in/Home/EmergencyContactNo
+fire-control-room,,Control Room,"['2414195-96', '2423751-56 (Ext - 324)', '9724346022']",other,Fire,False,,2026-10-24T22:00:38+05:30,smc_helplines,https://www.suratmunicipal.gov.in/Home/EmergencyContactNo
+maskati-hospital-contact-number,,Contact Number,['2420412'],other,Maskati Hospital,False,,2026-10-24T22:00:38+05:30,smc_helplines,https://www.suratmunicipal.gov.in/Home/EmergencyContactNo
+maskati-hospital-control-room,,Control Room,"['2429566', '9724346065-67']",other,Maskati Hospital,False,,2026-10-24T22:00:38+05:30,smc_helplines,https://www.suratmunicipal.gov.in/Home/EmergencyContactNo
+north-zone-contact-number,,Contact Number,['2480518'],zone,North Zone,False,north,2026-10-24T22:00:38+05:30,smc_helplines,https://www.suratmunicipal.gov.in/Home/EmergencyContactNo
+north-zone-control-room,,Control Room,"['2480568', '2485700', '9724346011-13']",zone,North Zone,False,north,2026-10-24T22:00:38+05:30,smc_helplines,https://www.suratmunicipal.gov.in/Home/EmergencyContactNo
+smc-help-line-construction-demolition-waste,,Construction & Demolition Waste,['1800-212-2829 (Toll Free)'],other,SMC Help Line,True,,2026-10-24T22:00:38+05:30,smc_helplines,https://www.suratmunicipal.gov.in/Home/EmergencyContactNo
+smc-help-line-for-complaint-registration,6:00 am to 10:00 pm,For Complaint Registration,"['1800-123-8000 (Toll Free)', '0261-2451913', '0261-2423751-56 (Ext.-300)']",other,SMC Help Line,True,,2026-10-24T22:00:38+05:30,smc_helplines,https://www.suratmunicipal.gov.in/Home/EmergencyContactNo
+smc-help-line-plastic-waste,,Plastic Waste,['1800-233-3002 (Toll Free)'],other,SMC Help Line,True,,2026-10-24T22:00:38+05:30,smc_helplines,https://www.suratmunicipal.gov.in/Home/EmergencyContactNo
+smc-hq-central-control-room,,Central Control Room,"['2423751-56 (Ext - 318)', '9724346021']",zone,SMC HQ,False,,2026-10-24T22:00:38+05:30,smc_helplines,https://www.suratmunicipal.gov.in/Home/EmergencyContactNo
+smc-hq-contact-number,,Contact Number,"['2423751-56', '2422285-87']",zone,SMC HQ,False,,2026-10-24T22:00:38+05:30,smc_helplines,https://www.suratmunicipal.gov.in/Home/EmergencyContactNo
+smimer-hospital-contact-number,,Contact Number,['2368040-44'],other,SMIMER Hospital,False,,2026-10-24T22:00:38+05:30,smc_helplines,https://www.suratmunicipal.gov.in/Home/EmergencyContactNo
+smimer-hospital-control-room,,Control Room,['9724346044-48'],other,SMIMER Hospital,False,,2026-10-24T22:00:38+05:30,smc_helplines,https://www.suratmunicipal.gov.in/Home/EmergencyContactNo
+smimer-hospital-tele-medicine-helpline-no,,Tele-Medicine Helpline No.,['6359980201'],other,SMIMER Hospital,False,,2026-10-24T22:00:38+05:30,smc_helplines,https://www.suratmunicipal.gov.in/Home/EmergencyContactNo
+south-east-zone-contact-number,,Contact Number,['2331903-05'],zone,South East Zone,False,south_east,2026-10-24T22:00:38+05:30,smc_helplines,https://www.suratmunicipal.gov.in/Home/EmergencyContactNo
+south-east-zone-control-room,,Control Room,['9724346049-52'],zone,South East Zone,False,south_east,2026-10-24T22:00:38+05:30,smc_helplines,https://www.suratmunicipal.gov.in/Home/EmergencyContactNo
+south-west-zone-contact-number,,Contact Number,['2663049-50'],zone,South West Zone,False,south_west,2026-10-24T22:00:38+05:30,smc_helplines,https://www.suratmunicipal.gov.in/Home/EmergencyContactNo
+south-west-zone-control-room,,Control Room,"['2667926', '9724346015-18']",zone,South West Zone,False,south_west,2026-10-24T22:00:38+05:30,smc_helplines,https://www.suratmunicipal.gov.in/Home/EmergencyContactNo
+south-zone-contact-number,,Contact Number,"['2278429', '2276145', '2277043']",zone,South Zone,False,south,2026-10-24T22:00:38+05:30,smc_helplines,https://www.suratmunicipal.gov.in/Home/EmergencyContactNo
+south-zone-control-room,,Control Room,"['3991804', '9724346060-61']",zone,South Zone,False,south,2026-10-24T22:00:38+05:30,smc_helplines,https://www.suratmunicipal.gov.in/Home/EmergencyContactNo
+stray-dog-bite-complaint-contact-number,,Contact Number,['9727740889'],other,Stray Dog Bite Complaint,False,,2026-10-24T22:00:38+05:30,smc_helplines,https://www.suratmunicipal.gov.in/Home/EmergencyContactNo
+west-zone-contact-number,,Contact Number,['2786181-83'],zone,West Zone,False,west,2026-10-24T22:00:38+05:30,smc_helplines,https://www.suratmunicipal.gov.in/Home/EmergencyContactNo
+west-zone-control-room,,Control Room,"['2781439', '9724346025-26']",zone,West Zone,False,west,2026-10-24T22:00:38+05:30,smc_helplines,https://www.suratmunicipal.gov.in/Home/EmergencyContactNo

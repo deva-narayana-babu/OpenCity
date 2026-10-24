@@ -1,0 +1,5 @@
+metric_id,geo_level,geo_code,period_start,period_end,dims,value,value_text,status,publisher_as_of,source_url,retrieved_at,raw_sha256,parser
+tenders.active,smc_city,smc,2026-10-24,2026-10-24,{},70.0,,reported,,https://www.suratmunicipal.gov.in/Information/Tender/Tenders,2026-10-24T22:42:00+05:30,75b779d8f73ec36265f59107c12e4052f292703949ce1b018caa9f8d4295bf60,smc_tenders@1
+tenders.closing_within,smc_city,smc,2026-10-24,2026-10-24,"{""within_days"":""14""}",69.0,,reported,,https://www.suratmunicipal.gov.in/Information/Tender/Tenders,2026-10-24T22:42:00+05:30,75b779d8f73ec36265f59107c12e4052f292703949ce1b018caa9f8d4295bf60,smc_tenders@1
+tenders.closing_within,smc_city,smc,2026-10-24,2026-10-24,"{""within_days"":""2""}",4.0,,reported,,https://www.suratmunicipal.gov.in/Information/Tender/Tenders,2026-10-24T22:42:00+05:30,75b779d8f73ec36265f59107c12e4052f292703949ce1b018caa9f8d4295bf60,smc_tenders@1
+tenders.closing_within,smc_city,smc,2026-10-24,2026-10-24,"{""within_days"":""7""}",54.0,,reported,,https://www.suratmunicipal.gov.in/Information/Tender/Tenders,2026-10-24T22:42:00+05:30,75b779d8f73ec36265f59107c12e4052f292703949ce1b018caa9f8d4295bf60,smc_tenders@1

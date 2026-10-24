@@ -1,0 +1,3 @@
+metric_id,geo_level,geo_code,period_start,period_end,dims,value,value_text,status,publisher_as_of,source_url,retrieved_at,raw_sha256,parser
+recruitment.open_ads,smc_city,smc,2026-10-24,2026-10-24,{},2.0,,reported,,https://www.suratmunicipal.gov.in/Information/Recruitment,2026-10-24T22:44:24+05:30,ca09b9339b661faee13990912de38e6bb87423dfca14789d471f859cc908e42c,smc_recruitment@1
+recruitment.posts,smc_city,smc,2026-10-24,2026-10-24,{},26.0,,reported,,https://www.suratmunicipal.gov.in/Information/Recruitment,2026-10-24T22:44:24+05:30,ca09b9339b661faee13990912de38e6bb87423dfca14789d471f859cc908e42c,smc_recruitment@1
